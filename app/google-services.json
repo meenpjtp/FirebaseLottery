@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1000875561562",
+    "firebase_url": "https://fir-lottery.firebaseio.com",
+    "project_id": "fir-lottery",
+    "storage_bucket": "fir-lottery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000875561562:android:d6ee3050f64b8113",
+        "android_client_info": {
+          "package_name": "project.senior.com.firebaselottery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000875561562-93o4n78kofjbc4v3cqla4h70jfuoft71.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTR1uw4w_Cwh6X_VE9UT7ffcQPbAa2j6U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

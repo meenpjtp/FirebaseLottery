@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="project.senior.com.firebaselottery.MainActivity">
+    tools:context="project.senior.com.firebaselottery.Activities.DisplayLotteriesActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,22 +15,27 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
-        <Button
-            android:id="@+id/buttonDisplayLottery"
-            android:text="@string/btn_display_lottery"
-            android:layout_width="match_parent"
-            android:onClick="onClick"
-            android:layout_height="50dp" />
-
-        <Button
-            android:id="@+id/buttonCheckLottery"
+        <Spinner
+            android:id="@+id/spinnerSelectDate"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:onClick="onClick"
-            android:text="@string/btn_check_lottery" />
+            android:layout_marginBottom="5dp">
+        </Spinner>
+
+        <Button
+            android:id="@+id/buttonSelect"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/btn_select"
+            android:layout_marginBottom="5dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewLotteries"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
 
     </LinearLayout>
-
-
 
 </LinearLayout>
