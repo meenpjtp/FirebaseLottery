@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.senior.com.firebaselottery.Adapters.RecyclerViewLotteriesAdapter;
+import project.senior.com.firebaselottery.Adapters.LotteriesAdapter;
 import project.senior.com.firebaselottery.Models.ResultModel;
 import project.senior.com.firebaselottery.R;
 
@@ -30,9 +30,8 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
     private Button buttonSelect;
     private RecyclerView recyclerViewLotteries;
 
-    private RecyclerViewLotteriesAdapter adapter; //RecyclerView
+    private LotteriesAdapter adapter; //RecyclerView
     private List<ResultModel> listResult;
-//    ArrayAdapter<String> arrayAdapter;
 
 
     @Override
@@ -70,41 +69,6 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
         });
 
         /**
-         * ButtonSelect
-         */
-        buttonSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DatabaseReference selectedDate = FirebaseDatabase.getInstance().getReference(spinnerSelectDate.getSelectedItem().toString());
-                selectedDate.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-//                        for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-//
-////                            adapter.notifyDataSetChanged();
-//
-//                            String lottery_number = (String) snapshot.child("lottery_number").getValue();
-//                            String lottery_prize = (String) snapshot.child("lottery_prize").getValue();
-//
-//                        }
-                        ResultModel model = dataSnapshot.getValue(ResultModel.class);
-                        listResult.add(model);
-                        recyclerViewLotteries.setAdapter(adapter);
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        });
-
-
-        /**
          * RecyclerView
          */
         recyclerViewLotteries.setHasFixedSize(true);
@@ -123,7 +87,64 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
         buttonSelect = (Button) findViewById(R.id.buttonSelect);
         recyclerViewLotteries = (RecyclerView) findViewById(R.id.recyclerViewLotteries);
         listResult = new ArrayList<>();
-        adapter = new RecyclerViewLotteriesAdapter(listResult);
+        adapter = new LotteriesAdapter(this,listResult);
+
+    }
+
+    /**
+     * Button Select
+     **/
+    public void RunDatabse(View view){
+        DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
+        DatabaseReference refResult = refLottery.child("RESULT");
+        DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
+//        recyclerViewLotteries.removeAllViews();
+
+//        refDate.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
+        refDate.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    ResultModel resultModel = dataSnapshot1.getValue(ResultModel.class);
+                    listResult.add(resultModel);
+                }
+                adapter = new LotteriesAdapter(DisplayLotteriesActivity.this,listResult);
+                recyclerViewLotteries.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

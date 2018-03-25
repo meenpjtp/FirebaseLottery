@@ -22,12 +22,20 @@
             android:layout_marginBottom="5dp">
         </Spinner>
 
+        <EditText
+            android:id="@+id/editTextLotteryNumber"
+            android:inputType="number"
+            android:maxLength="6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/buttonSelect"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="@string/btn_select"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:onClick="CheckLottery"
+            android:text="@string/btn_okay" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewCheckedLotteries"
