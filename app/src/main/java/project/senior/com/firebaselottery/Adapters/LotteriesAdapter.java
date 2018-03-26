@@ -55,13 +55,8 @@ public class LotteriesAdapter extends RecyclerView.Adapter<LotteriesAdapter.MyVi
         return listResult.size();
     }
 
-    public void removeItem(int position){
-        listResult.remove(position);
-        notifyItemRemoved(position);
-    }
-
-    public void restoreItem(ResultModel item, int position){
-        listResult.add(position, item);
-        notifyItemInserted(position);
+    public void addAllData(List<ResultModel> models){
+        this.listResult.clear();
+        this.listResult.addAll(models);
     }
 }

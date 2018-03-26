@@ -6,20 +6,18 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import project.senior.com.firebaselottery.Adapters.LotteriesAdapter;
 import project.senior.com.firebaselottery.Models.ResultModel;
 import project.senior.com.firebaselottery.R;
@@ -98,39 +96,12 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
         DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
         DatabaseReference refResult = refLottery.child("RESULT");
         DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
-//        recyclerViewLotteries.removeAllViews();
-
-//        refDate.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
         refDate.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                listResult.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                     ResultModel resultModel = dataSnapshot1.getValue(ResultModel.class);
                     listResult.add(resultModel);
@@ -142,12 +113,12 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", "Unable to connect database.");
 
             }
         });
 
     }
-
 
 
 }
