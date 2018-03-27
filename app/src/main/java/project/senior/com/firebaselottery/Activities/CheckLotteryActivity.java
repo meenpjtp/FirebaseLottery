@@ -78,21 +78,55 @@ public class CheckLotteryActivity extends AppCompatActivity {
         DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
         final DatabaseReference refResult = refLottery.child("RESULT");
         DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
-        DatabaseReference refLotteryNumber = refDate.child("lottery_number");
 
         refDate.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()){
-                    if(data.child("lottery_number").getValue().toString().equals(
-                            editTextLotteryNumber.getText().toString())){
+
+                    if(data.exists()){
+
+                        if(data.child("lottery_number").getValue().toString().equals(
+                                editTextLotteryNumber.getText().toString())){
+                            Toast.makeText(CheckLotteryActivity.this,
+                                    "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+                        } if(data.child("lottery_number").getValue().toString().equals( //last 2 number 000098
+                                editTextLotteryNumber.getText().toString().substring(4,6))){
+                            Toast.makeText(CheckLotteryActivity.this,
+                                    "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+                        } if(data.child("lottery_number").getValue().toString().equals( //last 3 number
+                                editTextLotteryNumber.getText().toString().substring(3,6))){
+                            Toast.makeText(CheckLotteryActivity.this,
+                                    "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+                        } if(data.child("lottery_number").getValue().toString().equals( //first 3 number
+                                editTextLotteryNumber.getText().toString().substring(0,3))){
+                            Toast.makeText(CheckLotteryActivity.this,
+                                    "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    } if(!data.exists()) {
                         Toast.makeText(CheckLotteryActivity.this,
-                                "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
-                    } if(data.child("lottery_number").getValue().toString().equals(
-                            editTextLotteryNumber.getText().toString().substring(4,6))){
-                        Toast.makeText(CheckLotteryActivity.this,
-                                "Win", Toast.LENGTH_SHORT).show();
+                                "Lose", Toast.LENGTH_SHORT).show();
                     }
+
+//                    if(data.child("lottery_number").getValue().toString().equals(
+//                            editTextLotteryNumber.getText().toString())){
+//                        Toast.makeText(CheckLotteryActivity.this,
+//                                "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+//                    } if(data.child("lottery_number").getValue().toString().equals( //last 2 number 000098
+//                            editTextLotteryNumber.getText().toString().substring(4,6))){
+//                        Toast.makeText(CheckLotteryActivity.this,
+//                                "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+//                    } if(data.child("lottery_number").getValue().toString().equals( //last 3 number
+//                            editTextLotteryNumber.getText().toString().substring(3,6))){
+//                        Toast.makeText(CheckLotteryActivity.this,
+//                                "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+//                    } if(data.child("lottery_number").getValue().toString().equals( //first 3 number
+//                            editTextLotteryNumber.getText().toString().substring(0,3))){
+//                        Toast.makeText(CheckLotteryActivity.this,
+//                                "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+//                    }
+
                 }
 
             }

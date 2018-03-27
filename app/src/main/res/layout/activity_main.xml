@@ -29,6 +29,20 @@
             android:onClick="onClick"
             android:text="@string/btn_check_lottery" />
 
+        <Button
+            android:id="@+id/buttonModeSimulation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="@string/btn_mode_simulation" />
+
+        <Button
+            android:id="@+id/buttonModePurchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="@string/btn_mode_purchase" />
+
     </LinearLayout>
 
 

@@ -8,10 +8,12 @@ import android.widget.Button;
 
 import project.senior.com.firebaselottery.Activities.CheckLotteryActivity;
 import project.senior.com.firebaselottery.Activities.DisplayLotteriesActivity;
+import project.senior.com.firebaselottery.Activities.ModePurchase.ModePurchaseActivity;
+import project.senior.com.firebaselottery.Activities.ModeSimulation.ModeSimulationActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonCheckLottery, buttonDisplayLottery;
+    private Button buttonCheckLottery, buttonDisplayLottery, buttonModeSimulation, buttonModePurchase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private void initObjects(){
         buttonCheckLottery = (Button) findViewById(R.id.buttonCheckLottery);
         buttonDisplayLottery = (Button) findViewById(R.id.buttonDisplayLottery);
+        buttonModeSimulation = (Button) findViewById(R.id.buttonModeSimulation);
+        buttonModePurchase = (Button) findViewById(R.id.buttonModePurchase);
     }
 
     public void onClick(View view){
@@ -36,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonDisplayLottery:
                 Intent b = new Intent(MainActivity.this, DisplayLotteriesActivity.class);
                 startActivity(b);
+                break;
+
+            case R.id.buttonModeSimulation:
+                Intent c = new Intent(MainActivity.this, ModeSimulationActivity.class);
+                startActivity(c);
+                break;
+
+            case R.id.buttonModePurchase:
+                Intent d = new Intent(MainActivity.this, ModePurchaseActivity.class);
+                startActivity(d);
                 break;
         }
     }

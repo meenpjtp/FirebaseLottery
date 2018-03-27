@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="project.senior.com.firebaselottery">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.CheckLotteryActivity" />
-        <activity android:name=".Activities.DisplayLotteriesActivity"></activity>
+        <activity android:name=".Activities.DisplayLotteriesActivity" />
+        <activity android:name=".Activities.ModeSimulation.ModeSimulationActivity" />
+        <activity android:name=".Activities.ModePurchase.ModePurchaseActivity" />
+        <activity android:name=".Activities.ModeSimulation.AddLotterySimulationActivity" />
+        <activity android:name=".Activities.ModePurchase.AddLotteryPurchaseActivity"></activity>
     </application>
 
 </manifest>

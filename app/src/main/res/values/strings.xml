@@ -5,4 +5,16 @@
     <string name="btn_check_lottery">Check Lottery</string>
     <string name="btn_display_lottery">Display Lottery</string>
     <string name="btn_okay">Ok</string>
+    <string name="btn_mode_simulation">Mode Simulation</string>
+    <string name="btn_mode_purchase">Mode Purchase</string>
+    <string name="btn_save">Save</string>
+
+    <string name="hint_input_amount">กรอกจำนวนที่ต้องการซื้อ</string>
+    <string name="hint_input_lottery_number">กรอกเลขที่ต้อง (ตัวอย่าง.:911234)</string>
+
+    <string name="text_selected_date">งวดวันที่</string>
+    <string name="text_price_lottery">ราคา/ใบ</string>
+    <string name="text_amount">จำนวน</string>
+    <string name="text_paid">จำนวนเงิน</string>
+    <string name="text_status">สถานะ</string>
 </resources>
