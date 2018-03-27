@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="5dp"
-            android:onClick="CheckLottery"
+            android:onClick="checkLotteryNumber"
             android:text="@string/btn_okay" />
 
         <android.support.v7.widget.RecyclerView

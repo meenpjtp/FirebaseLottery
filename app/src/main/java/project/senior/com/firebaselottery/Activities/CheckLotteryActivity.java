@@ -8,12 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -72,20 +72,53 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
     }
 
-    private void firebaseCheck(String date, String lottery_number){
+
+    public void checkLotteryNumber(View view){
 
         DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-        DatabaseReference refResult = refLottery.child("RESULT");
+        final DatabaseReference refResult = refLottery.child("RESULT");
         DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
+        DatabaseReference refLotteryNumber = refDate.child("lottery_number");
 
-        Query checkQuery = refDate;
+        refDate.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+                    if(data.child("lottery_number").getValue().toString().equals(
+                            editTextLotteryNumber.getText().toString())){
+                        Toast.makeText(CheckLotteryActivity.this,
+                                "Win" + data.child("lottery_prize").getValue(), Toast.LENGTH_SHORT).show();
+                    } if(data.child("lottery_number").getValue().toString().equals(
+                            editTextLotteryNumber.getText().toString().substring(4,6))){
+                        Toast.makeText(CheckLotteryActivity.this,
+                                "Win", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
+            }
 
-    }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-    public void CheckLottery(View view){
-//        DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-//        DatabaseReference refResult = refLottery.child("RESULT");
-//        DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
+            }
+        });
+
+//        refLotteryNumber.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for(DataSnapshot data : dataSnapshot.getChildren()){
+//                    ResultModel resultModel = dataSnapshot.getValue(ResultModel.class);
+//                    if(data.child(editTextLotteryNumber.getText().toString()).exists()){
+//                        Toast.makeText(CheckLotteryActivity.this,
+//                                "win",Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 }
