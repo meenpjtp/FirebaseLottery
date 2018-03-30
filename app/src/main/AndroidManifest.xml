@@ -18,12 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.CheckLotteryActivity" />
-        <activity android:name=".Activities.DisplayLotteriesActivity" />
-        <activity android:name=".Activities.ModeSimulation.ModeSimulationActivity" />
-        <activity android:name=".Activities.ModePurchase.ModePurchaseActivity" />
-        <activity android:name=".Activities.ModeSimulation.AddLotterySimulationActivity" />
-        <activity android:name=".Activities.ModePurchase.AddLotteryPurchaseActivity"></activity>
+        <activity android:name=".Activities.CheckLotteryActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".Activities.DisplayLotteriesActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Activities.ModeSimulation.ModeSimulationActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Activities.ModePurchase.ModePurchaseActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Activities.ModeSimulation.AddLotterySimulationActivity"
+            android:parentActivityName=".Activities.ModeSimulation.ModeSimulationActivity"/>
+        <activity android:name=".Activities.ModePurchase.AddLotteryPurchaseActivity"
+            android:parentActivityName=".Activities.ModePurchase.ModePurchaseActivity"></activity>
     </application>
 
 </manifest>
