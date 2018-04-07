@@ -42,8 +42,6 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
     //SQLite
     private ArrayList<HistoryModel> listHistory;
-//    private DBAdapter db;
-    private int ID = -1;
     HistoryAdapter adapter;
 
     @Override
@@ -53,8 +51,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
         initObjects();
         initViews();
-//        getDataFromSQLite();
-
+        getLotteries();
 
         /**
          * Spinner
@@ -102,7 +99,6 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
 
         //RecyclerView
-//        db = new DBAdapter(this);
         listHistory = new ArrayList<>();
 
         adapter = new HistoryAdapter(this, listHistory);
@@ -113,12 +109,9 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
         recyclerViewCheckedLottery.setLayoutManager(new LinearLayoutManager(this));
 
-//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewCheckedLottery.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCheckedLottery.setItemAnimator(new DefaultItemAnimator());
         recyclerViewCheckedLottery.setHasFixedSize(true);
-//        recyclerViewCheckedLottery.setAdapter(adapter);
-//
 
     }
 
@@ -126,7 +119,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
      * Clear EditText when press button
      */
     private void clear(){
-        editTextLotteryNumber.setText(null);
+        editTextLotteryNumber.setText("");
     }
 
 
@@ -161,16 +154,11 @@ public class CheckLotteryActivity extends AppCompatActivity {
                             Snackbar.make(checkLotteryActivity, "คุณถูกรางวัลที่ " + data.child("lottery_prize").getValue()
                                     , Snackbar.LENGTH_SHORT).show();
 
-//                            db.addLottery(new HistoryModel(ID, spinnerSelectDate.getSelectedItem().toString(),
-//                                    editTextLotteryNumber.getText().toString(), (String) data.child("lottery_prize").getValue()));
-//                            db.addLottery(spinnerSelectDate.getSelectedItem().toString(),
-//                                    editTextLotteryNumber.getText().toString(),
-//                                    (String) data.child("lottery_prize").getValue());
-//                            getDataFromSQLite();
                             save(spinnerSelectDate.getSelectedItem().toString(),
                                     editTextLotteryNumber.getText().toString(),
                                     (String) data.child("lottery_prize").getValue());
                             getLotteries();
+                            clear();
 
 
                         }
@@ -194,7 +182,6 @@ public class CheckLotteryActivity extends AppCompatActivity {
                         Snackbar.make(checkLotteryActivity, "เสียใจด้วยคุณไม่ถูกรางวัล", Snackbar.LENGTH_SHORT).show();
                     }
 
-
                 }
 
             }
@@ -211,7 +198,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
         DBAdapter db = new DBAdapter(this);
         db.openDB();
         if(db.addLottery(selected_date, lottery_number, lottery_result)){
-            editTextLotteryNumber.setText("");
+//            editTextLotteryNumber.setText("");
         } else {
             Toast.makeText(this,"Unable to save", Toast.LENGTH_SHORT).show();;
         }
@@ -246,21 +233,4 @@ public class CheckLotteryActivity extends AppCompatActivity {
             recyclerViewCheckedLottery.setAdapter(adapter);
         }
     }
-
-//    private void getDataFromSQLite() {
-//        new AsyncTask<Void, Void, Void>() {
-//            @Override
-//            protected Void doInBackground(Void... params) {
-//                listHistory.clear();
-//                listHistory.addAll(db.getAllHistory());
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Void aVoid) {
-//                super.onPostExecute(aVoid);
-//                adapter.notifyDataSetChanged();
-//            }
-//        }.execute();
-//    }
 }

@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +50,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     }
 
     public class HistoryHolder extends RecyclerView.ViewHolder {
-        TextView dateTextView, lotteryNumberTextView, resultTextView;
+        public TextView dateTextView, lotteryNumberTextView, resultTextView;
+        public RelativeLayout view_background;
+        public LinearLayout view_foreground;
 
         public HistoryHolder(View itemView){
             super(itemView);
@@ -56,7 +60,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
             dateTextView = (TextView) itemView.findViewById(R.id.dateTextView);
             lotteryNumberTextView = (TextView) itemView.findViewById(R.id.lotteryNumberTextView);
             resultTextView = (TextView) itemView.findViewById(R.id.resultTextView);
-
+            view_background = (RelativeLayout) itemView.findViewById(R.id.view_background);
+            view_foreground = (LinearLayout) itemView.findViewById(R.id.view_foreground);
         }
     }
 
