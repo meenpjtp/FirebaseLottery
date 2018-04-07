@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
-import project.senior.com.firebaselottery.Adapters.LotteriesAdapter;
+import project.senior.com.firebaselottery.RecyclerViewAdapters.LotteriesAdapter;
 import project.senior.com.firebaselottery.Models.ResultModel;
 import project.senior.com.firebaselottery.R;
 

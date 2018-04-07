@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Adapters;
+package project.senior.com.firebaselottery.RecyclerViewAdapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

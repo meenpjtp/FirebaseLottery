@@ -1,27 +1,14 @@
 package project.senior.com.firebaselottery.Models;
 
-
-import android.provider.BaseColumns;
-
-public class HistoryCheckLotteryModel {
+public class HistoryModel {
 
     private int id;
     private String selected_date;
     private String lottery_number;
     private String lottery_result;
 
-    public HistoryCheckLotteryModel(int id, String selected_date, String lottery_number, String lottery_result) {
-        this.id = id;
-        this.selected_date = selected_date;
-        this.lottery_number = lottery_number;
-        this.lottery_result = lottery_result;
-    }
+    public HistoryModel(){
 
-    public class Column{
-        public static final String ID = BaseColumns._ID;
-        public static final String SELECTED_DATE = "selected_date";
-        public static final String LOTTERY_NUMBER = "lottery_number";
-        public static final String LOTTERY_RESULT = "lottery_result";
     }
 
     public int getId() {
