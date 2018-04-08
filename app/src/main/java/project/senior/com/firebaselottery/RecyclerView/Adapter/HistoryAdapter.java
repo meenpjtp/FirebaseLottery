@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.RecyclerViewAdapters;
+package project.senior.com.firebaselottery.RecyclerView.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -37,7 +37,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
 
     @Override
     public void onBindViewHolder(HistoryHolder holder, int position) {
-//        HistoryModel data = listHistory.get(position);
+//        HistoryModel data = listSimulation.get(position);
 
         holder.dateTextView.setText(listHistory.get(position).getSelected_date());
         holder.lotteryNumberTextView.setText(listHistory.get(position).getLottery_number());
@@ -73,6 +73,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         db.openDB();
         if(db.deleteLottery(id)){
             listHistory.remove(position);
+            Toast.makeText(context,R.string.message_delete_history,Toast.LENGTH_SHORT).show();
+
         } else {
             Toast.makeText(context,"Unable To Delete",Toast.LENGTH_SHORT).show();
         }

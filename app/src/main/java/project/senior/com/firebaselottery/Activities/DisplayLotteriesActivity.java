@@ -1,6 +1,11 @@
 package project.senior.com.firebaselottery.Activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -18,8 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
-import project.senior.com.firebaselottery.RecyclerViewAdapters.LotteriesAdapter;
-import project.senior.com.firebaselottery.Models.ResultModel;
+import project.senior.com.firebaselottery.RecyclerView.Adapter.LotteriesAdapter;
+import project.senior.com.firebaselottery.Models.DisplayLotteryModel;
 import project.senior.com.firebaselottery.R;
 
 public class DisplayLotteriesActivity extends AppCompatActivity {
@@ -29,7 +34,7 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
     private RecyclerView recyclerViewLotteries;
 
     private LotteriesAdapter adapter; //RecyclerView
-    private List<ResultModel> listResult;
+    private List<DisplayLotteryModel> listDisplay;
 
 
     @Override
@@ -38,6 +43,14 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_lotteries);
 
         initObjects();
+
+        /**
+         * Display Dialog when is not connect internet
+         */
+        if(!isConnected(DisplayLotteriesActivity.this)) buildDialog(DisplayLotteriesActivity.this).show();
+        else {
+
+        }
 
         /**
          * Spinner
@@ -84,8 +97,8 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
         spinnerSelectDate = (Spinner) findViewById(R.id.spinnerSelectDate);
         buttonSelect = (Button) findViewById(R.id.buttonSelect);
         recyclerViewLotteries = (RecyclerView) findViewById(R.id.recyclerViewLotteries);
-        listResult = new ArrayList<>();
-        adapter = new LotteriesAdapter(this,listResult);
+        listDisplay = new ArrayList<>();
+        adapter = new LotteriesAdapter(this, listDisplay);
 
     }
 
@@ -101,12 +114,12 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                listResult.clear();
+                listDisplay.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                    ResultModel resultModel = dataSnapshot1.getValue(ResultModel.class);
-                    listResult.add(resultModel);
+                    DisplayLotteryModel displayLotteryModel = dataSnapshot1.getValue(DisplayLotteryModel.class);
+                    listDisplay.add(displayLotteryModel);
                 }
-                adapter = new LotteriesAdapter(DisplayLotteriesActivity.this,listResult);
+                adapter = new LotteriesAdapter(DisplayLotteriesActivity.this, listDisplay);
                 recyclerViewLotteries.setAdapter(adapter);
 
             }
@@ -118,6 +131,44 @@ public class DisplayLotteriesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     * Dialog Display when not connect Internet
+     */
+    public boolean isConnected(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netinfo = cm.getActiveNetworkInfo();
+
+        if (netinfo != null && netinfo.isConnectedOrConnecting()) {
+            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting())) return true;
+            else return false;
+        } else
+            return false;
+    }
+
+    /**
+     * Dialog Display when not connect Internet
+     */
+    public AlertDialog.Builder buildDialog(Context c) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setTitle(R.string.message_no_internet_connection);
+        builder.setMessage(R.string.message_no_internet_connection_description);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        return builder;
     }
 
 

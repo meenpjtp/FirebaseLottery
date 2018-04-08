@@ -27,7 +27,7 @@
             android:layout_marginRight="@dimen/padd_10"
             android:layout_toLeftOf="@id/delete_icon"
             android:text="ลบ"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textSize="13dp" />
 
     </RelativeLayout>

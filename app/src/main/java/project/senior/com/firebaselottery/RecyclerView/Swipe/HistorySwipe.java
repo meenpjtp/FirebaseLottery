@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.RecyclerViewSwipe;
+package project.senior.com.firebaselottery.RecyclerView.Swipe;
 
 
 import android.graphics.Canvas;
@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import project.senior.com.firebaselottery.RecyclerViewAdapters.HistoryAdapter;
+import project.senior.com.firebaselottery.RecyclerView.Adapter.HistoryAdapter;
 
 public class HistorySwipe extends ItemTouchHelper.SimpleCallback {
 

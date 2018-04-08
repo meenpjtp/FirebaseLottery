@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.RecyclerViewAdapters;
+package project.senior.com.firebaselottery.RecyclerView.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,15 +9,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import project.senior.com.firebaselottery.Models.ResultModel;
+import project.senior.com.firebaselottery.Models.DisplayLotteryModel;
 import project.senior.com.firebaselottery.R;
 
 public class LotteriesAdapter extends RecyclerView.Adapter<LotteriesAdapter.MyViewHolder>{
 
     Context context;
-    List<ResultModel> listResult;
+    List<DisplayLotteryModel> listResult;
 
-    public LotteriesAdapter(Context context,List<ResultModel> list){
+    public LotteriesAdapter(Context context,List<DisplayLotteryModel> list){
         this.context = context;
         this.listResult = list;
     }
@@ -31,7 +31,7 @@ public class LotteriesAdapter extends RecyclerView.Adapter<LotteriesAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ResultModel data = listResult.get(position);
+        DisplayLotteryModel data = listResult.get(position);
 
         holder.textViewLotteryNumber.setText(data.getLottery_number());
         holder.textViewPrize.setText(data.getLottery_prize());
@@ -55,7 +55,7 @@ public class LotteriesAdapter extends RecyclerView.Adapter<LotteriesAdapter.MyVi
         return listResult.size();
     }
 
-    public void addAllData(List<ResultModel> models){
+    public void addAllData(List<DisplayLotteryModel> models){
         this.listResult.clear();
         this.listResult.addAll(models);
     }

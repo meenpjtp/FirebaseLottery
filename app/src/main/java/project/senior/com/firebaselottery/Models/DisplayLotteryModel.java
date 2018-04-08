@@ -1,6 +1,6 @@
 package project.senior.com.firebaselottery.Models;
 
-public class ResultModel {
+public class DisplayLotteryModel {
 
     private String lottery_number;
     private String lottery_prize;

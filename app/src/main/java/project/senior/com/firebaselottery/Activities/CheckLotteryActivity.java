@@ -1,8 +1,13 @@
 package project.senior.com.firebaselottery.Activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,8 +33,8 @@ import java.util.List;
 import project.senior.com.firebaselottery.DBHelper.DBAdapter;
 import project.senior.com.firebaselottery.Models.HistoryModel;
 import project.senior.com.firebaselottery.R;
-import project.senior.com.firebaselottery.RecyclerViewAdapters.HistoryAdapter;
-import project.senior.com.firebaselottery.RecyclerViewSwipe.HistorySwipe;
+import project.senior.com.firebaselottery.RecyclerView.Adapter.HistoryAdapter;
+import project.senior.com.firebaselottery.RecyclerView.Swipe.HistorySwipe;
 import project.senior.com.firebaselottery.Util.StringUtil;
 
 public class CheckLotteryActivity extends AppCompatActivity {
@@ -52,6 +57,14 @@ public class CheckLotteryActivity extends AppCompatActivity {
         initObjects();
         initViews();
         getLotteries();
+
+        /**
+         * Display Dialog when is not connect internet
+         */
+        if(!isConnected(CheckLotteryActivity.this)) buildDialog(CheckLotteryActivity.this).show();
+        else {
+
+        }
 
         /**
          * Spinner
@@ -77,11 +90,6 @@ public class CheckLotteryActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-        /**
-         * RecyclerView
-         */
-
 
     }
     private void initViews(){
@@ -194,6 +202,9 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *  Save check lottery to database
+     */
     private void save(String selected_date, String lottery_number, String lottery_result){
         DBAdapter db = new DBAdapter(this);
         db.openDB();
@@ -205,6 +216,9 @@ public class CheckLotteryActivity extends AppCompatActivity {
         db.closeDB();
     }
 
+    /**
+     * Update list history to recyclerview
+     */
     private void getLotteries(){
         listHistory.clear();
 
@@ -232,5 +246,43 @@ public class CheckLotteryActivity extends AppCompatActivity {
         if(listHistory.size() > 0){
             recyclerViewCheckedLottery.setAdapter(adapter);
         }
+    }
+
+    /**
+     * Dialog Display when not connect Internet
+     */
+    public boolean isConnected(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netinfo = cm.getActiveNetworkInfo();
+
+        if (netinfo != null && netinfo.isConnectedOrConnecting()) {
+            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting())) return true;
+        else return false;
+        } else
+        return false;
+    }
+
+    /**
+     * Dialog Display when not connect Internet
+     */
+    public AlertDialog.Builder buildDialog(Context c) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setTitle(R.string.message_no_internet_connection);
+        builder.setMessage(R.string.message_no_internet_connection_description);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        return builder;
     }
 }
