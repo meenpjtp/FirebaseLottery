@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Util;
+package project.senior.com.firebaselottery.Error;
 
 public abstract class StringUtil {
 

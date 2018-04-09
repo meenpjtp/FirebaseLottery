@@ -13,6 +13,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,12 +31,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.senior.com.firebaselottery.DBHelper.DBAdapter;
+import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
 import project.senior.com.firebaselottery.Models.HistoryModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.HistoryAdapter;
 import project.senior.com.firebaselottery.RecyclerView.Swipe.HistorySwipe;
-import project.senior.com.firebaselottery.Util.StringUtil;
+import project.senior.com.firebaselottery.Error.StringUtil;
 
 public class CheckLotteryActivity extends AppCompatActivity {
 
@@ -58,17 +59,40 @@ public class CheckLotteryActivity extends AppCompatActivity {
         initViews();
         getLotteries();
 
-        /**
-         * Display Dialog when is not connect internet
-         */
+    }
+
+    private void initViews(){
+        checkLotteryActivity = (LinearLayout) findViewById(R.id.checkLotteryActivity);
+        spinnerSelectDate = (Spinner) findViewById(R.id.spinnerSelectDate);
+        editTextLotteryNumber = (EditText) findViewById(R.id.editTextLotteryNumber);
+        buttonSelect = (Button) findViewById(R.id.buttonSelect);
+
+    }
+
+    // This method is to initialize objects to be used
+    private void initObjects(){
+        recyclerViewCheckedLottery = (RecyclerView) findViewById(R.id.recyclerViewCheckedLotteries);
+
+        // RecyclerView
+        listHistory = new ArrayList<>();
+
+        adapter = new HistoryAdapter(this, listHistory);
+
+        ItemTouchHelper.Callback callback = new HistorySwipe(adapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerViewCheckedLottery);
+
+        recyclerViewCheckedLottery.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewCheckedLottery.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewCheckedLottery.setHasFixedSize(true);
+
+        // Display Dialog when is not connect internet
         if(!isConnected(CheckLotteryActivity.this)) buildDialog(CheckLotteryActivity.this).show();
         else {
 
         }
 
-        /**
-         * Spinner
-         */
+        // Spinner
         DatabaseReference lottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
         lottery.child("DATE").addValueEventListener(new ValueEventListener() {
             @Override
@@ -92,40 +116,8 @@ public class CheckLotteryActivity extends AppCompatActivity {
         });
 
     }
-    private void initViews(){
-        checkLotteryActivity = (LinearLayout) findViewById(R.id.checkLotteryActivity);
-        spinnerSelectDate = (Spinner) findViewById(R.id.spinnerSelectDate);
-        editTextLotteryNumber = (EditText) findViewById(R.id.editTextLotteryNumber);
-        buttonSelect = (Button) findViewById(R.id.buttonSelect);
-    }
 
-    /**
-     * This method is to initialize objects to be used
-     */
-    private void initObjects(){
-        recyclerViewCheckedLottery = (RecyclerView) findViewById(R.id.recyclerViewCheckedLotteries);
-
-
-        //RecyclerView
-        listHistory = new ArrayList<>();
-
-        adapter = new HistoryAdapter(this, listHistory);
-
-        ItemTouchHelper.Callback callback = new HistorySwipe(adapter);
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerViewCheckedLottery);
-
-        recyclerViewCheckedLottery.setLayoutManager(new LinearLayoutManager(this));
-
-        recyclerViewCheckedLottery.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewCheckedLottery.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewCheckedLottery.setHasFixedSize(true);
-
-    }
-
-    /**
-     * Clear EditText when press button
-     */
+    // Clear EditText when press button
     private void clear(){
         editTextLotteryNumber.setText("");
     }
@@ -137,6 +129,15 @@ public class CheckLotteryActivity extends AppCompatActivity {
      */
     public void checkLotteryNumber(View view){
 
+        // Error Message when input length != 6
+        if(StringUtil.isEmpty(editTextLotteryNumber.getText().toString())){
+            editTextLotteryNumber.setError(getString(R.string.error_message_length));
+            return;
+        } if(StringUtil.isLength(editTextLotteryNumber.getText().toString())){
+            editTextLotteryNumber.setError(getString(R.string.error_message_length));
+            return;
+        }
+
         DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
         final DatabaseReference refResult = refLottery.child("RESULT");
         final DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
@@ -146,53 +147,88 @@ public class CheckLotteryActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()){
 
-                    // Error Message when input length != 6
-                    if(StringUtil.isEmpty(editTextLotteryNumber.getText().toString())){
-                        editTextLotteryNumber.setError(getString(R.string.error_message_length));
-                        return;
-                    } if(StringUtil.isLength(editTextLotteryNumber.getText().toString())){
-                        editTextLotteryNumber.setError(getString(R.string.error_message_length));
-                        return;
-                    }
+                    // Length input == 6 | if data exists in firebase
+                    if(data.hasChild("lottery_number")){
 
-                    if(data.exists()){
-
+                        // 1st prize, 2nd prize, 3rd prize, 4th prize, 5th prize
                         if(data.child("lottery_number").getValue().toString().equals(
                                 editTextLotteryNumber.getText().toString())){
-                            Snackbar.make(checkLotteryActivity, "คุณถูกรางวัลที่ " + data.child("lottery_prize").getValue()
+                            // Display snackbar
+                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
                                     , Snackbar.LENGTH_SHORT).show();
 
+                            // Save check lottery to database
                             save(spinnerSelectDate.getSelectedItem().toString(),
                                     editTextLotteryNumber.getText().toString(),
                                     (String) data.child("lottery_prize").getValue());
                             getLotteries();
-                            clear();
-
 
                         }
-//                        if(data.child("lottery_number").getValue().toString().equals( //last 2 number 000098
-//                                editTextLotteryNumber.getText().toString().substring(4,6))){
-//                            Snackbar.make(checkLotteryActivity, "คุณถูกรางวัลที่ " + data.child("lottery_prize").getValue()
-//                                    , Snackbar.LENGTH_SHORT).show();
-//
-//                        } if(data.child("lottery_number").getValue().toString().equals( //last 3 number
-//                                editTextLotteryNumber.getText().toString().substring(3,6))){
-//                            Snackbar.make(checkLotteryActivity, "คุณถูกรางวัลที่ " + data.child("lottery_prize").getValue()
-//                                    , Snackbar.LENGTH_SHORT).show();
-//
-//                        } if(data.child("lottery_number").getValue().toString().equals( //first 3 number
-//                                editTextLotteryNumber.getText().toString().substring(0,3))){
-//                            Snackbar.make(checkLotteryActivity, "คุณถูกรางวัลที่ " + data.child("lottery_prize").getValue()
-//                                    , Snackbar.LENGTH_SHORT).show();
-//                        }
 
-                    } if(!data.exists()) {
+                        // last 2 number prize
+                        if(data.child("lottery_number").getValue().toString().equals( //last 2 number 000098
+                                editTextLotteryNumber.getText().toString().substring(4,6))){
+
+                            // Display snackbar
+                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
+                                    , Snackbar.LENGTH_SHORT).show();
+
+                            // Save check lottery to database
+                            save(spinnerSelectDate.getSelectedItem().toString(),
+                                    editTextLotteryNumber.getText().toString(),
+                                    (String) data.child("lottery_prize").getValue());
+                            getLotteries();
+
+                        }
+
+                        // last 3 number prize
+                        if(data.child("lottery_number").getValue().toString().equals( //last 3 number
+                                editTextLotteryNumber.getText().toString().substring(3,6))){
+
+                            // Display snackbar
+                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
+                                    , Snackbar.LENGTH_SHORT).show();
+
+                            // Save check lottery to database
+                            save(spinnerSelectDate.getSelectedItem().toString(),
+                                    editTextLotteryNumber.getText().toString(),
+                                    (String) data.child("lottery_prize").getValue());
+                            getLotteries();
+
+                        }
+
+                        // first 3 number
+                        if(data.child("lottery_number").getValue().toString().equals( //first 3 number
+                                editTextLotteryNumber.getText().toString().substring(0,3))){
+
+                            // Display snackbar
+                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
+                                    , Snackbar.LENGTH_SHORT).show();
+
+                            // Save check lottery to database
+                            save(spinnerSelectDate.getSelectedItem().toString(),
+                                    editTextLotteryNumber.getText().toString(),
+                                    (String) data.child("lottery_prize").getValue());
+                            getLotteries();
+                        }
+
+                    } else {
                         Snackbar.make(checkLotteryActivity, "เสียใจด้วยคุณไม่ถูกรางวัล", Snackbar.LENGTH_SHORT).show();
+                        Toast.makeText(CheckLotteryActivity.this, "เสียใจด้วยคุณไม่ถูกรางวัล", Toast.LENGTH_SHORT).show();
+                        Log.i("TT", editTextLotteryNumber.getText().toString());
+
+                        save(spinnerSelectDate.getSelectedItem().toString(),
+                                editTextLotteryNumber.getText().toString(),
+                                (String) data.child("lottery_prize").getValue());
+                        getLotteries();
                     }
 
                 }
 
+                clear();
+
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -202,11 +238,9 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
     }
 
-    /**
-     *  Save check lottery to database
-     */
+    // Save check lottery to database
     private void save(String selected_date, String lottery_number, String lottery_result){
-        DBAdapter db = new DBAdapter(this);
+        DBHistoryAdapter db = new DBHistoryAdapter(this);
         db.openDB();
         if(db.addLottery(selected_date, lottery_number, lottery_result)){
 //            editTextLotteryNumber.setText("");
@@ -216,13 +250,11 @@ public class CheckLotteryActivity extends AppCompatActivity {
         db.closeDB();
     }
 
-    /**
-     * Update list history to recyclerview
-     */
+    // Update list history to recyclerview
     private void getLotteries(){
         listHistory.clear();
 
-        DBAdapter db = new DBAdapter(this);
+        DBHistoryAdapter db = new DBHistoryAdapter(this);
         db.openDB();
         Cursor cursor = db.retrieve();
 
@@ -248,9 +280,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Dialog Display when not connect Internet
-     */
+    // Dialog Display when not connect Internet
     public boolean isConnected(Context context) {
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -266,9 +296,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     * Dialog Display when not connect Internet
-     */
+    // Dialog Display when not connect Internet
     public AlertDialog.Builder buildDialog(Context c) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(c);

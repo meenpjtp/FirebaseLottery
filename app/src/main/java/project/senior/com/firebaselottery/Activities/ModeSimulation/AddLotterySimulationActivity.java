@@ -1,8 +1,13 @@
 package project.senior.com.firebaselottery.Activities.ModeSimulation;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,6 +48,15 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_lottery_simulation);
 
         initObjects();
+
+        /**
+         * Display Dialog when is not connect internet
+         */
+        if(!isConnected(AddLotterySimulationActivity.this)) buildDialog(AddLotterySimulationActivity.this).show();
+        else {
+
+        }
+
         textViewPriceLotterySimulation.setText(String.valueOf(PRICE));
 
         /**
@@ -73,8 +87,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void initObjects(){
@@ -87,5 +99,43 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
         textInputLayoutAddAmountLotterySimulation = (TextInputLayout)findViewById(R.id.textInputLayoutAddAmountLotterySimulation);
         editTextAddAmountLotterySimulation = (TextInputEditText) findViewById(R.id.editTextAddAmountLotterySimulation);
         buttonSaveSimulation = (Button) findViewById(R.id.buttonSaveSimulation);
+    }
+
+    /**
+     * Dialog Display when not connect Internet
+     */
+    public boolean isConnected(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netinfo = cm.getActiveNetworkInfo();
+
+        if (netinfo != null && netinfo.isConnectedOrConnecting()) {
+            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting())) return true;
+            else return false;
+        } else
+            return false;
+    }
+
+    /**
+     * Dialog Display when not connect Internet
+     */
+    public AlertDialog.Builder buildDialog(Context c) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setTitle(R.string.message_no_internet_connection);
+        builder.setMessage(R.string.message_no_internet_connection_description);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        return builder;
     }
 }

@@ -20,7 +20,21 @@ public class ModePurchaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mode_purchase);
 
         initObjects();
+        initViews();
 
+    }
+
+    private void initViews(){
+        recyclerviewPurchase = (RecyclerView) findViewById(R.id.recyclerviewPurchase);
+    }
+
+    /**
+     * This method is to initialize objects to be used
+     */
+    private void initObjects(){
+
+        // Floating Action Button Add Lottery
+        fabAddLotteryPurchase = (FloatingActionButton) findViewById(R.id.fabAddLotteryPurchase);
         fabAddLotteryPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,14 +42,6 @@ public class ModePurchaseActivity extends AppCompatActivity {
                 startActivity(a);
             }
         });
-    }
-
-    /**
-     * This method is to initialize objects to be used
-     */
-    private void initObjects(){
-        recyclerviewPurchase = (RecyclerView) findViewById(R.id.recyclerviewPurchase);
-        fabAddLotteryPurchase = (FloatingActionButton) findViewById(R.id.fabAddLotteryPurchase);
     }
 
 

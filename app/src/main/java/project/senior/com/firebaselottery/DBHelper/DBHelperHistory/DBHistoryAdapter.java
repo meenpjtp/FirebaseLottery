@@ -1,19 +1,19 @@
-package project.senior.com.firebaselottery.DBHelper;
+package project.senior.com.firebaselottery.DBHelper.DBHelperHistory;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class DBAdapter {
+public class DBHistoryAdapter {
 
     Context context;
     SQLiteDatabase sqLiteDatabase;
-    DBHelper helper;
+    DBHistoryHelper helper;
 
-    public DBAdapter(Context context){
+    public DBHistoryAdapter(Context context){
         this.context =context;
-        helper = new DBHelper(context);
+        helper = new DBHistoryHelper(context);
     }
 
     public void openDB(){
@@ -33,12 +33,12 @@ public class DBAdapter {
     }
 
     public Cursor retrieve() {
-        String[] columns = {Constants.COLS_ID,
-                Constants.COLS_DATE,
-                Constants.COLS_LOTTERY_NUMBER,
-                Constants.COLS_RESULT };
+        String[] columns = {ConstantsHistory.COLS_ID,
+                ConstantsHistory.COLS_DATE,
+                ConstantsHistory.COLS_LOTTERY_NUMBER,
+                ConstantsHistory.COLS_RESULT };
 
-        return sqLiteDatabase.query(Constants.TABLE_NAME,
+        return sqLiteDatabase.query(ConstantsHistory.TB_NAME,
                 columns,
                 null,
                 null,
@@ -50,11 +50,11 @@ public class DBAdapter {
     public boolean addLottery(String selected_date, String lottery_number, String lottery_result){
         try{
             ContentValues values = new ContentValues();
-            values.put(Constants.COLS_DATE, selected_date);
-            values.put(Constants.COLS_LOTTERY_NUMBER, lottery_number);
-            values.put(Constants.COLS_RESULT, lottery_result);
+            values.put(ConstantsHistory.COLS_DATE, selected_date);
+            values.put(ConstantsHistory.COLS_LOTTERY_NUMBER, lottery_number);
+            values.put(ConstantsHistory.COLS_RESULT, lottery_result);
 
-            sqLiteDatabase.insert(Constants.TABLE_NAME, Constants.COLS_ID, values);
+            sqLiteDatabase.insert(ConstantsHistory.TB_NAME, ConstantsHistory.COLS_ID, values);
             return true;
 
         } catch (Exception e){
@@ -65,7 +65,7 @@ public class DBAdapter {
 
     public boolean deleteLottery(int id){
         try {
-            int result = sqLiteDatabase.delete(Constants.TABLE_NAME, Constants.COLS_ID + " =?",
+            int result = sqLiteDatabase.delete(ConstantsHistory.TB_NAME, ConstantsHistory.COLS_ID + " =?",
                     new String[]{String.valueOf(id)});
             if(result > 0){
                 return true;

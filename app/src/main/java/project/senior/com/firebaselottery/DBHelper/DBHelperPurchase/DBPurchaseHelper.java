@@ -1,21 +1,20 @@
-package project.senior.com.firebaselottery.DBHelper;
-
+package project.senior.com.firebaselottery.DBHelper.DBHelperPurchase;
 
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHelper extends SQLiteOpenHelper {
+public class DBPurchaseHelper extends SQLiteOpenHelper {
 
-    public DBHelper(Context context){
-        super(context, Constants.DB_NAME, null, Constants.DB_VERSION);
+    public DBPurchaseHelper(Context context){
+        super(context, ConstantsPurchase.DB_NAME, null, ConstantsPurchase.DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
-            sqLiteDatabase.execSQL(Constants.CREATE_TB);
+            sqLiteDatabase.execSQL(ConstantsPurchase.CREATE_TB);
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -24,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL(Constants.DROP_TB);
+        sqLiteDatabase.execSQL(ConstantsPurchase.DROP_TB);
         onCreate(sqLiteDatabase);
     }
 }

@@ -37,7 +37,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textViewPriceLotteryPurchase"
+                    android:id="@+id/textViewPriceLottery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp" />
@@ -60,7 +60,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textViewSelectedDateLotteryPurchase"
+                    android:id="@+id/textViewSelectedDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp" />
@@ -84,20 +84,20 @@
                 android:text="@string/btn_mode_purchase" />
 
             <Spinner
-                android:id="@+id/spinnerSelectDatePurchase"
+                android:id="@+id/spinnerSelectDate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
             </Spinner>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutAddLotteryNumberPurchase"
+                android:id="@+id/textInputLayoutAddLottery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/editTextAddLotteryNumberPurchase"
+                    android:id="@+id/editTextAddLottery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_input_lottery_number"
@@ -108,13 +108,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutAddAmountLotteryPurchase"
+                android:id="@+id/textInputLayoutAddAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/editTextAddAmountLotteryPurchase"
+                    android:id="@+id/editTextAddAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_input_amount"
@@ -131,13 +131,14 @@
 
 
     <Button
-        android:id="@+id/buttonSavePurchase"
+        android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:background="@color/colorPrimary"
+        android:onClick="saveLotteryNumber"
         android:text="@string/btn_save"
-        android:textSize="14sp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 
 </LinearLayout>

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import project.senior.com.firebaselottery.DBHelper.DBAdapter;
+import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
 import project.senior.com.firebaselottery.Models.PurchaseModel;
 import project.senior.com.firebaselottery.R;
 
@@ -73,7 +73,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
         PurchaseModel model = listPurchase.get(position);
         int id = model.getId();
 
-        DBAdapter db = new DBAdapter(context);
+        DBHistoryAdapter db = new DBHistoryAdapter(context);
         db.openDB();
         if(db.deleteLottery(id)){
             listPurchase.remove(position);

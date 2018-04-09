@@ -41,28 +41,28 @@
 
         <TextView
             android:id="@+id/dateTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
+            android:text="30 December 2017"
             android:textSize="14sp"
             />
 
         <TextView
             android:id="@+id/lotteryNumberTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
+            android:text="123456"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/resultTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="67dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
+            android:text="รางวัลข้างเคียงรางวัลที่ 1"
             android:textSize="14sp"
             />
 
