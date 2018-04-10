@@ -32,11 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
+import project.senior.com.firebaselottery.Error.StringUtil;
 import project.senior.com.firebaselottery.Models.HistoryModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.HistoryAdapter;
 import project.senior.com.firebaselottery.RecyclerView.Swipe.HistorySwipe;
-import project.senior.com.firebaselottery.Error.StringUtil;
 
 public class CheckLotteryActivity extends AppCompatActivity {
 
@@ -49,6 +49,8 @@ public class CheckLotteryActivity extends AppCompatActivity {
     //SQLite
     private ArrayList<HistoryModel> listHistory;
     HistoryAdapter adapter;
+
+    int countFalse = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +131,8 @@ public class CheckLotteryActivity extends AppCompatActivity {
      */
     public void checkLotteryNumber(View view){
 
+        final int count = 0;
+
         // Error Message when input length != 6
         if(StringUtil.isEmpty(editTextLotteryNumber.getText().toString())){
             editTextLotteryNumber.setError(getString(R.string.error_message_length));
@@ -145,88 +149,92 @@ public class CheckLotteryActivity extends AppCompatActivity {
         refDate.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for(DataSnapshot data : dataSnapshot.getChildren()){
 
-                    // Length input == 6 | if data exists in firebase
-                    if(data.hasChild("lottery_number")){
+                    /**
+                     *  Counting True or False to tell you win or not
+                     *  if counting False == 5 you did not win
+                     *  Counting True < 5 you win!
+                     */
+                    Boolean match1 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString());
+                    Boolean match2 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(4,6));
+                    Boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(3,6));
+                    Boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(0,3));
 
-                        // 1st prize, 2nd prize, 3rd prize, 4th prize, 5th prize
-                        if(data.child("lottery_number").getValue().toString().equals(
-                                editTextLotteryNumber.getText().toString())){
-                            // Display snackbar
-                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
-                                    , Snackbar.LENGTH_SHORT).show();
+                    // 1st prize | 2nd prize | 3rd prize | 4th prize | 5th prize
+                    if(match1 == true){
 
-                            // Save check lottery to database
-                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                    editTextLotteryNumber.getText().toString(),
-                                    (String) data.child("lottery_prize").getValue());
-                            getLotteries();
+                        // Display Snackbar
+                        Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
 
-                        }
-
-                        // last 2 number prize
-                        if(data.child("lottery_number").getValue().toString().equals( //last 2 number 000098
-                                editTextLotteryNumber.getText().toString().substring(4,6))){
-
-                            // Display snackbar
-                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
-                                    , Snackbar.LENGTH_SHORT).show();
-
-                            // Save check lottery to database
-                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                    editTextLotteryNumber.getText().toString(),
-                                    (String) data.child("lottery_prize").getValue());
-                            getLotteries();
-
-                        }
-
-                        // last 3 number prize
-                        if(data.child("lottery_number").getValue().toString().equals( //last 3 number
-                                editTextLotteryNumber.getText().toString().substring(3,6))){
-
-                            // Display snackbar
-                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
-                                    , Snackbar.LENGTH_SHORT).show();
-
-                            // Save check lottery to database
-                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                    editTextLotteryNumber.getText().toString(),
-                                    (String) data.child("lottery_prize").getValue());
-                            getLotteries();
-
-                        }
-
-                        // first 3 number
-                        if(data.child("lottery_number").getValue().toString().equals( //first 3 number
-                                editTextLotteryNumber.getText().toString().substring(0,3))){
-
-                            // Display snackbar
-                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
-                                    , Snackbar.LENGTH_SHORT).show();
-
-                            // Save check lottery to database
-                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                    editTextLotteryNumber.getText().toString(),
-                                    (String) data.child("lottery_prize").getValue());
-                            getLotteries();
-                        }
-
-                    } else {
-                        Snackbar.make(checkLotteryActivity, "เสียใจด้วยคุณไม่ถูกรางวัล", Snackbar.LENGTH_SHORT).show();
-                        Toast.makeText(CheckLotteryActivity.this, "เสียใจด้วยคุณไม่ถูกรางวัล", Toast.LENGTH_SHORT).show();
-                        Log.i("TT", editTextLotteryNumber.getText().toString());
-
+                        // Save check lottery to database
                         save(spinnerSelectDate.getSelectedItem().toString(),
                                 editTextLotteryNumber.getText().toString(),
-                                (String) data.child("lottery_prize").getValue());
+                                "ถูก" + (String) data.child("lottery_prize").getValue());
                         getLotteries();
                     }
 
+                    // Last 2 number
+                    if(match2 == true){
+
+                        // Display Snackbar
+                        Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
+
+                        // Save check lottery to database
+                        save(spinnerSelectDate.getSelectedItem().toString(),
+                                editTextLotteryNumber.getText().toString(),
+                                "ถูก" + (String) data.child("lottery_prize").getValue());
+                        getLotteries();
+                    }
+
+                    // Last 3 number
+                    if(match3 == true){
+
+                        // Display Snackbar
+                        Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
+
+                        // Save check lottery to database
+                        save(spinnerSelectDate.getSelectedItem().toString(),
+                                editTextLotteryNumber.getText().toString(),
+                                "ถูก" + (String) data.child("lottery_prize").getValue());
+                        getLotteries();
+                    }
+
+                    // First 3 number
+                    if(match4 == true){
+
+                        // Display Snackbar
+                        Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
+
+                        // Save check lottery to database
+                        save(spinnerSelectDate.getSelectedItem().toString(),
+                                editTextLotteryNumber.getText().toString(),
+                                "ถูก" + (String) data.child("lottery_prize").getValue());
+                        getLotteries();
+
+                    }
+
+                    // Did not win lottery (count boolean False == 5)
+                    if(match1 == false && match2 == false && match3 == false && match4 == false) {
+                        countFalse++;
+                        Log.i("countFalse", String.valueOf(countFalse));
+
+                    }
+                    // countFalse == 5 --> Did not win lottery!
+                    if(countFalse == 5){
+                        Snackbar.make(checkLotteryActivity, "คุณไม่ถูกรางวัล", Snackbar.LENGTH_SHORT).show();
+
+                        // Save check lottery to database
+                        save(spinnerSelectDate.getSelectedItem().toString(),
+                                editTextLotteryNumber.getText().toString(),
+                                "ไม่ถูกรางวัล");
+                        getLotteries();
+                    }
                 }
 
                 clear();
-
+                countFalse = 0; // reset countFalse
             }
 
 
@@ -314,3 +322,93 @@ public class CheckLotteryActivity extends AppCompatActivity {
         return builder;
     }
 }
+
+// Length input == 6 | if data exists in firebase
+                    /*if(data.exists()){
+
+                        // 1st prize, 2nd prize, 3rd prize, 4th prize, 5th prize
+                        if(data.child("lottery_number").getValue().toString().equals(
+                                editTextLotteryNumber.getText().toString())){
+
+                            Log.i("QQQQ", String.valueOf(match1));
+
+                            // Display snackbar
+                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
+                                    , Snackbar.LENGTH_SHORT).show();
+
+                            // Save check lottery to database
+                            save(spinnerSelectDate.getSelectedItem().toString(),
+                                    editTextLotteryNumber.getText().toString(),
+                                    (String) data.child("lottery_prize").getValue());
+                            getLotteries();
+
+                        }
+
+                        // last 2 number prize
+                        if(data.child("lottery_number").getValue().toString().equals( //last 2 number 000098
+                                editTextLotteryNumber.getText().toString().substring(4,6))){
+
+                            Log.i("QQQQ", String.valueOf(match2));
+
+                            // Display snackbar
+                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
+                                    , Snackbar.LENGTH_SHORT).show();
+
+                            // Save check lottery to database
+                            save(spinnerSelectDate.getSelectedItem().toString(),
+                                    editTextLotteryNumber.getText().toString(),
+                                    (String) data.child("lottery_prize").getValue());
+                            getLotteries();
+
+                        }
+
+                        // last 3 number prize
+                        if(data.child("lottery_number").getValue().toString().equals( //last 3 number
+                                editTextLotteryNumber.getText().toString().substring(3,6))){
+
+                            Log.i("QQQQ", String.valueOf(match3));
+
+
+                            // Display snackbar
+                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
+                                    , Snackbar.LENGTH_SHORT).show();
+
+                            // Save check lottery to database
+                            save(spinnerSelectDate.getSelectedItem().toString(),
+                                    editTextLotteryNumber.getText().toString(),
+                                    (String) data.child("lottery_prize").getValue());
+                            getLotteries();
+
+                        }
+
+                        // first 3 number
+                        if(data.child("lottery_number").getValue().toString().equals( //first 3 number
+                                editTextLotteryNumber.getText().toString().substring(0,3))){
+
+                            Log.i("QQQQ", String.valueOf(match4));
+
+                            // Display snackbar
+                            Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue()
+                                    , Snackbar.LENGTH_SHORT).show();
+
+                            // Save check lottery to database
+                            save(spinnerSelectDate.getSelectedItem().toString(),
+                                    editTextLotteryNumber.getText().toString(),
+                                    (String) data.child("lottery_prize").getValue());
+                            getLotteries();
+                        }
+
+                        if(!match1 && !match2 && !match3 && !match4){
+                            Toast.makeText(CheckLotteryActivity.this, "เสียใจด้วยคุณไม่ถูกรางวัล", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        Snackbar.make(checkLotteryActivity, "เสียใจด้วยคุณไม่ถูกรางวัล", Snackbar.LENGTH_SHORT).show();
+                        Toast.makeText(CheckLotteryActivity.this, "เสียใจด้วยคุณไม่ถูกรางวัล", Toast.LENGTH_SHORT).show();
+                        Log.i("TT", editTextLotteryNumber.getText().toString());
+
+                        save(spinnerSelectDate.getSelectedItem().toString(),
+                                editTextLotteryNumber.getText().toString(),
+                                (String) data.child("lottery_prize").getValue());
+                        getLotteries();
+                    }*/
