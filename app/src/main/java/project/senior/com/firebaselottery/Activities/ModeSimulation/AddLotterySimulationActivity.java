@@ -19,16 +19,13 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
 import project.senior.com.firebaselottery.Error.InputValidation;
 import project.senior.com.firebaselottery.Models.SimulationModel;
@@ -188,6 +185,8 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             String.valueOf(save_paid),
                                             "คุณถูก" + data.child("lottery_prize").getValue());
 
+                                    Log.i("testLength", editTextAddLottery.getText().toString().substring(4,6));
+
                                 }
 
                                 // Last 3 number
@@ -231,10 +230,13 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             editTextAddAmount.getText().toString(),
                                             String.valueOf(save_paid),
                                             "คุณไม่ถูกรางวัล");
+//                                    clear();
+
                                 }
                             }
 
                             countFalse = 0; // reset countFalse
+                            clear();
                         }
 
 
@@ -256,11 +258,11 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                             editTextAddAmount.getText().toString(),
                             String.valueOf(save_paid),
                             "รอผลรางวัล");
+                    clear();
 
                 }
 
                 getLotteries();
-                clear();
                 Snackbar.make(addLotterySimulation, "บันทึกเรียบร้อย", Snackbar.LENGTH_SHORT).show();
 
             }
