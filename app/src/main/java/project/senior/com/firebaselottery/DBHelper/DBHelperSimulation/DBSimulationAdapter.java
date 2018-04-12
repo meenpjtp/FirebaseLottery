@@ -38,7 +38,7 @@ public class DBSimulationAdapter {
                 ConstantsSimulation.COLS_NUMBER,
                 ConstantsSimulation.COLS_AMOUNT,
                 ConstantsSimulation.COLS_PAID,
-                ConstantsSimulation.COLS_PAID };
+                ConstantsSimulation.COLS_STATUS };
 
         return sqLiteDatabase.query(ConstantsSimulation.TB_NAME,
                 columns,
@@ -57,7 +57,6 @@ public class DBSimulationAdapter {
             values.put(ConstantsSimulation.COLS_AMOUNT, simulation_amount);
             values.put(ConstantsSimulation.COLS_PAID, simulation_paid);
             values.put(ConstantsSimulation.COLS_STATUS, simulation_status);
-
 
             sqLiteDatabase.insert(ConstantsSimulation.TB_NAME, ConstantsSimulation.COLS_ID, values);
             return true;

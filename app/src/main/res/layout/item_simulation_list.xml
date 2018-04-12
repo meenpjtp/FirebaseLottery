@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/view_background"
+        android:id="@+id/sim_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,7 +32,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/view_foreground"
+        android:id="@+id/sim_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -68,7 +68,7 @@
                         android:textColor="@android:color/white"/>
 
                     <TextView
-                        android:id="@+id/selectedDateTextView"
+                        android:id="@+id/sim_dateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
@@ -93,7 +93,7 @@
                         android:textColor="@android:color/white"/>
 
                     <TextView
-                        android:id="@+id/statusTextView"
+                        android:id="@+id/sim_statusTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
@@ -113,7 +113,7 @@
                 android:background="@drawable/recyclerview_shape2">
 
                 <TextView
-                    android:id="@+id/lotteryNumberTextView"
+                    android:id="@+id/sim_lotteryNumberTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="123456"
@@ -140,7 +140,7 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/amountTextView"
+                            android:id="@+id/sim_amountTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -171,7 +171,7 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/paidTextView"
+                            android:id="@+id/sim_paidTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"

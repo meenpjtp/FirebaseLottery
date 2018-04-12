@@ -29,7 +29,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
     @Override
     public PurchaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_list, parent, false);
+                .inflate(R.layout.item_purchase_list, parent, false);
         PurchaseHolder holder = new PurchaseHolder(view);
         return holder;
     }
@@ -37,11 +37,11 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
     @Override
     public void onBindViewHolder(PurchaseHolder holder, int position) {
 
-        holder.selectedDateTextView.setText(listPurchase.get(position).getLottery_date());
-        holder.statusTextView.setText(listPurchase.get(position).getLottery_status());
-        holder.lotteryNumberTextView.setText(listPurchase.get(position).getLottery_number());
-        holder.amountTextView.setText(listPurchase.get(position).getLottery_amount());
-        holder.paidTextView.setText(listPurchase.get(position).getLottery_paid());
+        holder.pur_dateTextView.setText(listPurchase.get(position).getLottery_date());
+        holder.pur_statusTextView.setText(listPurchase.get(position).getLottery_status());
+        holder.pur_lotteryNumberTextView.setText(listPurchase.get(position).getLottery_number());
+        holder.pur_amountTextView.setText(listPurchase.get(position).getLottery_amount());
+        holder.pur_paidTextView.setText(listPurchase.get(position).getLottery_paid());
 
 
     }
@@ -52,20 +52,20 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
     }
 
     public class PurchaseHolder extends RecyclerView.ViewHolder {
-        public TextView selectedDateTextView, statusTextView, lotteryNumberTextView, amountTextView, paidTextView;
-        public RelativeLayout view_background;
-        public LinearLayout view_foreground;
+        public TextView pur_dateTextView, pur_statusTextView, pur_lotteryNumberTextView, pur_amountTextView, pur_paidTextView;
+        public RelativeLayout pur_background;
+        public LinearLayout pur_foreground;
 
         public PurchaseHolder(View itemView){
             super(itemView);
 
-            selectedDateTextView = (TextView) itemView.findViewById(R.id.selectedDateTextView);
-            statusTextView = (TextView) itemView.findViewById(R.id.statusTextView);
-            lotteryNumberTextView = (TextView) itemView.findViewById(R.id.lotteryNumberTextView);
-            amountTextView = (TextView) itemView.findViewById(R.id.amountTextView);
-            paidTextView = (TextView) itemView.findViewById(R.id.paidTextView);
-            view_background = (RelativeLayout) itemView.findViewById(R.id.view_background);
-            view_foreground = (LinearLayout) itemView.findViewById(R.id.view_foreground);
+            pur_dateTextView = (TextView) itemView.findViewById(R.id.pur_dateTextView);
+            pur_statusTextView = (TextView) itemView.findViewById(R.id.pur_statusTextView);
+            pur_lotteryNumberTextView = (TextView) itemView.findViewById(R.id.pur_lotteryNumberTextView);
+            pur_amountTextView = (TextView) itemView.findViewById(R.id.pur_amountTextView);
+            pur_paidTextView = (TextView) itemView.findViewById(R.id.pur_paidTextView);
+            pur_background = (RelativeLayout) itemView.findViewById(R.id.pur_background);
+            pur_foreground = (LinearLayout) itemView.findViewById(R.id.pur_foreground);
         }
     }
 

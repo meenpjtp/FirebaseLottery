@@ -29,7 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
 import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
 import project.senior.com.firebaselottery.Error.InputValidation;
 import project.senior.com.firebaselottery.Models.SimulationModel;
@@ -48,6 +47,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
     private Button buttonSave; // save to SQLite after check with firebase
 
     private final int PRICE = 80;
+    private int countFalse = 0;
 
     private InputValidation inputValidation;
 
@@ -61,6 +61,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
         initObjects();
         initViews();
+        getLotteries();
 
         // Display Dialog when is not connect internet
         if(!isConnected(AddLotterySimulationActivity.this)) buildDialog(AddLotterySimulationActivity.this).show();
@@ -120,6 +121,9 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
         else {
         }
 
+        // Save To SQLite
+        listModel = new ArrayList<>();
+
     }
 
     // Press button save to database
@@ -135,30 +139,130 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
         final DatabaseReference refResult = refLottery.child("RESULT");
         final DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
 
-        refDate.addListenerForSingleValueEvent(new ValueEventListener() {
+        refResult.child(spinnerSelectDate.getSelectedItem().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
 
-                    Boolean match1 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString());
+                final int save_paid = Integer.parseInt(editTextAddAmount.getText().toString()) * PRICE;
+
+                // Result Announcement
+                if(dataSnapshot.getValue() != null){
+                    Log.i("testExists", "data exists");
+
+                    refDate.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            for(DataSnapshot data : dataSnapshot.getChildren()){
+
+                                /**
+                                 *  Counting True or False to tell you win or not
+                                 *  if counting False == 5 you did not win
+                                 *  Counting True < 5 you win!
+                                 */
+                                Boolean match1 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString());
+                                Boolean match2 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(4,6));
+                                Boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(3,6));
+                                Boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(0,3));
+
+                                // 1st prize | 2nd prize | 3rd prize | 4th prize | 5th prize
+                                if(match1 == true){
+
+                                    // Save check lottery to database
+                                    save(spinnerSelectDate.getSelectedItem().toString(),
+                                            editTextAddLottery.getText().toString(),
+                                            editTextAddAmount.getText().toString(),
+                                            String.valueOf(save_paid),
+                                            "คุณถูก" + data.child("lottery_prize").getValue());
+
+                                    //Log.i("logggggg", String.valueOf(data));
+                                }
+
+                                // Last 2 number
+                                if(match2 == true){
+
+                                    // Save check lottery to database
+                                    save(spinnerSelectDate.getSelectedItem().toString(),
+                                            editTextAddLottery.getText().toString(),
+                                            editTextAddAmount.getText().toString(),
+                                            String.valueOf(save_paid),
+                                            "คุณถูก" + data.child("lottery_prize").getValue());
+
+                                }
+
+                                // Last 3 number
+                                if(match3 == true){
+
+                                    // Save check lottery to database
+                                    save(spinnerSelectDate.getSelectedItem().toString(),
+                                            editTextAddLottery.getText().toString(),
+                                            editTextAddAmount.getText().toString(),
+                                            String.valueOf(save_paid),
+                                            "คุณถูก" + data.child("lottery_prize").getValue());
+
+                                }
+
+                                // First 3 number
+                                if(match4 == true){
+
+                                    // Save check lottery to database
+                                    save(spinnerSelectDate.getSelectedItem().toString(),
+                                            editTextAddLottery.getText().toString(),
+                                            editTextAddAmount.getText().toString(),
+                                            String.valueOf(save_paid),
+                                            "คุณถูก" + data.child("lottery_prize").getValue());
+
+                                }
 
 
-                    if (data == null){
+                                // Did not win lottery (count boolean False == 5)
+                                if(match1 == false  && match2 == false&& match3 == false && match4 == false) {
+                                    countFalse++;
+                                    Log.i("countFalse", String.valueOf(countFalse));
 
-                    } else {
+                                }
 
-                        if (data.child("lottery_number").getValue().toString().equals(
-                                editTextAddLottery.getText().toString())) {
+                                // countFalse == 5 --> Did not win lottery!
+                                // change 5 -> 173
+                                if(countFalse ==5){
 
-                            Log.i("QQQQ", String.valueOf(match1));
+                                    save(spinnerSelectDate.getSelectedItem().toString(),
+                                            editTextAddLottery.getText().toString(),
+                                            editTextAddAmount.getText().toString(),
+                                            String.valueOf(save_paid),
+                                            "คุณไม่ถูกรางวัล");
+                                }
+                            }
 
-                            // Display snackbar
-                            Snackbar.make(addLotterySimulation, "คุณถูก" + data.child("lottery_prize").getValue()
-                                    , Snackbar.LENGTH_SHORT).show();
+                            countFalse = 0; // reset countFalse
+                        }
+
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
                         }
-                    }
+                    });
                 }
+
+                // Waiting Result...
+                else{
+
+                    Log.i("testExists", "data not exists");
+
+                    // Save check lottery to database
+                    save(spinnerSelectDate.getSelectedItem().toString(),
+                            editTextAddLottery.getText().toString(),
+                            editTextAddAmount.getText().toString(),
+                            String.valueOf(save_paid),
+                            "รอผลรางวัล");
+
+                }
+
+                getLotteries();
+                clear();
+                Snackbar.make(addLotterySimulation, "บันทึกเรียบร้อย", Snackbar.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -167,18 +271,12 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
-    // Save check lottery to database
-    private void save(String selected_date, String lottery_number, String lottery_result){
-        DBHistoryAdapter db = new DBHistoryAdapter(this);
-        db.openDB();
-        if(db.addLottery(selected_date, lottery_number, lottery_result)){
-//            editTextLotteryNumber.setText("");
-        } else {
-            Toast.makeText(this,"Unable to save", Toast.LENGTH_SHORT).show();;
-        }
-        db.closeDB();
+    private void clear(){
+        editTextAddAmount.setText("");
+        editTextAddLottery.setText("");
     }
 
     // Save check lottery to database
@@ -226,7 +324,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 //            recyclerViewCheckedLottery.setAdapter(adapter);
 //        }
     }
-
 
     // Dialog Display when not connect Internet
     public boolean isConnected(Context context) {

@@ -38,7 +38,7 @@ public class DBPurchaseAdapter {
                 ConstantsPurchase.COLS_NUMBER,
                 ConstantsPurchase.COLS_AMOUNT,
                 ConstantsPurchase.COLS_PAID,
-                ConstantsPurchase.COLS_PAID };
+                ConstantsPurchase.COLS_STATUS };
 
         return sqLiteDatabase.query(ConstantsPurchase.TB_NAME,
                 columns,
@@ -57,7 +57,6 @@ public class DBPurchaseAdapter {
             values.put(ConstantsPurchase.COLS_AMOUNT, purchase_amount);
             values.put(ConstantsPurchase.COLS_PAID, purchase_paid);
             values.put(ConstantsPurchase.COLS_STATUS, purchase_status);
-
 
             sqLiteDatabase.insert(ConstantsPurchase.TB_NAME, ConstantsPurchase.COLS_ID, values);
             return true;

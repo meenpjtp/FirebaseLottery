@@ -10,13 +10,13 @@ public class ConstantsSimulation {
     static final String COLS_PAID = "simulation_paid";
     static final String COLS_STATUS = "simulation_status";
 
-    static final String DB_NAME = "mode_simulation";
-    static final String TB_NAME = "mode_simulation";
+    static final String DB_NAME = "modeSimulation";
+    static final String TB_NAME = "modeSimulation";
     static final int DB_VERSION = 1;
 
     //CREATE TABLE
-    static final String CREATE_TB = "CREATE TABLE simulation(id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "purchase_date TEXT, purchase_number TEXT, purchase_amount TEXT, purchase_paid TEXT, purchase_status TEXT)";
+    static final String CREATE_TB = "CREATE TABLE modeSimulation(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "simulation_date TEXT, simulation_number TEXT, simulation_amount TEXT, simulation_paid TEXT, simulation_status TEXT)";
 
     static final String DROP_TB = "DROP TABLE IF EXISTS " + TB_NAME;
 }

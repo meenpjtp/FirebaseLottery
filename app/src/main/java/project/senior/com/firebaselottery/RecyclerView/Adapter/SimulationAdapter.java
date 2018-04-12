@@ -29,7 +29,7 @@ public class SimulationAdapter extends RecyclerView.Adapter<SimulationAdapter.Si
     @Override
     public SimulationHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_list, parent, false);
+                .inflate(R.layout.item_simulation_list, parent, false);
         SimulationHolder holder = new SimulationHolder(view);
         return holder;
     }
@@ -37,11 +37,11 @@ public class SimulationAdapter extends RecyclerView.Adapter<SimulationAdapter.Si
     @Override
     public void onBindViewHolder(SimulationHolder holder, int position) {
 
-        holder.selectedDateTextView.setText(listSimulation.get(position).getLottery_date());
-        holder.statusTextView.setText(listSimulation.get(position).getLottery_status());
-        holder.lotteryNumberTextView.setText(listSimulation.get(position).getLottery_number());
-        holder.amountTextView.setText(listSimulation.get(position).getLottery_amount());
-        holder.paidTextView.setText(listSimulation.get(position).getLottery_paid());
+        holder.sim_dateTextView.setText(listSimulation.get(position).getLottery_date());
+        holder.sim_lotteryNumberTextView.setText(listSimulation.get(position).getLottery_number());
+        holder.sim_amountTextView.setText(listSimulation.get(position).getLottery_amount());
+        holder.sim_paidTextView.setText(listSimulation.get(position).getLottery_paid());
+        holder.sim_statusTextView.setText(listSimulation.get(position).getLottery_status());
 
     }
 
@@ -51,20 +51,20 @@ public class SimulationAdapter extends RecyclerView.Adapter<SimulationAdapter.Si
     }
 
     public class SimulationHolder extends RecyclerView.ViewHolder {
-        public TextView selectedDateTextView, statusTextView, lotteryNumberTextView, amountTextView, paidTextView;
-        public RelativeLayout view_background;
-        public LinearLayout view_foreground;
+        public TextView sim_dateTextView, sim_statusTextView, sim_lotteryNumberTextView, sim_amountTextView, sim_paidTextView;
+        public RelativeLayout sim_background;
+        public LinearLayout sim_foreground;
 
         public SimulationHolder(View itemView){
             super(itemView);
 
-            selectedDateTextView = (TextView) itemView.findViewById(R.id.selectedDateTextView);
-            statusTextView = (TextView) itemView.findViewById(R.id.statusTextView);
-            lotteryNumberTextView = (TextView) itemView.findViewById(R.id.lotteryNumberTextView);
-            amountTextView = (TextView) itemView.findViewById(R.id.amountTextView);
-            paidTextView = (TextView) itemView.findViewById(R.id.paidTextView);
-            view_background = (RelativeLayout) itemView.findViewById(R.id.view_background);
-            view_foreground = (LinearLayout) itemView.findViewById(R.id.view_foreground);
+            sim_dateTextView = (TextView) itemView.findViewById(R.id.sim_dateTextView);
+            sim_statusTextView = (TextView) itemView.findViewById(R.id.sim_statusTextView);
+            sim_lotteryNumberTextView = (TextView) itemView.findViewById(R.id.sim_lotteryNumberTextView);
+            sim_amountTextView = (TextView) itemView.findViewById(R.id.sim_amountTextView);
+            sim_paidTextView = (TextView) itemView.findViewById(R.id.sim_paidTextView);
+            sim_background = (RelativeLayout) itemView.findViewById(R.id.sim_background);
+            sim_foreground = (LinearLayout) itemView.findViewById(R.id.sim_foreground);
         }
     }
 

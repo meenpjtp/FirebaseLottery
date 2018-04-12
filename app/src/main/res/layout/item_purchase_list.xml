@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/p_background"
+        android:id="@+id/pur_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,7 +32,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/p_foreground"
+        android:id="@+id/pur_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -68,7 +68,7 @@
                         android:textColor="@android:color/white"/>
 
                     <TextView
-                        android:id="@+id/selectedDateTextViewPurchase"
+                        android:id="@+id/pur_dateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
@@ -93,7 +93,7 @@
                         android:textColor="@android:color/white"/>
 
                     <TextView
-                        android:id="@+id/statusTextViewPurchase"
+                        android:id="@+id/pur_statusTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
@@ -113,7 +113,7 @@
                 android:background="@drawable/recyclerview_shape2">
 
                 <TextView
-                    android:id="@+id/lotteryNumberTextViewPurchase"
+                    android:id="@+id/pur_lotteryNumberTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="123456"
@@ -140,7 +140,7 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/amountTextViewPurchase"
+                            android:id="@+id/pur_amountTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -171,7 +171,7 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/paidTextViewPurchase"
+                            android:id="@+id/pur_paidTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
