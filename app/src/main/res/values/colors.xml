@@ -6,4 +6,8 @@
 
     <color name="colorBackground">#f4f1f1</color>
 
+    <color name="colorComplete">#5acf58</color>
+    <color name="colorNotComplete">#fd4949</color>
+
+
 </resources>

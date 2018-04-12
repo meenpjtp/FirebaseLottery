@@ -9,13 +9,7 @@ public class SimulationModel {
     private String lottery_paid;
     private String lottery_status;
 
-    public SimulationModel(int id, String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status) {
-        this.id = id;
-        this.lottery_date = lottery_date;
-        this.lottery_number = lottery_number;
-        this.lottery_amount = lottery_amount;
-        this.lottery_paid = lottery_paid;
-        this.lottery_status = lottery_status;
+    public SimulationModel() {
     }
 
     public int getId() {
