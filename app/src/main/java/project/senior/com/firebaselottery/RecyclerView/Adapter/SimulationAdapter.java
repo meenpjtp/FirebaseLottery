@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
+import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
 import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
 
@@ -68,11 +68,11 @@ public class SimulationAdapter extends RecyclerView.Adapter<SimulationAdapter.Si
         }
     }
 
-    public void deleteHistory(int position){
+    public void deleteSimulation(int position){
         SimulationModel model = listSimulation.get(position);
         int id = model.getId();
 
-        DBHistoryAdapter db = new DBHistoryAdapter(context);
+        DBSimulationAdapter db = new DBSimulationAdapter(context);
         db.openDB();
         if(db.deleteLottery(id)){
             listSimulation.remove(position);

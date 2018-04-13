@@ -69,7 +69,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
         }
     }
 
-    public void deleteHistory(int position){
+    public void deletePurchase(int position){
         PurchaseModel model = listPurchase.get(position);
         int id = model.getId();
 

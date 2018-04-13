@@ -32,7 +32,8 @@ dependencies {
     compile 'com.google.firebase:firebase-database:12.0.0'
 
     compile 'com.android.support:cardview-v7:26.1.0' //RecyclerView
-    compile 'com.daimajia.swipelayout:library:1.2.0@aar' //swipe to delete recyclerview remove from database
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    //swipe to delete recyclerview remove from database
     compile 'com.android.support:design:26.1.0'
 
     implementation 'com.android.support:recyclerview-v7:26.1.0'    //swipe to delete recyclerview
@@ -42,6 +43,10 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+
+
+
 
 
 

@@ -28,6 +28,7 @@ import java.util.List;
 
 import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
 import project.senior.com.firebaselottery.Error.InputValidation;
+import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
 
 public class AddLotteryPurchaseActivity extends AppCompatActivity {
@@ -43,8 +44,12 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
     private Button buttonSave;
 
     private final int PRICE = 80;
+    private int countFalse = 0;
 
     private InputValidation inputValidation;
+
+    //SQLite
+    private ArrayList<SimulationModel> listModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +59,15 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
         initObjects();
         initViews();
 
+
         // TextView set Price
         textViewPriceLottery.setText(String.valueOf(PRICE));
+
+        // Display Dialog when is not connect internet
+        if(!isConnected(AddLotteryPurchaseActivity.this)) buildDialog(AddLotteryPurchaseActivity.this).show();
+        else {
+
+        }
 
     }
 

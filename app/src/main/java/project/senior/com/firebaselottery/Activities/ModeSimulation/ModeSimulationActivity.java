@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulati
 import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.SimulationAdapter;
+import project.senior.com.firebaselottery.RecyclerView.Swipe.SimulationSwipe;
 
 public class ModeSimulationActivity extends AppCompatActivity {
 
@@ -35,9 +39,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
         initObjects();
         getLotteries();
 
-        /**
-         * Floating Action Button
-         */
+        // Floating Action Button
         fabAddLotterySimulation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +63,11 @@ public class ModeSimulationActivity extends AppCompatActivity {
         recyclerviewSimulation.setLayoutManager(new LinearLayoutManager(this));
         recyclerviewSimulation.setItemAnimator(new DefaultItemAnimator());
         recyclerviewSimulation.setHasFixedSize(true);
+
+        // RecyclerView Swipe To Delete
+        ItemTouchHelper.Callback callback = new SimulationSwipe(adapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerviewSimulation);
     }
 
     // Update list history to recyclerview
@@ -95,6 +102,23 @@ public class ModeSimulationActivity extends AppCompatActivity {
         if(listModel.size() > 0){
             recyclerviewSimulation.setAdapter(adapter);
         }
+    }
+
+    //Menu Summary
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_summary,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.m_summary:
+                Intent intent = new Intent(this, SummarySimulationActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

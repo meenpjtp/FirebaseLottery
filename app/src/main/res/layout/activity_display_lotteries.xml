@@ -25,7 +25,7 @@
         <Button
             android:id="@+id/buttonSelect"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:onClick="RunDatabse"
             android:text="@string/btn_select" />

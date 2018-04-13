@@ -80,6 +80,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
         adapter = new HistoryAdapter(this, listHistory);
 
+        // RecyclerView Swipe To Delete
         ItemTouchHelper.Callback callback = new HistorySwipe(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerViewCheckedLottery);
