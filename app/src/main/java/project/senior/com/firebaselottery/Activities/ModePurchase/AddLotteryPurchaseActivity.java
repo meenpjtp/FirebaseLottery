@@ -101,7 +101,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
                 final List<String> dateSet = new ArrayList<String>();
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    String date = snapshot.child("date").getValue(String.class);
+                    String date = snapshot.child("title").getValue(String.class);
                     dateSet.add(date);
                 }
                 ArrayAdapter<String> dateAdapter = new ArrayAdapter<String>(AddLotteryPurchaseActivity.this,

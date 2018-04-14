@@ -8,6 +8,7 @@
     android:id="@+id/activityModeSimulation"
     tools:context="project.senior.com.firebaselottery.Activities.ModeSimulation.ModeSimulationActivity">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerviewSimulation"
         android:layout_width="match_parent"

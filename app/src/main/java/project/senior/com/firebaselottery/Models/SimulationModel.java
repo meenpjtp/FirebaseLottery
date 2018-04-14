@@ -8,8 +8,17 @@ public class SimulationModel {
     private String lottery_amount;
     private String lottery_paid;
     private String lottery_status;
+    private String lottery_value;
 
     public SimulationModel() {
+    }
+
+    public String getLottery_value() {
+        return lottery_value;
+    }
+
+    public void setLottery_value(String lottery_value) {
+        this.lottery_value = lottery_value;
     }
 
     public int getId() {

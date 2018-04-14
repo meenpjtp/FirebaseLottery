@@ -71,8 +71,8 @@
                         android:id="@+id/sim_dateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -96,8 +96,8 @@
                         android:id="@+id/sim_statusTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -106,7 +106,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:baselineAligned="false"
@@ -192,6 +192,38 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/recyclerview_shape2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/message_value_prize"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/sim_valueTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="textView"
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

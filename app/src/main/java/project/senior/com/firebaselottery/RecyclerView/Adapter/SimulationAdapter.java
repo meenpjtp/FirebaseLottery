@@ -42,6 +42,7 @@ public class SimulationAdapter extends RecyclerView.Adapter<SimulationAdapter.Si
         holder.sim_amountTextView.setText(listSimulation.get(position).getLottery_amount());
         holder.sim_paidTextView.setText(listSimulation.get(position).getLottery_paid());
         holder.sim_statusTextView.setText(listSimulation.get(position).getLottery_status());
+        holder.sim_valueTextView.setText(listSimulation.get(position).getLottery_value());
 
     }
 
@@ -51,7 +52,8 @@ public class SimulationAdapter extends RecyclerView.Adapter<SimulationAdapter.Si
     }
 
     public class SimulationHolder extends RecyclerView.ViewHolder {
-        public TextView sim_dateTextView, sim_statusTextView, sim_lotteryNumberTextView, sim_amountTextView, sim_paidTextView;
+        public TextView sim_dateTextView, sim_statusTextView, sim_lotteryNumberTextView,
+                sim_amountTextView, sim_paidTextView, sim_valueTextView;
         public RelativeLayout sim_background;
         public LinearLayout sim_foreground;
 
@@ -65,6 +67,7 @@ public class SimulationAdapter extends RecyclerView.Adapter<SimulationAdapter.Si
             sim_paidTextView = (TextView) itemView.findViewById(R.id.sim_paidTextView);
             sim_background = (RelativeLayout) itemView.findViewById(R.id.sim_background);
             sim_foreground = (LinearLayout) itemView.findViewById(R.id.sim_foreground);
+            sim_valueTextView = (TextView) itemView.findViewById(R.id.sim_valueTextView);
         }
     }
 

@@ -1,9 +1,11 @@
 package project.senior.com.firebaselottery.Activities.ModeSimulation;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 
@@ -25,10 +29,12 @@ public class ModeSimulationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerviewSimulation;
     private FloatingActionButton fabAddLotterySimulation;
+    private RelativeLayout activityModeSimulation;
 
     // SQLite
     private ArrayList<SimulationModel> listModel;
     SimulationAdapter adapter;
+    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
         initViews();
         initObjects();
         getLotteries();
+
 
         // Floating Action Button
         fabAddLotterySimulation.setOnClickListener(new View.OnClickListener() {
@@ -51,12 +58,13 @@ public class ModeSimulationActivity extends AppCompatActivity {
 
     private void initViews(){
         fabAddLotterySimulation = (FloatingActionButton) findViewById(R.id.fabAddLotterySimulation);
+        activityModeSimulation = (RelativeLayout) findViewById(R.id.activityModeSimulation);
     }
 
     private void initObjects(){
 
         listModel = new ArrayList<>();
-        adapter = new SimulationAdapter(this, listModel);
+        adapter = new SimulationAdapter(this,listModel);
 
         // RecyclerView
         recyclerviewSimulation = (RecyclerView) findViewById(R.id.recyclerviewSimulation);
@@ -68,6 +76,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
         ItemTouchHelper.Callback callback = new SimulationSwipe(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerviewSimulation);
+
     }
 
     // Update list history to recyclerview
@@ -85,6 +94,8 @@ public class ModeSimulationActivity extends AppCompatActivity {
             String lottery_amount = cursor.getString(3);
             String lottery_paid = cursor.getString(4);
             String lottery_status = cursor.getString(5);
+            String lottery_value = cursor.getString(6);
+
 
             SimulationModel model = new SimulationModel();
             model.setId(id);
@@ -93,6 +104,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
             model.setLottery_amount(lottery_amount);
             model.setLottery_paid(lottery_paid);
             model.setLottery_status(lottery_status);
+            model.setLottery_value(lottery_value);
 
             listModel.add(model);
 
@@ -104,12 +116,73 @@ public class ModeSimulationActivity extends AppCompatActivity {
         }
     }
 
+    // Search List Lottery
+    private void searchItem (String search)
+    {
+        listModel.clear();
+
+        DBSimulationAdapter db=new DBSimulationAdapter(this);
+        db.openDB();
+        SimulationModel model1=null;
+        Cursor cursor =db.retrieveSearch(search);
+
+        while (cursor.moveToNext())
+        {
+            int id=cursor.getInt(0);
+            String lottery_date=cursor.getString(1);
+            String lottery_number=cursor.getString(2);
+            String lottery_amount=cursor.getString(3);
+            String lottery_paid=cursor.getString(4);
+            String lottery_status=cursor.getString(5);
+            String lottery_value = cursor.getString(6);
+
+
+            model1 = new SimulationModel();
+            model1.setId(id);
+            model1.setLottery_date(lottery_date);
+            model1.setLottery_number(lottery_number);
+            model1.setLottery_amount(lottery_amount);
+            model1.setLottery_paid(lottery_paid);
+            model1.setLottery_status(lottery_status);
+            model1.setLottery_value(lottery_value);
+
+            listModel.add(model1);
+        }
+
+        db.closeDB();
+
+        recyclerviewSimulation.setAdapter(adapter);
+    }
+
+
+
     //Menu Summary
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_summary,menu);
-        return super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.menu_toolbar,menu);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.m_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                searchItem(s);
+                return false;
+            }
+        });
+        return true;
+
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

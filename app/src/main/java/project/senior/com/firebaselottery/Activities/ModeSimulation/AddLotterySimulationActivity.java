@@ -170,7 +170,8 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             editTextAddLottery.getText().toString(),
                                             editTextAddAmount.getText().toString(),
                                             String.valueOf(save_paid),
-                                            "คุณถูก" + data.child("lottery_prize").getValue());
+                                            "คุณถูก" + data.child("lottery_prize").getValue(),
+                                            String.valueOf(data.child("lottery_value").getValue()));
 
                                     //Log.i("logggggg", String.valueOf(data));
                                 }
@@ -183,7 +184,8 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             editTextAddLottery.getText().toString(),
                                             editTextAddAmount.getText().toString(),
                                             String.valueOf(save_paid),
-                                            "คุณถูก" + data.child("lottery_prize").getValue());
+                                            "คุณถูก" + data.child("lottery_prize").getValue(),
+                                            String.valueOf(data.child("lottery_value").getValue()));
 
                                     Log.i("testLength", editTextAddLottery.getText().toString().substring(4,6));
 
@@ -197,7 +199,8 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             editTextAddLottery.getText().toString(),
                                             editTextAddAmount.getText().toString(),
                                             String.valueOf(save_paid),
-                                            "คุณถูก" + data.child("lottery_prize").getValue());
+                                            "คุณถูก" + data.child("lottery_prize").getValue(),
+                                            String.valueOf(data.child("lottery_value").getValue()));
 
                                 }
 
@@ -209,7 +212,8 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             editTextAddLottery.getText().toString(),
                                             editTextAddAmount.getText().toString(),
                                             String.valueOf(save_paid),
-                                            "คุณถูก" + data.child("lottery_prize").getValue());
+                                            "คุณถูก" + data.child("lottery_prize").getValue(),
+                                            String.valueOf(data.child("lottery_value").getValue()));
 
                                 }
 
@@ -229,7 +233,8 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             editTextAddLottery.getText().toString(),
                                             editTextAddAmount.getText().toString(),
                                             String.valueOf(save_paid),
-                                            "คุณไม่ถูกรางวัล");
+                                            "คุณไม่ถูกรางวัล",
+                                            "-");
 //                                    clear();
 
                                 }
@@ -257,6 +262,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                             editTextAddLottery.getText().toString(),
                             editTextAddAmount.getText().toString(),
                             String.valueOf(save_paid),
+                            "รอผลรางวัล",
                             "รอผลรางวัล");
                     clear();
 
@@ -282,10 +288,10 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
     }
 
     // Save check lottery to database
-    private void save(String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status){
+    private void save(String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status, String lottery_value){
         DBSimulationAdapter db = new DBSimulationAdapter(this);
         db.openDB();
-        if(db.addLottery(lottery_date, lottery_number, lottery_amount, lottery_paid, lottery_status)){
+        if(db.addLottery(lottery_date, lottery_number, lottery_amount, lottery_paid, lottery_status, lottery_value)){
 //            editTextLotteryNumber.setText("");
         } else {
             Toast.makeText(this,"Unable to save", Toast.LENGTH_SHORT).show();;
@@ -308,6 +314,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
             String lottery_amount = cursor.getString(3);
             String lottery_paid = cursor.getString(4);
             String lottery_status = cursor.getString(5);
+            String lottery_value = cursor.getString(6);
 
             SimulationModel model = new SimulationModel();
             model.setId(id);
@@ -316,6 +323,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
             model.setLottery_amount(lottery_amount);
             model.setLottery_paid(lottery_paid);
             model.setLottery_status(lottery_status);
+            model.setLottery_value(lottery_value);
 
             listModel.add(model);
 
