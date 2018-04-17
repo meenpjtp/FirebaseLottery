@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
-import project.senior.com.firebaselottery.Error.InputValidation;
+import project.senior.com.firebaselottery.Utils.InputValidation;
 import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
 

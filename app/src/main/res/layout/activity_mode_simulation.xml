@@ -30,4 +30,21 @@
         app:fabSize="normal"
         app:backgroundTint="@color/colorAccent"/>
 
+    <LinearLayout
+        android:id="@+id/linearLayoutWithoutData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:srcCompat="@drawable/icon_sad" />
+
+
+    </LinearLayout>
+
 </RelativeLayout>

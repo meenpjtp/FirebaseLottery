@@ -42,7 +42,15 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.6.2'
 }
 
+dependencies {
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3' //pie chart
+}
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}
+
 apply plugin: 'com.google.gms.google-services'
+
 
 
 

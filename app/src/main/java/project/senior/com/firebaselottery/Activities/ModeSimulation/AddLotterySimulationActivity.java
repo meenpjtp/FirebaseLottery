@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
-import project.senior.com.firebaselottery.Error.InputValidation;
+import project.senior.com.firebaselottery.Utils.InputValidation;
 import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
 
@@ -162,6 +162,10 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                 Boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(3,6));
                                 Boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(0,3));
 
+                                int value = Integer.parseInt(String.valueOf(data.child("lottery_value").getValue()));
+                                int amount = Integer.parseInt(editTextAddAmount.getText().toString());
+                                int totalValue = value * amount;
+
                                 // 1st prize | 2nd prize | 3rd prize | 4th prize | 5th prize
                                 if(match1 == true){
 
@@ -171,7 +175,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             editTextAddAmount.getText().toString(),
                                             String.valueOf(save_paid),
                                             "คุณถูก" + data.child("lottery_prize").getValue(),
-                                            String.valueOf(data.child("lottery_value").getValue()));
+                                            String.valueOf(totalValue));
 
                                     //Log.i("logggggg", String.valueOf(data));
                                 }

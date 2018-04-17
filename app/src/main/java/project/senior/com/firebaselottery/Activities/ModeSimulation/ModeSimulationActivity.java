@@ -14,6 +14,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 
@@ -30,6 +31,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
     private RecyclerView recyclerviewSimulation;
     private FloatingActionButton fabAddLotterySimulation;
     private RelativeLayout activityModeSimulation;
+    private LinearLayout linearLayoutWithoutData;
 
     // SQLite
     private ArrayList<SimulationModel> listModel;
@@ -44,7 +46,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
         initViews();
         initObjects();
         getLotteries();
-
+//        checkLayoutVisibility(listModel.size());
 
         // Floating Action Button
         fabAddLotterySimulation.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +61,21 @@ public class ModeSimulationActivity extends AppCompatActivity {
     private void initViews(){
         fabAddLotterySimulation = (FloatingActionButton) findViewById(R.id.fabAddLotterySimulation);
         activityModeSimulation = (RelativeLayout) findViewById(R.id.activityModeSimulation);
+        linearLayoutWithoutData = (LinearLayout) findViewById(R.id.linearLayoutWithoutData);
     }
+
+    // Image Gone when add lottery
+//    private void checkLayoutVisibility(int size){
+//        if(size == 0){
+//            recyclerviewSimulation.setVisibility(View.GONE);
+//            linearLayoutWithoutData.setVisibility(View.VISIBLE);
+//        } else {
+//            recyclerviewSimulation.setVisibility(View.VISIBLE);
+//            linearLayoutWithoutData.setVisibility(View.GONE);
+//        }
+//    }
+
+
 
     private void initObjects(){
 
@@ -71,6 +87,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
         recyclerviewSimulation.setLayoutManager(new LinearLayoutManager(this));
         recyclerviewSimulation.setItemAnimator(new DefaultItemAnimator());
         recyclerviewSimulation.setHasFixedSize(true);
+        recyclerviewSimulation.setAdapter(adapter);
 
         // RecyclerView Swipe To Delete
         ItemTouchHelper.Callback callback = new SimulationSwipe(adapter);
@@ -154,8 +171,6 @@ public class ModeSimulationActivity extends AppCompatActivity {
         recyclerviewSimulation.setAdapter(adapter);
     }
 
-
-
     //Menu Summary
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -182,12 +197,11 @@ public class ModeSimulationActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.m_summary:
-                Intent intent = new Intent(this, SummarySimulationActivity.class);
+                Intent intent = new Intent(this, SimulationStaticActivity.class);
                 startActivity(intent);
                 break;
         }

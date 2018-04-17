@@ -17,6 +17,13 @@
     <string name="text_amount">จำนวน :</string>
     <string name="text_paid">จำนวนเงิน :</string>
     <string name="text_status">สถานะ</string>
+    <string name="text_static_lottery">สถิติการตรวจล็อตเตอรี่</string>
+    <string name="text_amount_lottery">จำนวนสลากที่ตรวจ</string>
+    <string name="text_win_lottery">ถูกรางวัล</string>
+    <string name="text_did_not_win_lottery">ไม่ถูกรางวัล</string>
+    <string name="text_amount_paid_lottery">จำนวนเงินค่าสลากทั้งหมด</string>
+    <string name="text_value_prize">มูลค่ารางวัลทั้งหมด</string>
+    <string name="text_clear">เคลียร์</string>
 
     <string name="error_message_length">กรุณากรอกตัวเลขให้ครบ 6 หลัก</string>
     <string name="error_message_amount">กรุณากรอกจำนวนที่ต้องการซื้อ</string>

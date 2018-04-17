@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
-import project.senior.com.firebaselottery.Error.StringUtil;
+import project.senior.com.firebaselottery.Utils.StringUtil;
 import project.senior.com.firebaselottery.Models.HistoryModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.HistoryAdapter;

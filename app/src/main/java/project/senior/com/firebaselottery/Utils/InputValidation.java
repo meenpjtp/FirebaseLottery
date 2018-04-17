@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Error;
+package project.senior.com.firebaselottery.Utils;
 
 import android.app.Activity;
 import android.content.Context;
