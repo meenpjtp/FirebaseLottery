@@ -32,11 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
-import project.senior.com.firebaselottery.Utils.StringUtil;
 import project.senior.com.firebaselottery.Models.HistoryModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.HistoryAdapter;
 import project.senior.com.firebaselottery.RecyclerView.Swipe.HistorySwipe;
+import project.senior.com.firebaselottery.Utils.StringUtil;
 
 public class CheckLotteryActivity extends AppCompatActivity {
 
@@ -133,8 +133,6 @@ public class CheckLotteryActivity extends AppCompatActivity {
      */
     public void checkLotteryNumber(View view){
 
-        final int count = 0;
-
         // Error Message when input length != 6
         if(StringUtil.isEmpty(editTextLotteryNumber.getText().toString())){
             editTextLotteryNumber.setError(getString(R.string.error_message_length));
@@ -156,21 +154,23 @@ public class CheckLotteryActivity extends AppCompatActivity {
                 if(dataSnapshot.getValue() != null){
                     Log.i("testExists", "data exists");
 
+
                     refDate.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        public void onDataChange(DataSnapshot dataSnapshot1) {
 
-                            for(DataSnapshot data : dataSnapshot.getChildren()){
+                            for(DataSnapshot data : dataSnapshot1.getChildren()){
 
                                 /**
                                  *  Counting True or False to tell you win or not
                                  *  if counting False == 5 you did not win
                                  *  Counting True < 5 you win!
                                  */
-                                Boolean match1 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString());
-                                Boolean match2 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(4,6));
-                                Boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(3,6));
-                                Boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(0,3));
+                                boolean match1 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString());
+                                boolean match2 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(4,6));
+                                boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(3,6));
+                                boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(0,3));
+
 
                                 // 1st prize | 2nd prize | 3rd prize | 4th prize | 5th prize
                                 if(match1 == true){
@@ -182,13 +182,13 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                     save(spinnerSelectDate.getSelectedItem().toString(),
                                             editTextLotteryNumber.getText().toString(),
                                             "ถูก" + (String) data.child("lottery_prize").getValue());
-                                    getLotteries();
 
-            //                        Log.i("logggggg", String.valueOf(data));
+                                    getLotteries();
+                                    break;
                                 }
 
                                 // Last 2 number
-                                if(match2 == true){
+                                else if(match2 == true){
 
                                     // Display Snackbar
                                     Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
@@ -197,11 +197,13 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                     save(spinnerSelectDate.getSelectedItem().toString(),
                                             editTextLotteryNumber.getText().toString(),
                                             "ถูก" + (String) data.child("lottery_prize").getValue());
+
                                     getLotteries();
+                                    break;
                                 }
 
                                 // Last 3 number
-                                if(match3 == true){
+                                else if(match3 == true){
 
                                     // Display Snackbar
                                     Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
@@ -210,11 +212,13 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                     save(spinnerSelectDate.getSelectedItem().toString(),
                                             editTextLotteryNumber.getText().toString(),
                                             "ถูก" + (String) data.child("lottery_prize").getValue());
+
                                     getLotteries();
+                                    break;
                                 }
 
                                 // First 3 number
-                                if(match4 == true){
+                                else if(match4 == true){
 
                                     // Display Snackbar
                                     Snackbar.make(checkLotteryActivity, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
@@ -223,7 +227,9 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                     save(spinnerSelectDate.getSelectedItem().toString(),
                                             editTextLotteryNumber.getText().toString(),
                                             "ถูก" + (String) data.child("lottery_prize").getValue());
+
                                     getLotteries();
+                                    break;
 
                                 }
 
@@ -233,17 +239,22 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                     countFalse++;
                                     Log.i("countFalse", String.valueOf(countFalse));
 
+
                                 }
                                 // countFalse == 5 --> Did not win lottery!
                                 // change 5 -> 173
-                                if(countFalse ==5){
+                                if(countFalse == 152){
+                                    Log.i("countFalse", String.valueOf(countFalse));
+
                                     Snackbar.make(checkLotteryActivity, "คุณไม่ถูกรางวัล", Snackbar.LENGTH_SHORT).show();
 
                                     // Save check lottery to database
                                     save(spinnerSelectDate.getSelectedItem().toString(),
                                             editTextLotteryNumber.getText().toString(),
                                             "ไม่ถูกรางวัล");
+
                                     getLotteries();
+                                    break;
                                 }
                             }
 
@@ -271,7 +282,6 @@ public class CheckLotteryActivity extends AppCompatActivity {
                     save(spinnerSelectDate.getSelectedItem().toString(),
                             editTextLotteryNumber.getText().toString(),
                             "รอผลรางวัล");
-                    getLotteries();
 
                 }
 

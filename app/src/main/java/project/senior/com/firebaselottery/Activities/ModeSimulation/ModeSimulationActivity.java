@@ -201,7 +201,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.m_summary:
-                Intent intent = new Intent(this, SimulationStaticActivity.class);
+                Intent intent = new Intent(this, SimStatActivity.class);
                 startActivity(intent);
                 break;
         }

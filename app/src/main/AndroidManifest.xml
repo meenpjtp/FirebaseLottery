@@ -49,7 +49,7 @@
             android:name=".Activities.ModePurchase.SummaryPurchaseActivity" />
 
         <activity
-            android:name=".Activities.ModeSimulation.SimulationStaticActivity"
+            android:name=".Activities.ModeSimulation.SimStatActivity"
             android:parentActivityName=".Activities.ModeSimulation.ModeSimulationActivity">
 
         </activity>
