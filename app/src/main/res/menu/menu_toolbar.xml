@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/m_summary"
-        android:icon="@drawable/ic_static"
+        android:icon="@drawable/ic_check"
         android:title="summary"
         app:showAsAction="always" />
 

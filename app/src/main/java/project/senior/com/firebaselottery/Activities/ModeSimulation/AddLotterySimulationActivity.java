@@ -11,6 +11,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -42,11 +43,13 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
     private TextInputLayout textInputLayoutAddAmount;
     private TextInputEditText editTextAddAmount;
     private Button buttonSave; // save to SQLite after check with firebase
+    private Toolbar sim_toolbar;
 
     private final int PRICE = 80;
     private int countFalse = 0;
 
     private InputValidation inputValidation;
+
 
     //SQLite
     private ArrayList<SimulationModel> listModel;
@@ -80,16 +83,27 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
         textInputLayoutAddAmount = (TextInputLayout)findViewById(R.id.textInputLayoutAddAmount);
         editTextAddAmount = (TextInputEditText) findViewById(R.id.editTextAddAmount);
         buttonSave = (Button) findViewById(R.id.buttonSave);
+        sim_toolbar = (Toolbar) findViewById(R.id.sim_toolbar);
+    }
+
+    public Toolbar getToolbar() {
+        if (sim_toolbar == null) {
+            sim_toolbar = (Toolbar) findViewById(R.id.sim_toolbar);
+        }
+        return sim_toolbar;
     }
 
     private void initObjects(){
+
+        setSupportActionBar(sim_toolbar);
+        getToolbar().setTitle(getString(R.string.app_name));
 
         // Error when field is empty
         inputValidation = new InputValidation(this);
 
         // Spinner
         DatabaseReference lottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-        lottery.child("DATE").orderByChild("date").addValueEventListener(new ValueEventListener() {
+        lottery.child("DATE").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -148,19 +162,19 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
                     refDate.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        public void onDataChange(DataSnapshot dataSnapshot1) {
 
-                            for(DataSnapshot data : dataSnapshot.getChildren()){
+                            for(DataSnapshot data : dataSnapshot1.getChildren()){
 
                                 /**
                                  *  Counting True or False to tell you win or not
                                  *  if counting False == 5 you did not win
                                  *  Counting True < 5 you win!
                                  */
-                                Boolean match1 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString());
-                                Boolean match2 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(4,6));
-                                Boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(3,6));
-                                Boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(0,3));
+                                boolean match1 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString());
+                                boolean match2 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(4,6));
+                                boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(3,6));
+                                boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(0,3));
 
                                 int value = Integer.parseInt(String.valueOf(data.child("lottery_value").getValue()));
                                 int amount = Integer.parseInt(editTextAddAmount.getText().toString());
@@ -176,12 +190,11 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             String.valueOf(save_paid),
                                             "คุณถูก" + data.child("lottery_prize").getValue(),
                                             String.valueOf(totalValue));
-
-                                    //Log.i("logggggg", String.valueOf(data));
+                                    break;
                                 }
 
                                 // Last 2 number
-                                if(match2 == true){
+                                else if(match2 == true){
 
                                     // Save check lottery to database
                                     save(spinnerSelectDate.getSelectedItem().toString(),
@@ -191,12 +204,12 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             "คุณถูก" + data.child("lottery_prize").getValue(),
                                             String.valueOf(data.child("lottery_value").getValue()));
 
-                                    Log.i("testLength", editTextAddLottery.getText().toString().substring(4,6));
+                                    break;
 
                                 }
 
                                 // Last 3 number
-                                if(match3 == true){
+                                else if(match3 == true){
 
                                     // Save check lottery to database
                                     save(spinnerSelectDate.getSelectedItem().toString(),
@@ -206,10 +219,11 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             "คุณถูก" + data.child("lottery_prize").getValue(),
                                             String.valueOf(data.child("lottery_value").getValue()));
 
+                                    break;
                                 }
 
                                 // First 3 number
-                                if(match4 == true){
+                                else if(match4 == true){
 
                                     // Save check lottery to database
                                     save(spinnerSelectDate.getSelectedItem().toString(),
@@ -218,20 +232,22 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             String.valueOf(save_paid),
                                             "คุณถูก" + data.child("lottery_prize").getValue(),
                                             String.valueOf(data.child("lottery_value").getValue()));
+                                    Toast.makeText(AddLotterySimulationActivity.this, "ถูก", Toast.LENGTH_SHORT).show();
+
+                                    break;
 
                                 }
 
 
                                 // Did not win lottery (count boolean False == 5)
-                                if(match1 == false  && match2 == false&& match3 == false && match4 == false) {
+                                if(match1 == false && match2 == false && match3 == false && match4 == false) {
                                     countFalse++;
-                                    Log.i("countFalse", String.valueOf(countFalse));
-
+                                    Log.i("testCountFalse", String.valueOf(countFalse));
                                 }
 
                                 // countFalse == 5 --> Did not win lottery!
                                 // change 5 -> 173
-                                if(countFalse ==5){
+                                if(countFalse ==152){
 
                                     save(spinnerSelectDate.getSelectedItem().toString(),
                                             editTextAddLottery.getText().toString(),
@@ -240,6 +256,8 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             "คุณไม่ถูกรางวัล",
                                             "-");
 //                                    clear();
+                                    Log.i("testCountFalse", String.valueOf(countFalse));
+                                    break;
 
                                 }
                             }
@@ -270,9 +288,10 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                             "รอผลรางวัล");
                     clear();
 
+
                 }
 
-                getLotteries();
+//                getLotteries();
                 Snackbar.make(addLotterySimulation, "บันทึกเรียบร้อย", Snackbar.LENGTH_SHORT).show();
 
             }

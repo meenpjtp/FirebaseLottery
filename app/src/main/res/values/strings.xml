@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FirebaseLottery</string>
 
-    <string name="btn_select">Select</string>
+    <string name="btn_select">เลือก</string>
     <string name="btn_check_lottery">Check Lottery</string>
     <string name="btn_display_lottery">Display Lottery</string>
     <string name="btn_okay">ตกลง</string>
@@ -25,6 +25,8 @@
     <string name="text_value_prize">มูลค่ารางวัลทั้งหมด</string>
     <string name="text_clear">เคลียร์</string>
     <string name="text_type">type</string>
+    <string name="text_history">ประวัติการตรวจล็อตเตอรี่</string>
+    <string name="text_select_date">เลือกงวดรางวัล</string>
 
     <string name="error_message_length">กรุณากรอกตัวเลขให้ครบ 6 หลัก</string>
     <string name="error_message_amount">กรุณากรอกจำนวนที่ต้องการซื้อ</string>
@@ -34,4 +36,6 @@
     <string name="message_no_internet_connection_description">โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
     <string name="message_result">รอผลรางวัล</string>
     <string name="message_value_prize">มูลค่ารางวัล :</string>
+
+    <string name="fragment_check_lottery">ตรวจล็อตเตอรี่</string>
 </resources>
