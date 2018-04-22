@@ -8,14 +8,9 @@ public class PurchaseModel {
     private String lottery_amount;
     private String lottery_paid;
     private String lottery_status;
+    private String lottery_value;
 
-    public PurchaseModel(int id, String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status) {
-        this.id = id;
-        this.lottery_date = lottery_date;
-        this.lottery_number = lottery_number;
-        this.lottery_amount = lottery_amount;
-        this.lottery_paid = lottery_paid;
-        this.lottery_status = lottery_status;
+    public PurchaseModel() {
     }
 
     public int getId() {
@@ -64,5 +59,13 @@ public class PurchaseModel {
 
     public void setLottery_status(String lottery_status) {
         this.lottery_status = lottery_status;
+    }
+
+    public String getLottery_value() {
+        return lottery_value;
+    }
+
+    public void setLottery_value(String lottery_value) {
+        this.lottery_value = lottery_value;
     }
 }

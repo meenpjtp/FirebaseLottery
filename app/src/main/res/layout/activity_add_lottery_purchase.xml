@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/addLotteryPurchase"
-    tools:context="project.senior.com.firebaselottery.Activities.ModePurchase.AddLotteryPurchaseActivity">
+    tools:context="project.senior.com.firebaselottery.Intent.AddLotteryPurchaseActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/pur_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -37,36 +47,12 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textViewPriceLottery"
+                    android:id="@+id/pur_textViewPriceLottery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_selected_date"
-                    android:textAllCaps="true"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textViewSelectedDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
 
 
 
@@ -84,20 +70,20 @@
                 android:text="@string/btn_mode_purchase" />
 
             <Spinner
-                android:id="@+id/spinnerSelectDate"
+                android:id="@+id/pur_spinnerSelectDate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
             </Spinner>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutAddLottery"
+                android:id="@+id/pur_textInputLayoutAddLottery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/editTextAddLottery"
+                    android:id="@+id/pur_editTextAddLottery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_input_lottery_number"
@@ -108,13 +94,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutAddAmount"
+                android:id="@+id/pur_textInputLayoutAddAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/editTextAddAmount"
+                    android:id="@+id/pur_editTextAddAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_input_amount"
@@ -131,7 +117,7 @@
 
 
     <Button
-        android:id="@+id/buttonSave"
+        android:id="@+id/pur_buttonSave"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"

@@ -79,7 +79,7 @@ public class SimulationAdapter extends RecyclerView.Adapter<SimulationAdapter.Si
         db.openDB();
         if(db.deleteLottery(id)){
             listSimulation.remove(position);
-            Toast.makeText(context,R.string.message_delete_history,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,R.string.message_delete_complete,Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(context,"Unable To Delete",Toast.LENGTH_SHORT).show();

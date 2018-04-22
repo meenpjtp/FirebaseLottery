@@ -21,6 +21,7 @@ import android.widget.SearchView;
 import java.util.ArrayList;
 
 import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
+import project.senior.com.firebaselottery.Intent.AddLotterySimulationActivity;
 import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.SimulationAdapter;

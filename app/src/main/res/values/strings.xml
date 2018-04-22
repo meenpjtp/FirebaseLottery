@@ -3,11 +3,11 @@
 
     <string name="btn_select">เลือก</string>
     <string name="btn_check_lottery">Check Lottery</string>
-    <string name="btn_display_lottery">Display Lottery</string>
+    <string name="btn_display_lottery">แสดงผล</string>
     <string name="btn_okay">ตกลง</string>
-    <string name="btn_mode_simulation">Mode Simulation</string>
-    <string name="btn_mode_purchase">Mode Purchase</string>
-    <string name="btn_save">Save</string>
+    <string name="btn_mode_simulation">โหมดจำลอง</string>
+    <string name="btn_mode_purchase">โหมดซื้อจริง</string>
+    <string name="btn_save">บันทึก</string>
 
     <string name="hint_input_amount">กรอกจำนวนที่ต้องการซื้อ</string>
     <string name="hint_input_lottery_number">กรอกเลขที่ต้อง (ตัวอย่าง.:911234)</string>
@@ -27,11 +27,14 @@
     <string name="text_type">type</string>
     <string name="text_history">ประวัติการตรวจล็อตเตอรี่</string>
     <string name="text_select_date">เลือกงวดรางวัล</string>
+    <string name="text_search_date">ค้นหาวันที่</string>
+    <string name="text_baht">บาท</string>
 
     <string name="error_message_length">กรุณากรอกตัวเลขให้ครบ 6 หลัก</string>
     <string name="error_message_amount">กรุณากรอกจำนวนที่ต้องการซื้อ</string>
 
     <string name="message_delete_history">ลบประวัติการตรวจแล้ว</string>
+    <string name="message_delete_complete">ลบแล้ว</string>
     <string name="message_no_internet_connection">ไม่มีการเชื่อมต่ออินเทอร์เน็ต</string>
     <string name="message_no_internet_connection_description">โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
     <string name="message_result">รอผลรางวัล</string>

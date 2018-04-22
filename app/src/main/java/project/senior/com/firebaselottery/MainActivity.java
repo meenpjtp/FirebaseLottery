@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +18,7 @@ import project.senior.com.firebaselottery.Fragment.CheckLotteryFragment;
 import project.senior.com.firebaselottery.Fragment.DisplayLotteryFragment;
 import project.senior.com.firebaselottery.Fragment.PurchaseFragment;
 import project.senior.com.firebaselottery.Fragment.SimulationFragment;
+import project.senior.com.firebaselottery.Fragment.ViewPager.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
 
     private Context mContext;
+
+    CustomViewPager customViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-////        mDrawerOpen = (DrawerLayout) findViewById(R.id.mainActivity);
-//
+
         setSupportActionBar(toolbar);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -104,26 +105,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void replaceFragment(Fragment fragment, String tag) {
-
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.viewpager, fragment, tag);
-        fragmentTransaction.addToBackStack(tag);
-        fragmentTransaction.commit();
-
-//        setMenuSelected(arguments);
-
-//        closeDrawerLayout();
-    }
-
-//    public void closeDrawerLayout() {
-//        if (mDrawerOpen.isDrawerOpen(GravityCompat.START)) {
-//            mDrawerOpen.closeDrawers();
-//        }
-//    }
-
 
 //    public void onClick(View view){
 //        switch (view.getId()){
@@ -150,3 +131,5 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 }
+
+

@@ -84,7 +84,7 @@ public class DisplayLotteryFragment extends Fragment {
 
         //Spinner
         DatabaseReference lottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-        lottery.child("DATE").orderByChild("order").startAt(56).endAt(1).addValueEventListener(new ValueEventListener() {
+        lottery.child("DATE").orderByChild("order").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

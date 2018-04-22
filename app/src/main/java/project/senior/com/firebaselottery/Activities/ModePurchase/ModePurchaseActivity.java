@@ -1,11 +1,9 @@
 package project.senior.com.firebaselottery.Activities.ModePurchase;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import project.senior.com.firebaselottery.R;
 
@@ -34,14 +32,14 @@ public class ModePurchaseActivity extends AppCompatActivity {
     private void initObjects(){
 
         // Floating Action Button Add Lottery
-        fabAddLotteryPurchase = (FloatingActionButton) findViewById(R.id.fabAddLotteryPurchase);
-        fabAddLotteryPurchase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent a = new Intent(ModePurchaseActivity.this, AddLotteryPurchaseActivity.class);
-                startActivity(a);
-            }
-        });
+//        fabAddLotteryPurchase = (FloatingActionButton) findViewById(R.id.fabAddLotteryPurchase);
+//        fabAddLotteryPurchase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent a = new Intent(ModePurchaseActivity.this, AddLotteryPurchaseActivity.class);
+//                startActivity(a);
+//            }
+//        });
     }
 
 

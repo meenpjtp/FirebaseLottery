@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Activities.ModeSimulation;
+package project.senior.com.firebaselottery.Intent;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,7 +36,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
     private LinearLayout addLotterySimulation;
     private TextView textViewPriceLottery; // 80 Baht
-    private TextView textViewSelectedDate; // 30 Dec 2017
     private Spinner spinnerSelectDate;
     private TextInputLayout textInputLayoutAddLottery; // Error display when don't input this field
     private TextInputEditText editTextAddLottery; // 911234
@@ -76,7 +75,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
     private void initViews(){
         addLotterySimulation = (LinearLayout) findViewById(R.id.addLotterySimulation);
         textViewPriceLottery= (TextView) findViewById(R.id.textViewPriceLottery);
-        textViewSelectedDate = (TextView) findViewById(R.id.textViewSelectedDate);
         spinnerSelectDate = (Spinner) findViewById(R.id.spinnerSelectDate);
         textInputLayoutAddLottery = (TextInputLayout) findViewById(R.id.textInputLayoutAddLottery);
         editTextAddLottery = (TextInputEditText) findViewById(R.id.editTextAddLottery);
@@ -232,7 +230,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                             String.valueOf(save_paid),
                                             "คุณถูก" + data.child("lottery_prize").getValue(),
                                             String.valueOf(data.child("lottery_value").getValue()));
-                                    Toast.makeText(AddLotterySimulationActivity.this, "ถูก", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(AddLotterySimulationActivity.this, "ถูก", Toast.LENGTH_SHORT).show();
 
                                     break;
 

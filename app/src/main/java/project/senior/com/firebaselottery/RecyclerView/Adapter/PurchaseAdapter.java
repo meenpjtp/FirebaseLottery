@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
+import project.senior.com.firebaselottery.DBHelper.DBHelperPurchase.DBPurchaseAdapter;
 import project.senior.com.firebaselottery.Models.PurchaseModel;
 import project.senior.com.firebaselottery.R;
 
@@ -42,7 +42,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
         holder.pur_lotteryNumberTextView.setText(listPurchase.get(position).getLottery_number());
         holder.pur_amountTextView.setText(listPurchase.get(position).getLottery_amount());
         holder.pur_paidTextView.setText(listPurchase.get(position).getLottery_paid());
-
+        holder.pur_valueTextView.setText(listPurchase.get(position).getLottery_value());
 
     }
 
@@ -52,7 +52,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
     }
 
     public class PurchaseHolder extends RecyclerView.ViewHolder {
-        public TextView pur_dateTextView, pur_statusTextView, pur_lotteryNumberTextView, pur_amountTextView, pur_paidTextView;
+        public TextView pur_dateTextView, pur_statusTextView, pur_lotteryNumberTextView, pur_amountTextView, pur_paidTextView, pur_valueTextView;
         public RelativeLayout pur_background;
         public LinearLayout pur_foreground;
 
@@ -66,6 +66,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
             pur_paidTextView = (TextView) itemView.findViewById(R.id.pur_paidTextView);
             pur_background = (RelativeLayout) itemView.findViewById(R.id.pur_background);
             pur_foreground = (LinearLayout) itemView.findViewById(R.id.pur_foreground);
+            pur_valueTextView = (TextView) itemView.findViewById(R.id.pur_valueTextView);
         }
     }
 
@@ -73,11 +74,11 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
         PurchaseModel model = listPurchase.get(position);
         int id = model.getId();
 
-        DBHistoryAdapter db = new DBHistoryAdapter(context);
+        DBPurchaseAdapter db = new DBPurchaseAdapter(context);
         db.openDB();
         if(db.deleteLottery(id)){
             listPurchase.remove(position);
-            Toast.makeText(context,R.string.message_delete_history,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,R.string.message_delete_complete,Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(context,"Unable To Delete",Toast.LENGTH_SHORT).show();

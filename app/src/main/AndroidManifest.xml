@@ -24,35 +24,26 @@
         <activity
             android:name=".Activities.CheckLotteryActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".Activities.DisplayLotteriesActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".Activities.ModeSimulation.ModeSimulationActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".Activities.ModePurchase.ModePurchaseActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
-            android:name=".Activities.ModeSimulation.AddLotterySimulationActivity"
+            android:name=".Intent.AddLotterySimulationActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
-            android:name=".Activities.ModePurchase.AddLotteryPurchaseActivity"
+            android:name=".Intent.AddLotteryPurchaseActivity"
             android:parentActivityName=".Activities.ModePurchase.ModePurchaseActivity" />
-
-        <activity
-            android:name=".Activities.ModePurchase.SummaryPurchaseActivity" />
-
+        <activity android:name=".Activities.ModePurchase.SummaryPurchaseActivity" />
         <activity
             android:name=".Activities.ModeSimulation.SimStatActivity"
-            android:parentActivityName=".Activities.ModeSimulation.ModeSimulationActivity">
-
-        </activity>
+            android:parentActivityName=".Activities.ModeSimulation.ModeSimulationActivity"></activity>
+        <activity android:name=".Activities.ModePurchase.AddLotteryPurchase1Activity"></activity>
     </application>
 
 </manifest>

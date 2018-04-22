@@ -25,7 +25,7 @@ import android.widget.SearchView;
 
 import java.util.ArrayList;
 
-import project.senior.com.firebaselottery.Activities.ModeSimulation.AddLotterySimulationActivity;
+import project.senior.com.firebaselottery.Intent.AddLotterySimulationActivity;
 import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
 import project.senior.com.firebaselottery.MainActivity;
 import project.senior.com.firebaselottery.Models.SimulationModel;
@@ -43,7 +43,6 @@ public class SimulationFragment extends Fragment {
     private RelativeLayout simulationFragment;
     private LinearLayout linearLayoutWithoutData;
     private SearchView serchViewSimulation;
-
 
     // SQLite
     private ArrayList<SimulationModel> listModel;
@@ -86,6 +85,8 @@ public class SimulationFragment extends Fragment {
         fabAddLotterySimulation = (FloatingActionButton) getView().findViewById(R.id.fabAddLotterySimulation);
         simulationFragment = (RelativeLayout) getView().findViewById(R.id.simulationFragment);
         serchViewSimulation = (SearchView) getView().findViewById(R.id.serchViewSimulation);
+
+        serchViewSimulation.setQueryHint(getString(R.string.text_search_date));
 
         //Press Floating Action Button start intent add lottery to simulation
         fabAddLotterySimulation.setOnClickListener(new View.OnClickListener() {

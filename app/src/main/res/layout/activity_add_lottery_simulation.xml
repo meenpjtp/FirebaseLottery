@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/addLotterySimulation"
-    tools:context="project.senior.com.firebaselottery.Activities.ModeSimulation.AddLotterySimulationActivity">
+    tools:context="project.senior.com.firebaselottery.Intent.AddLotterySimulationActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/sim_toolbar"
