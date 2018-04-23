@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -21,9 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
-
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import java.util.ArrayList;
-
 import project.senior.com.firebaselottery.DBHelper.DBHelperPurchase.DBPurchaseAdapter;
 import project.senior.com.firebaselottery.Intent.AddLotteryPurchaseActivity;
 import project.senior.com.firebaselottery.MainActivity;
@@ -42,6 +41,8 @@ public class PurchaseFragment extends Fragment {
     private RelativeLayout purchaseFragment;
 //    private LinearLayout linearLayoutWithoutData;
     private SearchView serchViewPurchase;
+    FloatingActionMenu pur_fabMenu;
+    FloatingActionButton pur_fabAdd, pur_fabStat;
 
     // SQLite
     private ArrayList<PurchaseModel> listModel;
@@ -55,6 +56,24 @@ public class PurchaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_purchase, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        pur_fabMenu = (FloatingActionMenu) view.findViewById(R.id.pur_fabMenu);
+        pur_fabAdd = (FloatingActionButton) view.findViewById(R.id.pur_fabAdd);
+        pur_fabStat = (FloatingActionButton) view.findViewById(R.id.pur_fabStat);
+
+        //FloatingActionButton
+        pur_fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a  = new Intent(getContext(), AddLotteryPurchaseActivity.class);
+                startActivity(a);
+            }
+        });
     }
 
     @Override
@@ -78,16 +97,16 @@ public class PurchaseFragment extends Fragment {
         setRecyclerView();
         getLotteries();
 
-        fabAddLotteryPurchase1 = (FloatingActionButton) getView().findViewById(R.id.fabAddLotteryPurchase1);
-
-        //Press Floating Action Button start intent add lottery to purchase
-        fabAddLotteryPurchase1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent a  = new Intent(getContext(), AddLotteryPurchaseActivity.class);
-                startActivity(a);
-            }
-        });
+//        fabAddLotteryPurchase1 = (FloatingActionButton) getView().findViewById(R.id.fabAddLotteryPurchase1);
+//
+//        //Press Floating Action Button start intent add lottery to purchase
+//        fabAddLotteryPurchase1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent a  = new Intent(getContext(), AddLotteryPurchaseActivity.class);
+//                startActivity(a);
+//            }
+//        });
     }
 
     private void getViewComponents() {
@@ -96,8 +115,8 @@ public class PurchaseFragment extends Fragment {
         purchaseFragment = (RelativeLayout) getView().findViewById(R.id.purchaseFragment);
         serchViewPurchase = (SearchView) getView().findViewById(R.id.serchViewPurchase);
 
+        // Search View
         serchViewPurchase.setQueryHint(getString(R.string.text_search_date));
-
         serchViewPurchase.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

@@ -1,6 +1,7 @@
 package project.senior.com.firebaselottery;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,8 +10,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import project.senior.com.firebaselottery.Activities.ModeSimulation.ModeSimulationActivity;
 import project.senior.com.firebaselottery.Fragment.CheckLotteryFragment;
 import project.senior.com.firebaselottery.Fragment.DisplayLotteryFragment;
 import project.senior.com.firebaselottery.Fragment.PurchaseFragment;
@@ -94,19 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-}
-
-/*---------------------- Version.1 ----------------------------*/
-
-    /*private Button buttonCheckLottery, buttonDisplayLottery, buttonModeSimulation, buttonModePurchase;
-
-            buttonCheckLottery = (Button) findViewById(R.id.buttonCheckLottery);
-        buttonDisplayLottery = (Button) findViewById(R.id.buttonDisplayLottery);
-        buttonModeSimulation = (Button) findViewById(R.id.buttonModeSimulation);
-        buttonModePurchase = (Button) findViewById(R.id.buttonModePurchase);
-
-
-//Menu Summary
+    //Menu Summary
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -126,6 +121,18 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+}
+
+/*---------------------- Version.1 ----------------------------*/
+
+    /*private Button buttonCheckLottery, buttonDisplayLottery, buttonModeSimulation, buttonModePurchase;
+
+            buttonCheckLottery = (Button) findViewById(R.id.buttonCheckLottery);
+        buttonDisplayLottery = (Button) findViewById(R.id.buttonDisplayLottery);
+        buttonModeSimulation = (Button) findViewById(R.id.buttonModeSimulation);
+        buttonModePurchase = (Button) findViewById(R.id.buttonModePurchase);
+
 
     public void onClick(View view){
         switch (view.getId()){

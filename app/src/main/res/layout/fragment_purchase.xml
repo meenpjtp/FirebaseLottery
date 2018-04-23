@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/tools"
     android:id="@+id/purchaseFragment">
 
     <LinearLayout
@@ -38,17 +38,54 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabAddLotteryPurchase1"
-        android:src="@drawable/ic_add"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/pur_fabMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        app:fabSize="normal"
-        app:backgroundTint="@color/colorAccent"/>
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        app:menu_showShadow="true"
+        app:menu_fab_label=""
+        app:menu_openDirection="up"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_icon="@drawable/ic_more"
+        app:menu_labels_textColor="@android:color/black"
+        app:menu_labels_colorNormal="@android:color/white"
+        app:menu_labels_colorPressed="@color/colorAccent">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/pur_fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="@string/text_add"
+            android:src="@drawable/ic_create"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/pur_fabStat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="@string/text_stat"
+            android:src="@drawable/ic_static"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fabAddLotteryPurchase1"-->
+        <!--android:src="@drawable/ic_add"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginEnd="15dp"-->
+        <!--app:fabSize="normal"-->
+        <!--app:backgroundTint="@color/colorAccent"/>-->
+
 
 </RelativeLayout>

@@ -94,7 +94,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
     private void initObjects(){
 
         setSupportActionBar(sim_toolbar);
-        getToolbar().setTitle(getString(R.string.app_name));
+//        getToolbar().setTitle(getString(R.string.app_name));
 
         // Error when field is empty
         inputValidation = new InputValidation(this);

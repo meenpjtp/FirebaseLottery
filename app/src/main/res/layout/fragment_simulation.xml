@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical">
@@ -46,33 +46,54 @@
 
     </LinearLayout>
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabAddLotterySimulation"
-        android:src="@drawable/ic_add"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/sim_fabMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        app:fabSize="normal"
-        app:backgroundTint="@color/colorAccent"/>
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        app:menu_showShadow="true"
+        app:menu_fab_label=""
+        app:menu_openDirection="up"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_icon="@drawable/ic_more"
+        app:menu_labels_textColor="@android:color/black"
+        app:menu_labels_colorNormal="@android:color/white"
+        app:menu_labels_colorPressed="@color/colorAccent">
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/linearLayoutWithoutData"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="vertical">-->
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/sim_fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="@string/text_add"
+            android:src="@drawable/ic_create"/>
 
-        <!--<ImageView-->
-            <!--android:id="@+id/imageView"-->
-            <!--android:layout_width="35dp"-->
-            <!--android:layout_height="35dp"-->
-            <!--app:srcCompat="@drawable/icon_sad" />-->
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/sim_fabStat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="@string/text_stat"
+            android:src="@drawable/ic_static"/>
 
-    <!--</LinearLayout>-->
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fabAddLotterySimulation"-->
+        <!--android:src="@drawable/ic_add"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginEnd="15dp"-->
+        <!--app:fabSize="normal"-->
+        <!--app:backgroundTint="@color/colorAccent"/>-->
+
 
 </RelativeLayout>

@@ -75,7 +75,6 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
     }
 
-
     private void initViews() {
         addLotteryPurchase = (LinearLayout) findViewById(R.id.addLotteryPurchase);
         pur_toolbar = (Toolbar) findViewById(R.id.pur_toolbar);
@@ -89,7 +88,6 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
     }
 
-
     public Toolbar getToolbar() {
         if (pur_toolbar == null) {
             pur_toolbar = (Toolbar) findViewById(R.id.pur_toolbar);
@@ -100,7 +98,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
     private void initObjects(){
 
         setSupportActionBar(pur_toolbar);
-        getToolbar().setTitle(getString(R.string.app_name));
+//        getToolbar().setTitle(getString(R.string.app_name));
 
         // Error when field is empty
         inputValidation = new InputValidation(this);
@@ -341,8 +339,6 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
         return builder;
     }
-
-
 
     // Save check lottery to database
     private void save(String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status, String lottery_value){

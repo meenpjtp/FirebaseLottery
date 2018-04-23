@@ -29,6 +29,8 @@
     <string name="text_select_date">เลือกงวดรางวัล</string>
     <string name="text_search_date">ค้นหาวันที่</string>
     <string name="text_baht">บาท</string>
+    <string name="text_stat">สถิติ</string>
+    <string name="text_add">เพิ่มล็อตเตอรี่</string>
 
     <string name="error_message_length">กรุณากรอกตัวเลขให้ครบ 6 หลัก</string>
     <string name="error_message_amount">กรุณากรอกจำนวนที่ต้องการซื้อ</string>

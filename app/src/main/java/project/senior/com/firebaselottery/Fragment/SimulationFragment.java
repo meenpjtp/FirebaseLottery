@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,14 +18,16 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import java.util.ArrayList;
 
-import project.senior.com.firebaselottery.Intent.AddLotterySimulationActivity;
 import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
+import project.senior.com.firebaselottery.Intent.AddLotterySimulationActivity;
 import project.senior.com.firebaselottery.MainActivity;
 import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
@@ -39,9 +40,9 @@ public class SimulationFragment extends Fragment {
     private MainActivity mMainActivity;
 
     private RecyclerView recyclerviewSimulation;
-    private FloatingActionButton fabAddLotterySimulation;
+    private FloatingActionButton sim_fabAdd,sim_fabStat;
+    private FloatingActionMenu sim_fabMenu;
     private RelativeLayout simulationFragment;
-    private LinearLayout linearLayoutWithoutData;
     private SearchView serchViewSimulation;
 
     // SQLite
@@ -77,19 +78,23 @@ public class SimulationFragment extends Fragment {
         getViewComponents();
         setRecyclerView();
         getLotteries();
+
     }
 
     private void getViewComponents() {
 
         //Init view
-        fabAddLotterySimulation = (FloatingActionButton) getView().findViewById(R.id.fabAddLotterySimulation);
         simulationFragment = (RelativeLayout) getView().findViewById(R.id.simulationFragment);
         serchViewSimulation = (SearchView) getView().findViewById(R.id.serchViewSimulation);
+        sim_fabMenu = (FloatingActionMenu) getView().findViewById(R.id.sim_fabMenu);
+        sim_fabAdd = (FloatingActionButton) getView().findViewById(R.id.sim_fabAdd);
+        sim_fabStat = (FloatingActionButton) getView().findViewById(R.id.sim_fabStat);
 
+        //SearchView
         serchViewSimulation.setQueryHint(getString(R.string.text_search_date));
 
         //Press Floating Action Button start intent add lottery to simulation
-        fabAddLotterySimulation.setOnClickListener(new View.OnClickListener() {
+        sim_fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), AddLotterySimulationActivity.class);
