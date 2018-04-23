@@ -110,7 +110,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
         // Spinner
         DatabaseReference lottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-        lottery.child("DATE").addValueEventListener(new ValueEventListener() {
+        lottery.child("DATE").orderByChild("order").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

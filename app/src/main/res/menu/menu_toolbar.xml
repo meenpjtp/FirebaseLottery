@@ -7,15 +7,10 @@
         android:id="@+id/m_search"
         android:title="Search"
         android:icon="@drawable/ic_search"
-        app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always">
 
-    </item>
+    <!--app:actionViewClass="android.widget.SearchView"-->
 
-    <item
-        android:id="@+id/m_summary"
-        android:icon="@drawable/ic_check"
-        android:title="summary"
-        app:showAsAction="always" />
+    </item>
 
 </menu>
