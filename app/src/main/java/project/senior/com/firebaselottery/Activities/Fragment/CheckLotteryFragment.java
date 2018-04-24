@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Fragment;
+package project.senior.com.firebaselottery.Activities.Fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;

@@ -7,14 +7,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/addLotterySimulation"
-    tools:context="project.senior.com.firebaselottery.Intent.AddLotterySimulationActivity">
+    tools:context="project.senior.com.firebaselottery.Activities.ModeSimulation.AddLotterySimulationActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/sim_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <LinearLayout

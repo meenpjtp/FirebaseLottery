@@ -1,22 +1,24 @@
 package project.senior.com.firebaselottery.Activities.ModeSimulation;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Menu;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
+import android.widget.SearchView;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import java.util.ArrayList;
-
 import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
-import project.senior.com.firebaselottery.Intent.AddLotterySimulationActivity;
 import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.SimulationAdapter;
@@ -25,14 +27,14 @@ import project.senior.com.firebaselottery.RecyclerView.Swipe.SimulationSwipe;
 public class ModeSimulationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerviewSimulation;
-    private FloatingActionButton fabAddLotterySimulation;
+    private FloatingActionButton sim_fabAdd,sim_fabStat;
+    private FloatingActionMenu sim_fabMenu;
     private RelativeLayout activityModeSimulation;
-    private LinearLayout linearLayoutWithoutData;
+    private Toolbar m_simToolbar;
 
     // SQLite
     private ArrayList<SimulationModel> listModel;
     SimulationAdapter adapter;
-    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,36 +44,20 @@ public class ModeSimulationActivity extends AppCompatActivity {
         initViews();
         initObjects();
         getLotteries();
-//        checkLayoutVisibility(listModel.size());
 
-        // Floating Action Button
-        fabAddLotterySimulation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent a = new Intent(ModeSimulationActivity.this, AddLotterySimulationActivity.class);
-                startActivity(a);
-            }
-        });
     }
 
     private void initViews(){
-        fabAddLotterySimulation = (FloatingActionButton) findViewById(R.id.fabAddLotterySimulation);
         activityModeSimulation = (RelativeLayout) findViewById(R.id.activityModeSimulation);
-        linearLayoutWithoutData = (LinearLayout) findViewById(R.id.linearLayoutWithoutData);
+        sim_fabAdd = (FloatingActionButton) findViewById(R.id.sim_fabAdd);
+        m_simToolbar = (Toolbar) findViewById(R.id.m_simToolbar);
+
+        // Display Button Back To ModeSimulationActivity
+        setSupportActionBar(m_simToolbar);
+        getSupportActionBar().setTitle("โหมดจำลอง");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
-
-    // Image Gone when add lottery
-//    private void checkLayoutVisibility(int size){
-//        if(size == 0){
-//            recyclerviewSimulation.setVisibility(View.GONE);
-//            linearLayoutWithoutData.setVisibility(View.VISIBLE);
-//        } else {
-//            recyclerviewSimulation.setVisibility(View.VISIBLE);
-//            linearLayoutWithoutData.setVisibility(View.GONE);
-//        }
-//    }
-
-
 
     private void initObjects(){
 
@@ -89,6 +75,18 @@ public class ModeSimulationActivity extends AppCompatActivity {
         ItemTouchHelper.Callback callback = new SimulationSwipe(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerviewSimulation);
+
+        //Floating Action Button
+        sim_fabStat = (FloatingActionButton) findViewById(R.id.sim_fabStat);
+        sim_fabMenu = (FloatingActionMenu) findViewById(R.id.sim_fabMenu);
+
+        sim_fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(ModeSimulationActivity.this, AddLotterySimulationActivity.class);
+                startActivity(a);
+            }
+        });
 
     }
 
@@ -167,8 +165,8 @@ public class ModeSimulationActivity extends AppCompatActivity {
         recyclerviewSimulation.setAdapter(adapter);
     }
 
-    //Menu Summary
-    /*@Override
+    //Menu SearchView
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_toolbar,menu);
@@ -176,6 +174,7 @@ public class ModeSimulationActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint(getString(R.string.text_search_date));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -193,15 +192,15 @@ public class ModeSimulationActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.m_summary:
-                Intent intent = new Intent(this, SimStatActivity.class);
-                startActivity(intent);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.m_search:
+//                Intent intent = new Intent(this, SimStatActivity.class);
+//                startActivity(intent);
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }

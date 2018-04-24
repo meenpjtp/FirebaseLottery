@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Fragment;
+package project.senior.com.firebaselottery.Activities.Fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,34 +20,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
-
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-
 import java.util.ArrayList;
-
-import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.DBSimulationAdapter;
-import project.senior.com.firebaselottery.Intent.AddLotterySimulationActivity;
+import project.senior.com.firebaselottery.DBHelper.DBHelperPurchase.DBPurchaseAdapter;
+import project.senior.com.firebaselottery.Activities.ModePurchase.AddLotteryPurchaseActivity;
 import project.senior.com.firebaselottery.MainActivity;
-import project.senior.com.firebaselottery.Models.SimulationModel;
+import project.senior.com.firebaselottery.Models.PurchaseModel;
 import project.senior.com.firebaselottery.R;
-import project.senior.com.firebaselottery.RecyclerView.Adapter.SimulationAdapter;
-import project.senior.com.firebaselottery.RecyclerView.Swipe.SimulationSwipe;
+import project.senior.com.firebaselottery.RecyclerView.Adapter.PurchaseAdapter;
+import project.senior.com.firebaselottery.RecyclerView.Swipe.PurchaseSwipe;
 
-public class SimulationFragment extends Fragment {
+public class PurchaseFragment extends Fragment {
 
-    public static final String TAG = "SimulationFragment";
+    public static final String TAG = "PurchaseFragment";
     private MainActivity mMainActivity;
 
-    private RecyclerView recyclerviewSimulation;
-    private FloatingActionButton sim_fabAdd,sim_fabStat;
-    private FloatingActionMenu sim_fabMenu;
-    private RelativeLayout simulationFragment;
-    private SearchView serchViewSimulation;
+    private RecyclerView recyclerviewPurchase;
+    private FloatingActionButton fabAddLotteryPurchase1;
+    private RelativeLayout purchaseFragment;
+//    private LinearLayout linearLayoutWithoutData;
+    private SearchView serchViewPurchase;
+    FloatingActionMenu pur_fabMenu;
+    FloatingActionButton pur_fabAdd, pur_fabStat;
 
     // SQLite
-    private ArrayList<SimulationModel> listModel;
-    SimulationAdapter adapter;
+    private ArrayList<PurchaseModel> listModel;
+    PurchaseAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,13 +55,32 @@ public class SimulationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_simulation, container, false);
+        return inflater.inflate(R.layout.fragment_purchase, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        pur_fabMenu = (FloatingActionMenu) view.findViewById(R.id.pur_fabMenu);
+        pur_fabAdd = (FloatingActionButton) view.findViewById(R.id.pur_fabAdd);
+        pur_fabStat = (FloatingActionButton) view.findViewById(R.id.pur_fabStat);
+
+        //FloatingActionButton
+        pur_fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a  = new Intent(getContext(), AddLotteryPurchaseActivity.class);
+                startActivity(a);
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
         initialize();
+
     }
 
     private void initialize() {
@@ -79,31 +97,27 @@ public class SimulationFragment extends Fragment {
         setRecyclerView();
         getLotteries();
 
+//        fabAddLotteryPurchase1 = (FloatingActionButton) getView().findViewById(R.id.fabAddLotteryPurchase1);
+//
+//        //Press Floating Action Button start intent add lottery to purchase
+//        fabAddLotteryPurchase1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent a  = new Intent(getContext(), AddLotteryPurchaseActivity.class);
+//                startActivity(a);
+//            }
+//        });
     }
 
     private void getViewComponents() {
 
         //Init view
-        simulationFragment = (RelativeLayout) getView().findViewById(R.id.simulationFragment);
-        serchViewSimulation = (SearchView) getView().findViewById(R.id.serchViewSimulation);
-        sim_fabMenu = (FloatingActionMenu) getView().findViewById(R.id.sim_fabMenu);
-        sim_fabAdd = (FloatingActionButton) getView().findViewById(R.id.sim_fabAdd);
-        sim_fabStat = (FloatingActionButton) getView().findViewById(R.id.sim_fabStat);
+        purchaseFragment = (RelativeLayout) getView().findViewById(R.id.purchaseFragment);
+        serchViewPurchase = (SearchView) getView().findViewById(R.id.serchViewPurchase);
 
-        //SearchView
-        serchViewSimulation.setQueryHint(getString(R.string.text_search_date));
-
-        //Press Floating Action Button start intent add lottery to simulation
-        sim_fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), AddLotterySimulationActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        serchViewSimulation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        // Search View
+        serchViewPurchase.setQueryHint(getString(R.string.text_search_date));
+        serchViewPurchase.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -120,28 +134,28 @@ public class SimulationFragment extends Fragment {
 
     //Recyclerview
     private void setRecyclerView() {
-        recyclerviewSimulation = (RecyclerView) getView().findViewById(R.id.recyclerviewSimulation);
+        recyclerviewPurchase = (RecyclerView) getView().findViewById(R.id.recyclerviewPurchase);
 
         listModel = new ArrayList<>();
-        adapter = new SimulationAdapter(getContext(), listModel);
+        adapter = new PurchaseAdapter(getContext(), listModel);
 
-        recyclerviewSimulation.setHasFixedSize(true);
+        recyclerviewPurchase.setHasFixedSize(true);
         RecyclerView.LayoutManager LM = new LinearLayoutManager(getContext());
-        recyclerviewSimulation.setLayoutManager(LM);
-        recyclerviewSimulation.setItemAnimator(new DefaultItemAnimator());
-        recyclerviewSimulation.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerviewPurchase.setLayoutManager(LM);
+        recyclerviewPurchase.setItemAnimator(new DefaultItemAnimator());
+        recyclerviewPurchase.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         // RecyclerView Swipe To Delete
-        ItemTouchHelper.Callback callback = new SimulationSwipe(adapter);
+        ItemTouchHelper.Callback callback = new PurchaseSwipe(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerviewSimulation);
+        helper.attachToRecyclerView(recyclerviewPurchase);
 
     }
 
     private void getLotteries(){
         listModel.clear();
 
-        DBSimulationAdapter db = new DBSimulationAdapter(getContext());
+        DBPurchaseAdapter db = new DBPurchaseAdapter(getContext());
         db.openDB();
         Cursor cursor = db.retrieve();
 
@@ -155,7 +169,7 @@ public class SimulationFragment extends Fragment {
             String lottery_value = cursor.getString(6);
 
 
-            SimulationModel model = new SimulationModel();
+            PurchaseModel model = new PurchaseModel();
             model.setId(id);
             model.setLottery_date(lottery_date);
             model.setLottery_number(lottery_number);
@@ -170,7 +184,7 @@ public class SimulationFragment extends Fragment {
         db.closeDB();
 
         if(listModel.size() > 0){
-            recyclerviewSimulation.setAdapter(adapter);
+            recyclerviewPurchase.setAdapter(adapter);
         }
     }
 
@@ -179,9 +193,9 @@ public class SimulationFragment extends Fragment {
     {
         listModel.clear();
 
-        DBSimulationAdapter db=new DBSimulationAdapter(getContext());
+        DBPurchaseAdapter db=new DBPurchaseAdapter(getContext());
         db.openDB();
-        SimulationModel model1=null;
+        PurchaseModel model1=null;
         Cursor cursor =db.retrieveSearch(search);
 
         while (cursor.moveToNext())
@@ -195,7 +209,7 @@ public class SimulationFragment extends Fragment {
             String lottery_value = cursor.getString(6);
 
 
-            model1 = new SimulationModel();
+            model1 = new PurchaseModel();
             model1.setId(id);
             model1.setLottery_date(lottery_date);
             model1.setLottery_number(lottery_number);
@@ -209,7 +223,7 @@ public class SimulationFragment extends Fragment {
 
         db.closeDB();
 
-        recyclerviewSimulation.setAdapter(adapter);
+        recyclerviewPurchase.setAdapter(adapter);
     }
 
     // Internet is not connect
@@ -245,5 +259,4 @@ public class SimulationFragment extends Fragment {
 
         return builder;
     }
-
 }

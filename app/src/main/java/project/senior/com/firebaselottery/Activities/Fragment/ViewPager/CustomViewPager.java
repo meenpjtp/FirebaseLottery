@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Fragment.ViewPager;
+package project.senior.com.firebaselottery.Activities.Fragment.ViewPager;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

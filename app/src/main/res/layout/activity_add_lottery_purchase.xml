@@ -7,12 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/addLotteryPurchase"
-    tools:context="project.senior.com.firebaselottery.Intent.AddLotteryPurchaseActivity">
+    tools:context="project.senior.com.firebaselottery.Activities.ModePurchase.AddLotteryPurchaseActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/pur_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

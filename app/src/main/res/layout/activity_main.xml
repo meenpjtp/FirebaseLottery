@@ -14,29 +14,59 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--app:layout_scrollFlags="scroll|enterAlways"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="scrollable"
+            app:tabMode="fixed"
             app:tabGravity="fill"
             android:background="@color/colorPrimary" />
 
     </android.support.design.widget.AppBarLayout>
 
 
-    <project.senior.com.firebaselottery.Fragment.ViewPager.CustomViewPager
+    <project.senior.com.firebaselottery.Activities.Fragment.ViewPager.CustomViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_sim"
+                android:layout_width="190dp"
+                android:layout_height="40dp"
+                android:text="@string/btn_mode_simulation"
+                android:background="@color/colorPrimary"
+                android:layout_marginEnd="5dp"/>
+
+            <Button
+                android:id="@+id/btn_pur"
+                android:layout_width="190dp"
+                android:layout_height="40dp"
+                android:text="@string/btn_mode_purchase"
+                android:background="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     <!--<LinearLayout-->

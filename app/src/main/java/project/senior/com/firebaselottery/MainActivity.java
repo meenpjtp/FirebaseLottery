@@ -13,22 +13,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import project.senior.com.firebaselottery.Activities.ModePurchase.ModePurchaseActivity;
 import project.senior.com.firebaselottery.Activities.ModeSimulation.ModeSimulationActivity;
-import project.senior.com.firebaselottery.Fragment.CheckLotteryFragment;
-import project.senior.com.firebaselottery.Fragment.DisplayLotteryFragment;
-import project.senior.com.firebaselottery.Fragment.PurchaseFragment;
-import project.senior.com.firebaselottery.Fragment.SimulationFragment;
-import project.senior.com.firebaselottery.Fragment.ViewPager.CustomViewPager;
+import project.senior.com.firebaselottery.Activities.Fragment.CheckLotteryFragment;
+import project.senior.com.firebaselottery.Activities.Fragment.DisplayLotteryFragment;
+import project.senior.com.firebaselottery.Activities.Fragment.ViewPager.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private Button btn_sim, btn_pur;
 
     private Context mContext;
 
@@ -47,28 +49,45 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = this;
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+        btn_sim = (Button) findViewById(R.id.btn_sim);
+        btn_pur = (Button) findViewById(R.id.btn_pur);
 
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
+        // Press button start intent ModeSimulation, ModePurchase
+        btn_sim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(MainActivity.this, ModeSimulationActivity.class);
+                startActivity(a);
+            }
+        });
+
+        btn_pur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent b = new Intent(MainActivity.this, ModePurchaseActivity.class);
+                startActivity(b);
+            }
+        });
     }
 
-    public Toolbar getToolbar() {
-        if (toolbar == null) {
-            toolbar = (Toolbar) findViewById(R.id.toolbar);
-        }
-        return toolbar;
-    }
+//    public Toolbar getToolbar() {
+//        if (toolbar == null) {
+//            toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        }
+//        return toolbar;
+//    }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new DisplayLotteryFragment(), "ผลรางวัล");
         adapter.addFragment(new CheckLotteryFragment(), "ตรวจล็อตเตอรี่");
-        adapter.addFragment(new SimulationFragment(), "โหมดจำลอง");
-        adapter.addFragment(new PurchaseFragment(), "โหมดซื้อจริง");
         viewPager.setAdapter(adapter);
     }
 

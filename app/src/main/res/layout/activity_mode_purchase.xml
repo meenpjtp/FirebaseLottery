@@ -8,25 +8,65 @@
     android:id="@+id/activityModePurchase"
     tools:context="project.senior.com.firebaselottery.Activities.ModePurchase.ModePurchaseActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewPurchase"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/m_purToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerviewPurchase"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabAddLotteryPurchase"
-        android:src="@drawable/ic_add"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/pur_fabMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        app:fabSize="normal"
-        app:backgroundTint="@color/colorAccent"/>
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        app:menu_showShadow="true"
+        app:menu_fab_label=""
+        app:menu_openDirection="up"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_icon="@drawable/ic_more"
+        app:menu_labels_textColor="@android:color/black"
+        app:menu_labels_colorNormal="@android:color/white"
+        app:menu_labels_colorPressed="@color/colorAccent">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/pur_fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="@string/text_add"
+            android:src="@drawable/ic_create"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/pur_fabStat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_label="@string/text_stat"
+            android:src="@drawable/ic_static"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>
