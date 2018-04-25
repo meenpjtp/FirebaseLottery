@@ -44,7 +44,7 @@
             android:name=".Activities.ModeSimulation.SimStatActivity"
             android:parentActivityName=".Activities.ModeSimulation.ModeSimulationActivity" />
 
-        <activity android:name=".Intent.TestActivity"></activity>
+        <activity android:name=".Activities.DisplayImageLotteryActivity"></activity>
     </application>
 
 </manifest>

@@ -26,41 +26,49 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //FireBase
-    compile 'com.google.firebase:firebase-core:12.0.0'
-    compile 'com.google.firebase:firebase-database:12.0.0'
+    //FireBase Database
+    implementation 'com.google.firebase:firebase-core:12.0.0'
+    implementation 'com.google.firebase:firebase-database:12.0.0'
 
-    compile 'com.android.support:cardview-v7:26.1.0' //RecyclerView
-    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    //Firebase Storage
+    implementation 'com.google.firebase:firebase-storage:12.0.0'
+    implementation 'com.google.firebase:firebase-auth:12.0.0'
+
+    implementation 'com.android.support:cardview-v7:26.1.0' //RecyclerView
+    implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     //swipe to delete recyclerview remove from database
-    compile 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
 
     implementation 'com.android.support:recyclerview-v7:26.1.0'    //swipe to delete recyclerview
     implementation 'com.github.bumptech.glide:glide:3.7.0'     // glide image library
     implementation 'com.android.volley:volley:1.0.0'     // volley http library
     implementation 'com.google.code.gson:gson:2.6.2'
 
-    compile 'com.nightonke:boommenu:2.1.1' //BoomMenu
+    implementation 'com.nightonke:boommenu:2.1.1' //BoomMenu
 
-    compile 'com.github.clans:fab:1.6.4' //FloatingActionButton
+    implementation 'com.github.clans:fab:1.6.4' //FloatingActionButton
 
-}
-
-dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3' //pie chart
-}
-dependencies {
     implementation 'com.android.support.constraint:constraint-layout:+'
+
+    implementation 'com.squareup.picasso:picasso:2.5.2' //Image
+
 }
+
+//dependencies {
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3' //pie chart
+//}
+//dependencies {
+//    implementation 'com.android.support.constraint:constraint-layout:+'
+//}
 
 apply plugin: 'com.google.gms.google-services'
 
-dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:+'
-}
+//dependencies {
+//    implementation 'com.android.support.constraint:constraint-layout:+'
+//}
 
-dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:+'
-}
-
+//dependencies {
+//    implementation 'com.android.support.constraint:constraint-layout:+'
+//}
 

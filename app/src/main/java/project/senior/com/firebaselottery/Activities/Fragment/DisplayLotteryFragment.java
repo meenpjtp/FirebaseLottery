@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import project.senior.com.firebaselottery.MainActivity;
-import project.senior.com.firebaselottery.Models.DisplayLotteryModel;
+import project.senior.com.firebaselottery.Models.ImageModel;
 import project.senior.com.firebaselottery.R;
-import project.senior.com.firebaselottery.RecyclerView.Adapter.LotteriesAdapter;
+import project.senior.com.firebaselottery.RecyclerView.Adapter.DisplayImageLotteryAdapter;
 
 public class DisplayLotteryFragment extends Fragment {
 
@@ -43,8 +43,11 @@ public class DisplayLotteryFragment extends Fragment {
     private Button buttonSelect;
     private RecyclerView recyclerViewLotteries;
 
-    private LotteriesAdapter adapter; //RecyclerView
-    private List<DisplayLotteryModel> listDisplay;
+//    private LotteriesAdapter adapter; //RecyclerView
+//    private List<DisplayLotteryModel> listDisplay;
+
+    private DisplayImageLotteryAdapter adapter;
+    private List<ImageModel> listDisplay;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,7 +115,7 @@ public class DisplayLotteryFragment extends Fragment {
             public void onClick(View view) {
 
                 DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-                DatabaseReference refResult = refLottery.child("RESULT");
+                DatabaseReference refResult = refLottery.child("IMAGE");
                 DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
 
                 refDate.addValueEventListener(new ValueEventListener() {
@@ -120,11 +123,13 @@ public class DisplayLotteryFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         listDisplay.clear();
-                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                            DisplayLotteryModel displayLotteryModel = dataSnapshot1.getValue(DisplayLotteryModel.class);
-                            listDisplay.add(displayLotteryModel);
-                        }
-                        adapter = new LotteriesAdapter(getContext(), listDisplay);
+//                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+//                            DisplayLotteryModel displayLotteryModel = dataSnapshot1.getValue(DisplayLotteryModel.class);
+//                            listDisplay.add(displayLotteryModel);
+//                        }
+                        ImageModel model = dataSnapshot.getValue(ImageModel.class);
+                        listDisplay.add(model);
+                        adapter = new DisplayImageLotteryAdapter(getContext(), listDisplay);
                         recyclerViewLotteries.setAdapter(adapter);
 
                     }
@@ -144,7 +149,7 @@ public class DisplayLotteryFragment extends Fragment {
 
         recyclerViewLotteries = (RecyclerView) getView().findViewById(R.id.recyclerViewLotteries);
         listDisplay = new ArrayList<>();
-        adapter = new LotteriesAdapter(getContext(), listDisplay);
+        adapter = new DisplayImageLotteryAdapter(getContext(), listDisplay);
 
         recyclerViewLotteries.setHasFixedSize(true);
         RecyclerView.LayoutManager LM = new LinearLayoutManager(getContext());
@@ -190,3 +195,36 @@ public class DisplayLotteryFragment extends Fragment {
 
 
 }
+
+/*------------------------- Version.1 -----------------------------*/
+//buttonSelect.setOnClickListener(new View.OnClickListener() {
+//@Override
+//public void onClick(View view) {
+//
+//        DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
+//        DatabaseReference refResult = refLottery.child("RESULT");
+//        DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
+//
+//        refDate.addValueEventListener(new ValueEventListener() {
+//@Override
+//public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//        listDisplay.clear();
+//        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+//        DisplayLotteryModel displayLotteryModel = dataSnapshot1.getValue(DisplayLotteryModel.class);
+//        listDisplay.add(displayLotteryModel);
+//        }
+//        adapter = new LotteriesAdapter(getContext(), listDisplay);
+//        recyclerViewLotteries.setAdapter(adapter);
+//
+//        }
+//
+//@Override
+//public void onCancelled(DatabaseError databaseError) {
+//        Log.e("ERROR", "Unable to connect database.");
+//
+//        }
+//        });
+//
+//        }
+//        });
