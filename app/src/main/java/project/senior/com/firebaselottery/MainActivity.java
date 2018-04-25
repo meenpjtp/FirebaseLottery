@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
     CustomViewPager customViewPager;
 
+    private int[] tabIcon = {
+            R.drawable.ic_lottery_result,
+            R.drawable.ic_check_lottery};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+//        setUpTabIcons();
 
         // Press button start intent ModeSimulation, ModePurchase
         btn_sim.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(b);
             }
         });
+    }
+
+    private void setUpTabIcons(){
+        tabLayout.getTabAt(0).setIcon(tabIcon[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcon[1]);
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +44,7 @@ public class DisplayLotteryFragment extends Fragment {
     private Spinner spinnerSelectDate;
     private Button buttonSelect;
     private RecyclerView recyclerViewLotteries;
+    private RelativeLayout displayLotteryFragment;
 
 //    private LotteriesAdapter adapter; //RecyclerView
 //    private List<DisplayLotteryModel> listDisplay;
@@ -84,6 +87,7 @@ public class DisplayLotteryFragment extends Fragment {
         //Init view
         spinnerSelectDate = (Spinner) getView().findViewById(R.id.spinnerSelectDate);
         buttonSelect = (Button) getView().findViewById(R.id.buttonSelect);
+        displayLotteryFragment = (RelativeLayout) getView().findViewById(R.id.displayLotteryFragment);
 
         //Spinner
         DatabaseReference lottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
@@ -122,15 +126,16 @@ public class DisplayLotteryFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        listDisplay.clear();
-//                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-//                            DisplayLotteryModel displayLotteryModel = dataSnapshot1.getValue(DisplayLotteryModel.class);
-//                            listDisplay.add(displayLotteryModel);
-//                        }
-                        ImageModel model = dataSnapshot.getValue(ImageModel.class);
-                        listDisplay.add(model);
-                        adapter = new DisplayImageLotteryAdapter(getContext(), listDisplay);
-                        recyclerViewLotteries.setAdapter(adapter);
+                        if(dataSnapshot.getValue() == null){
+                            Snackbar.make(displayLotteryFragment, "ไม่มีผลรางวัลดังกล่าว", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            listDisplay.clear();
+                            ImageModel model = dataSnapshot.getValue(ImageModel.class);
+                            listDisplay.add(model);
+                            adapter = new DisplayImageLotteryAdapter(getContext(), listDisplay);
+                            recyclerViewLotteries.setAdapter(adapter);
+
+                        }
 
                     }
 

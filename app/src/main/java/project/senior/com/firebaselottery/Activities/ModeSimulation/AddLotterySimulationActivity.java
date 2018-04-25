@@ -141,6 +141,10 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
             return;
         }
 
+        if (!inputValidation.isInputEditTextFilled(editTextAddAmount, textInputLayoutAddAmount, getString(R.string.error_message_amount))){
+            return;
+        }
+
         // Call Firebase
         DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
         final DatabaseReference refResult = refLottery.child("RESULT");
