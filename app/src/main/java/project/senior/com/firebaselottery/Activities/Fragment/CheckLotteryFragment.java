@@ -2,7 +2,6 @@ package project.senior.com.firebaselottery.Activities.Fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,14 +32,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
+import project.senior.com.firebaselottery.FirebaseHelper.FBAdapter.CheckLotteryAdapter;
+import project.senior.com.firebaselottery.FirebaseHelper.FBHelper.CheckLotteryHelper;
 import project.senior.com.firebaselottery.MainActivity;
 import project.senior.com.firebaselottery.Models.HistoryModel;
 import project.senior.com.firebaselottery.R;
-import project.senior.com.firebaselottery.RecyclerView.Adapter.HistoryAdapter;
-import project.senior.com.firebaselottery.RecyclerView.Swipe.HistorySwipe;
 import project.senior.com.firebaselottery.Utils.StringUtil;
 
+/**
+ * Old
+ */
 public class CheckLotteryFragment extends Fragment {
 
     public static final String TAG = "CheckLotteryFragment";
@@ -54,9 +53,16 @@ public class CheckLotteryFragment extends Fragment {
     private Button buttonSelect;
     private RecyclerView recyclerViewCheckLottery;
 
-    //SQLite
-    private ArrayList<HistoryModel> listHistory;
-    HistoryAdapter adapter;
+    // SQLite Don't use
+//    private ArrayList<HistoryModel> listHistory;
+//    HistoryAdapter adapter;
+
+    // Firebase
+    private HistoryModel historyModel;
+    DatabaseReference refLottery, refCheck, refDate, refResult;
+    private CheckLotteryHelper helper;
+    private CheckLotteryAdapter lotteryAdapter;
+
 
     int countFalse = 0;
 
@@ -74,6 +80,16 @@ public class CheckLotteryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         initialize();
+
+        refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
+        refResult = refLottery.child("RESULT");
+        refCheck = refLottery.child("CHECK");
+
+        historyModel = new HistoryModel();
+        helper = new CheckLotteryHelper(refCheck); // Insert data to Firebase
+        lotteryAdapter = new CheckLotteryAdapter(getContext(), helper.retrieveData());
+        helper.retrieveData();
+
     }
 
     private void initialize() {
@@ -88,15 +104,15 @@ public class CheckLotteryFragment extends Fragment {
 
         getViewComponents();
         setRecyclerView();
-        getLotteries();
+//        setFirebase();
 
     }
 
     private void setRecyclerView() {
 
         recyclerViewCheckLottery = (RecyclerView) getView().findViewById(R.id.recyclerViewCheckLottery);
-        listHistory = new ArrayList<>();
-        adapter = new HistoryAdapter(getContext(), listHistory);
+//        listHistory = new ArrayList<>();
+//        adapter = new HistoryAdapter(getContext(), listHistory);
 
         recyclerViewCheckLottery.setHasFixedSize(true);
         RecyclerView.LayoutManager LM = new LinearLayoutManager(getContext());
@@ -105,12 +121,24 @@ public class CheckLotteryFragment extends Fragment {
         recyclerViewCheckLottery.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         // RecyclerView Swipe To Delete
-        ItemTouchHelper.Callback callback = new HistorySwipe(adapter);
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerViewCheckLottery);
+//        ItemTouchHelper.Callback callback = new HistorySwipe(adapter);
+//        ItemTouchHelper helper = new ItemTouchHelper(callback);
+//        helper.attachToRecyclerView(recyclerViewCheckLottery);
 
-        getLotteries();
     }
+
+//    private void setFirebase(){
+//        historyModel = new HistoryModel();
+//        helper = new CheckLotteryHelper(refCheck); // Insert data to Firebase
+//        lotteryAdapter = new CheckLotteryAdapter(getContext(), helper.retrieveData());
+//        helper.retrieveData();
+
+//        refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
+//        refResult = refLottery.child("RESULT");
+//        refCheck = refLottery.child("CHECK");
+//        refDate = refLottery.child("DATE");
+
+//    }
 
     private void getViewComponents() {
 
@@ -122,7 +150,6 @@ public class CheckLotteryFragment extends Fragment {
 
         // Spinner
         DatabaseReference lottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-
         lottery.child("DATE").orderByChild("order").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -144,11 +171,24 @@ public class CheckLotteryFragment extends Fragment {
             }
         });
 
+        //
+        editTextLotteryNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerViewCheckLottery.setAdapter(lotteryAdapter);
+                lotteryAdapter.notifyDataSetChanged();
+            }
+        });
+
 
         //Button save to database
         buttonSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Click edittext retrieve data from firebase
+                recyclerViewCheckLottery.setAdapter(lotteryAdapter);
+                lotteryAdapter.notifyDataSetChanged();
 
                 // Error Message when input length != 6
                 if(StringUtil.isEmpty(editTextLotteryNumber.getText().toString())){
@@ -159,11 +199,14 @@ public class CheckLotteryFragment extends Fragment {
                     return;
                 }
 
-                DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-                final DatabaseReference refResult = refLottery.child("RESULT");
+//                DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
+//                final DatabaseReference refResult = refLottery.child("RESULT");
                 final DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
+//                final DatabaseReference refCheck = refLottery.child("CHECK");
 
-                refResult.child(spinnerSelectDate.getSelectedItem().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+//                refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
+                refResult.child(spinnerSelectDate.getSelectedItem().toString()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -172,7 +215,7 @@ public class CheckLotteryFragment extends Fragment {
                             Log.i("testExists", "data exists");
 
 
-                            refDate.addListenerForSingleValueEvent(new ValueEventListener() {
+                            refDate.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot1) {
 
@@ -188,6 +231,10 @@ public class CheckLotteryFragment extends Fragment {
                                         boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(3,6));
                                         boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextLotteryNumber.getText().toString().substring(0,3));
 
+                                        String result = data.child("lottery_prize").getValue().toString();
+                                        String id = refCheck.push().getKey();
+                                        String date = spinnerSelectDate.getSelectedItem().toString();
+                                        String lottery_number = editTextLotteryNumber.getText().toString();
 
                                         // 1st prize | 2nd prize | 3rd prize | 4th prize | 5th prize
                                         if(match1 == true){
@@ -196,11 +243,9 @@ public class CheckLotteryFragment extends Fragment {
                                             Snackbar.make(checkLotteryFragment, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
 
                                             // Save check lottery to database
-                                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                                    editTextLotteryNumber.getText().toString(),
-                                                    "ถูก" + (String) data.child("lottery_prize").getValue());
+                                            historyModel = new HistoryModel(id, date, lottery_number, result);
+                                            refCheck.child(id).setValue(historyModel);
 
-                                            getLotteries();
                                             clear();
                                             break;
                                         }
@@ -212,11 +257,9 @@ public class CheckLotteryFragment extends Fragment {
                                             Snackbar.make(checkLotteryFragment, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
 
                                             // Save check lottery to database
-                                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                                    editTextLotteryNumber.getText().toString(),
-                                                    "ถูก" + (String) data.child("lottery_prize").getValue());
+                                            historyModel = new HistoryModel(id, date, lottery_number, result);
+                                            refCheck.child(id).setValue(historyModel);
 
-                                            getLotteries();
                                             clear();
                                             break;
                                         }
@@ -228,11 +271,9 @@ public class CheckLotteryFragment extends Fragment {
                                             Snackbar.make(checkLotteryFragment, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
 
                                             // Save check lottery to database
-                                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                                    editTextLotteryNumber.getText().toString(),
-                                                    "ถูก" + (String) data.child("lottery_prize").getValue());
+                                            historyModel = new HistoryModel(id, date, lottery_number, result);
+                                            refCheck.child(id).setValue(historyModel);
 
-                                            getLotteries();
                                             clear();
                                             break;
                                         }
@@ -244,11 +285,9 @@ public class CheckLotteryFragment extends Fragment {
                                             Snackbar.make(checkLotteryFragment, "คุณถูก" + data.child("lottery_prize").getValue(), Snackbar.LENGTH_SHORT).show();
 
                                             // Save check lottery to database
-                                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                                    editTextLotteryNumber.getText().toString(),
-                                                    "ถูก" + (String) data.child("lottery_prize").getValue());
+                                            historyModel = new HistoryModel(id, date, lottery_number, result);
+                                            refCheck.child(id).setValue(historyModel);
 
-                                            getLotteries();
                                             clear();
                                             break;
 
@@ -270,18 +309,29 @@ public class CheckLotteryFragment extends Fragment {
                                             Snackbar.make(checkLotteryFragment, "คุณไม่ถูกรางวัล", Snackbar.LENGTH_SHORT).show();
 
                                             // Save check lottery to database
-                                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                                    editTextLotteryNumber.getText().toString(),
-                                                    "ไม่ถูกรางวัล");
-
-                                            getLotteries();
+                                            historyModel = new HistoryModel(id, date, lottery_number, "ไม่ถูกรางวัล");
+                                            refCheck.child(id).setValue(historyModel);
                                             clear();
                                             break;
                                         }
+
+                                        // Waiting for result
+                                        if(data.child("lottery_number").getValue().toString().equals("กำลังรอผล")){
+                                            Snackbar.make(checkLotteryFragment, "กำลังรอผล", Snackbar.LENGTH_SHORT).show();
+
+                                            historyModel = new HistoryModel(id, date, lottery_number, result);
+                                            refCheck.child(id).setValue(historyModel);
+                                            clear();
+                                            break;
+
+
+                                        }
+
                                     }
 
                                     clear();
                                     countFalse = 0; // reset countFalse
+                                    recyclerViewCheckLottery.setAdapter(lotteryAdapter);
                                 }
 
 
@@ -293,23 +343,23 @@ public class CheckLotteryFragment extends Fragment {
                         }
 
                         // Waiting Result...
-                        else{
-
-                            Log.i("testExists", "data not exists");
-
-                            // Display Snackbar
-                            Snackbar.make(checkLotteryFragment, R.string.message_result, Snackbar.LENGTH_SHORT).show();
-
-                            // Save check lottery to database
-                            save(spinnerSelectDate.getSelectedItem().toString(),
-                                    editTextLotteryNumber.getText().toString(),
-                                    "รอผลรางวัล");
-
-                            getLotteries();
-                            clear();
-
-
-                        }
+//                        else{
+//
+//                            Log.i("testExists", "data not exists");
+//
+//                            // Display Snackbar
+//                            Snackbar.make(checkLotteryFragment, R.string.message_result, Snackbar.LENGTH_SHORT).show();
+//
+//                            // Save check lottery to database
+//                            save(spinnerSelectDate.getSelectedItem().toString(),
+//                                    editTextLotteryNumber.getText().toString(),
+//                                    "รอผลรางวัล");
+//
+//                            getLotteries();
+//                            clear();
+//
+//
+//                        }
 
                     }
 
@@ -324,47 +374,6 @@ public class CheckLotteryFragment extends Fragment {
 
     }
 
-    // Save check lottery to database
-    private void save(String selected_date, String lottery_number, String lottery_result){
-        DBHistoryAdapter db = new DBHistoryAdapter(getContext());
-        db.openDB();
-        if(db.addLottery(selected_date, lottery_number, lottery_result)){
-//            editTextLotteryNumber.setText("");
-        } else {
-            Toast.makeText(getContext(),"Unable to save", Toast.LENGTH_SHORT).show();;
-        }
-        db.closeDB();
-    }
-
-    // Update list history to recyclerview
-    private void getLotteries(){
-        listHistory.clear();
-
-        DBHistoryAdapter db = new DBHistoryAdapter(getContext());
-        db.openDB();
-        Cursor cursor = db.retrieve();
-
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String selected_date = cursor.getString(1);
-            String lottery_number = cursor.getString(2);
-            String lottery_result = cursor.getString(3);
-
-            HistoryModel model = new HistoryModel();
-            model.setId(id);
-            model.setSelected_date(selected_date);
-            model.setLottery_number(lottery_number);
-            model.setLottery_result(lottery_result);
-
-            listHistory.add(model);
-
-        }
-        db.closeDB();
-
-        if(listHistory.size() > 0){
-            recyclerViewCheckLottery.setAdapter(adapter);
-        }
-    }
 
     // Clear EditText when press button
     private void clear(){
@@ -407,3 +416,45 @@ public class CheckLotteryFragment extends Fragment {
 
 
 }
+
+    // Save check lottery to database
+   /* private void save(String selected_date, String lottery_number, String lottery_result){
+        DBHistoryAdapter db = new DBHistoryAdapter(getContext());
+        db.openDB();
+        if(db.addLottery(selected_date, lottery_number, lottery_result)){
+//            editTextLotteryNumber.setText("");
+        } else {
+            Toast.makeText(getContext(),"Unable to save", Toast.LENGTH_SHORT).show();;
+        }
+        db.closeDB();
+    }*/
+
+// Update list history to recyclerview
+    /*private void getLotteries(){
+        listHistory.clear();
+
+        DBHistoryAdapter db = new DBHistoryAdapter(getContext());
+        db.openDB();
+        Cursor cursor = db.retrieve();
+
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String selected_date = cursor.getString(1);
+            String lottery_number = cursor.getString(2);
+            String lottery_result = cursor.getString(3);
+
+            HistoryModel model = new HistoryModel();
+            model.setId(id);
+            model.setSelected_date(selected_date);
+            model.setLottery_number(lottery_number);
+            model.setLottery_result(lottery_result);
+
+            listHistory.add(model);
+
+        }
+        db.closeDB();
+
+        if(listHistory.size() > 0){
+            recyclerViewCheckLottery.setAdapter(adapter);
+        }
+    }*/

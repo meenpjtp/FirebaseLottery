@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import project.senior.com.firebaselottery.DBHelper.DBHelperHistory.DBHistoryAdapter;
 import project.senior.com.firebaselottery.Models.HistoryModel;
 import project.senior.com.firebaselottery.R;
 
@@ -65,21 +63,21 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         }
     }
 
-    public void deleteHistory(int position){
-        HistoryModel model = listHistory.get(position);
-        int id = model.getId();
-
-        DBHistoryAdapter db = new DBHistoryAdapter(context);
-        db.openDB();
-        if(db.deleteLottery(id)){
-            listHistory.remove(position);
-            Toast.makeText(context,R.string.message_delete_history,Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(context,"Unable To Delete",Toast.LENGTH_SHORT).show();
-        }
-        db.closeDB();
-
-        this.notifyItemRemoved(position);
-    }
+//    public void deleteHistory(int position){
+//        HistoryModel model = listHistory.get(position);
+//        int id = model.getId();
+//
+//        DBHistoryAdapter db = new DBHistoryAdapter(context);
+//        db.openDB();
+//        if(db.deleteLottery(id)){
+//            listHistory.remove(position);
+//            Toast.makeText(context,R.string.message_delete_history,Toast.LENGTH_SHORT).show();
+//
+//        } else {
+//            Toast.makeText(context,"Unable To Delete",Toast.LENGTH_SHORT).show();
+//        }
+//        db.closeDB();
+//
+//        this.notifyItemRemoved(position);
+//    }
 }

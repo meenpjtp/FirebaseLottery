@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Activities;
+package project.senior.com.firebaselottery.Activities.DontUse;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +26,10 @@ import java.util.List;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.LotteriesAdapter;
 import project.senior.com.firebaselottery.Models.DisplayLotteryModel;
 import project.senior.com.firebaselottery.R;
+
+/**
+ * Don't use
+ */
 
 public class DisplayLotteriesActivity extends AppCompatActivity {
 

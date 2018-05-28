@@ -1,9 +1,8 @@
-package project.senior.com.firebaselottery.Activities.Fragment;
+package project.senior.com.firebaselottery.Activities.DontUse;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -20,16 +19,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+
 import java.util.ArrayList;
-import project.senior.com.firebaselottery.DBHelper.DBHelperPurchase.DBPurchaseAdapter;
+
 import project.senior.com.firebaselottery.Activities.ModePurchase.AddLotteryPurchaseActivity;
 import project.senior.com.firebaselottery.MainActivity;
 import project.senior.com.firebaselottery.Models.PurchaseModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.PurchaseAdapter;
 import project.senior.com.firebaselottery.RecyclerView.Swipe.PurchaseSwipe;
+
+/**
+ * Don't use
+ */
 
 public class PurchaseFragment extends Fragment {
 
@@ -95,7 +100,7 @@ public class PurchaseFragment extends Fragment {
 
         getViewComponents();
         setRecyclerView();
-        getLotteries();
+//        getLotteries();
 
 //        fabAddLotteryPurchase1 = (FloatingActionButton) getView().findViewById(R.id.fabAddLotteryPurchase1);
 //
@@ -125,7 +130,7 @@ public class PurchaseFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                searchItem(s);
+//                searchItem(s);
                 return false;
             }
         });
@@ -152,79 +157,79 @@ public class PurchaseFragment extends Fragment {
 
     }
 
-    private void getLotteries(){
-        listModel.clear();
-
-        DBPurchaseAdapter db = new DBPurchaseAdapter(getContext());
-        db.openDB();
-        Cursor cursor = db.retrieve();
-
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String lottery_date = cursor.getString(1);
-            String lottery_number = cursor.getString(2);
-            String lottery_amount = cursor.getString(3);
-            String lottery_paid = cursor.getString(4);
-            String lottery_status = cursor.getString(5);
-            String lottery_value = cursor.getString(6);
-
-
-            PurchaseModel model = new PurchaseModel();
-            model.setId(id);
-            model.setLottery_date(lottery_date);
-            model.setLottery_number(lottery_number);
-            model.setLottery_amount(lottery_amount);
-            model.setLottery_paid(lottery_paid);
-            model.setLottery_status(lottery_status);
-            model.setLottery_value(lottery_value);
-
-            listModel.add(model);
-
-        }
-        db.closeDB();
-
-        if(listModel.size() > 0){
-            recyclerviewPurchase.setAdapter(adapter);
-        }
-    }
+//    private void getLotteries(){
+//        listModel.clear();
+//
+//        DBPurchaseAdapter db = new DBPurchaseAdapter(getContext());
+//        db.openDB();
+//        Cursor cursor = db.retrieve();
+//
+//        while (cursor.moveToNext()){
+//            int id = cursor.getInt(0);
+//            String lottery_date = cursor.getString(1);
+//            String lottery_number = cursor.getString(2);
+//            String lottery_amount = cursor.getString(3);
+//            String lottery_paid = cursor.getString(4);
+//            String lottery_status = cursor.getString(5);
+//            String lottery_value = cursor.getString(6);
+//
+//
+//            PurchaseModel model = new PurchaseModel();
+//            model.setId(id);
+//            model.setLottery_date(lottery_date);
+//            model.setLottery_number(lottery_number);
+//            model.setLottery_amount(lottery_amount);
+//            model.setLottery_paid(lottery_paid);
+//            model.setLottery_status(lottery_status);
+//            model.setLottery_value(lottery_value);
+//
+//            listModel.add(model);
+//
+//        }
+//        db.closeDB();
+//
+//        if(listModel.size() > 0){
+//            recyclerviewPurchase.setAdapter(adapter);
+//        }
+//    }
 
     // Search List Lottery
-    private void searchItem (String search)
-    {
-        listModel.clear();
-
-        DBPurchaseAdapter db=new DBPurchaseAdapter(getContext());
-        db.openDB();
-        PurchaseModel model1=null;
-        Cursor cursor =db.retrieveSearch(search);
-
-        while (cursor.moveToNext())
-        {
-            int id=cursor.getInt(0);
-            String lottery_date=cursor.getString(1);
-            String lottery_number=cursor.getString(2);
-            String lottery_amount=cursor.getString(3);
-            String lottery_paid=cursor.getString(4);
-            String lottery_status=cursor.getString(5);
-            String lottery_value = cursor.getString(6);
-
-
-            model1 = new PurchaseModel();
-            model1.setId(id);
-            model1.setLottery_date(lottery_date);
-            model1.setLottery_number(lottery_number);
-            model1.setLottery_amount(lottery_amount);
-            model1.setLottery_paid(lottery_paid);
-            model1.setLottery_status(lottery_status);
-            model1.setLottery_value(lottery_value);
-
-            listModel.add(model1);
-        }
-
-        db.closeDB();
-
-        recyclerviewPurchase.setAdapter(adapter);
-    }
+//    private void searchItem (String search)
+//    {
+//        listModel.clear();
+//
+//        DBPurchaseAdapter db=new DBPurchaseAdapter(getContext());
+//        db.openDB();
+//        PurchaseModel model1=null;
+//        Cursor cursor =db.retrieveSearch(search);
+//
+//        while (cursor.moveToNext())
+//        {
+//            int id=cursor.getInt(0);
+//            String lottery_date=cursor.getString(1);
+//            String lottery_number=cursor.getString(2);
+//            String lottery_amount=cursor.getString(3);
+//            String lottery_paid=cursor.getString(4);
+//            String lottery_status=cursor.getString(5);
+//            String lottery_value = cursor.getString(6);
+//
+//
+//            model1 = new PurchaseModel();
+//            model1.setId(id);
+//            model1.setLottery_date(lottery_date);
+//            model1.setLottery_number(lottery_number);
+//            model1.setLottery_amount(lottery_amount);
+//            model1.setLottery_paid(lottery_paid);
+//            model1.setLottery_status(lottery_status);
+//            model1.setLottery_value(lottery_value);
+//
+//            listModel.add(model1);
+//        }
+//
+//        db.closeDB();
+//
+//        recyclerviewPurchase.setAdapter(adapter);
+//    }
 
     // Internet is not connect
     public boolean isConnected(Context context) {

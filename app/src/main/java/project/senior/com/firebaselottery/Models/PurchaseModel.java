@@ -2,7 +2,7 @@ package project.senior.com.firebaselottery.Models;
 
 public class PurchaseModel {
 
-    private int id;
+    private String id;
     private String lottery_date;
     private String lottery_number;
     private String lottery_amount;
@@ -10,14 +10,24 @@ public class PurchaseModel {
     private String lottery_status;
     private String lottery_value;
 
+    public PurchaseModel(String id, String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status, String lottery_value) {
+        this.id = id;
+        this.lottery_date = lottery_date;
+        this.lottery_number = lottery_number;
+        this.lottery_amount = lottery_amount;
+        this.lottery_paid = lottery_paid;
+        this.lottery_status = lottery_status;
+        this.lottery_value = lottery_value;
+    }
+
     public PurchaseModel() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

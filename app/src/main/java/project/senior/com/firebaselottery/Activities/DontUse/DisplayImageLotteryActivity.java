@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Activities;
+package project.senior.com.firebaselottery.Activities.DontUse;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +21,10 @@ import java.util.List;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.DisplayImageLotteryAdapter;
 import project.senior.com.firebaselottery.Models.ImageModel;
 import project.senior.com.firebaselottery.R;
+
+/**
+ * Don't use
+ */
 
 public class DisplayImageLotteryActivity extends AppCompatActivity {
 

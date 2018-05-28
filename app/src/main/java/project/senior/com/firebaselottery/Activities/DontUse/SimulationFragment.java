@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.Activities.Fragment;
+package project.senior.com.firebaselottery.Activities.DontUse;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,6 +33,10 @@ import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;
 import project.senior.com.firebaselottery.RecyclerView.Adapter.SimulationAdapter;
 import project.senior.com.firebaselottery.RecyclerView.Swipe.SimulationSwipe;
+
+/**
+ * Don't use
+ */
 
 public class SimulationFragment extends Fragment {
 

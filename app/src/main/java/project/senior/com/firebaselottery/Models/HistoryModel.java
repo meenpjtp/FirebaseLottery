@@ -2,7 +2,7 @@ package project.senior.com.firebaselottery.Models;
 
 public class HistoryModel {
 
-    private int id;
+    private String id;
     private String selected_date;
     private String lottery_number;
     private String lottery_result;
@@ -11,11 +11,18 @@ public class HistoryModel {
 
     }
 
-    public int getId() {
+    public HistoryModel(String id, String selected_date, String lottery_number, String lottery_result) {
+        this.id = id;
+        this.selected_date = selected_date;
+        this.lottery_number = lottery_number;
+        this.lottery_result = lottery_result;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

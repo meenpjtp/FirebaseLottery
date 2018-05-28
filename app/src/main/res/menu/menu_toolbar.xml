@@ -11,5 +11,10 @@
         app:showAsAction="always">
 
     </item>
+    <item
+        android:id="@+id/m_refresh"
+        android:title="Refresh"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="always" />
 
 </menu>

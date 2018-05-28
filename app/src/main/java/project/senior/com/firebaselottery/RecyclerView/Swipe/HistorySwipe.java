@@ -71,7 +71,7 @@ public class HistorySwipe extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        adapter.deleteHistory(viewHolder.getAdapterPosition());
+//        adapter.deleteHistory(viewHolder.getAdapterPosition());
     }
 
     public interface HistorySwipeListener{

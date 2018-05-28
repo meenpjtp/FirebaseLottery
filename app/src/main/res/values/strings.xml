@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FirebaseLottery</string>
+    <string name="app_name">SavingLotto</string>
 
     <string name="btn_select">เลือก</string>
     <string name="btn_check_lottery">Check Lottery</string>

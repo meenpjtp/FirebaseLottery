@@ -62,7 +62,7 @@ public class PurchaseSwipe extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        adapter.deletePurchase(viewHolder.getAdapterPosition());
+//        adapter.deletePurchase(viewHolder.getAdapterPosition());
     }
 
     public interface PurchaseSwipeListener{

@@ -1,8 +1,7 @@
-package project.senior.com.firebaselottery.Activities;
+package project.senior.com.firebaselottery.Activities.DontUse;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -38,6 +37,10 @@ import project.senior.com.firebaselottery.RecyclerView.Adapter.HistoryAdapter;
 import project.senior.com.firebaselottery.RecyclerView.Swipe.HistorySwipe;
 import project.senior.com.firebaselottery.Utils.StringUtil;
 
+/**
+ * Don't use
+ */
+
 public class CheckLotteryActivity extends AppCompatActivity {
 
     private LinearLayout checkLotteryActivity;
@@ -59,7 +62,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
 
         initObjects();
         initViews();
-        getLotteries();
+//        getLotteries();
 
     }
 
@@ -183,7 +186,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                             editTextLotteryNumber.getText().toString(),
                                             "ถูก" + (String) data.child("lottery_prize").getValue());
 
-                                    getLotteries();
+//                                    getLotteries();
                                     break;
                                 }
 
@@ -198,7 +201,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                             editTextLotteryNumber.getText().toString(),
                                             "ถูก" + (String) data.child("lottery_prize").getValue());
 
-                                    getLotteries();
+//                                    getLotteries();
                                     break;
                                 }
 
@@ -213,7 +216,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                             editTextLotteryNumber.getText().toString(),
                                             "ถูก" + (String) data.child("lottery_prize").getValue());
 
-                                    getLotteries();
+//                                    getLotteries();
                                     break;
                                 }
 
@@ -228,7 +231,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                             editTextLotteryNumber.getText().toString(),
                                             "ถูก" + (String) data.child("lottery_prize").getValue());
 
-                                    getLotteries();
+//                                    getLotteries();
                                     break;
 
                                 }
@@ -253,7 +256,7 @@ public class CheckLotteryActivity extends AppCompatActivity {
                                             editTextLotteryNumber.getText().toString(),
                                             "ไม่ถูกรางวัล");
 
-                                    getLotteries();
+//                                    getLotteries();
                                     break;
                                 }
                             }
@@ -309,34 +312,34 @@ public class CheckLotteryActivity extends AppCompatActivity {
     }
 
     // Update list history to recyclerview
-    private void getLotteries(){
-        listHistory.clear();
-
-        DBHistoryAdapter db = new DBHistoryAdapter(this);
-        db.openDB();
-        Cursor cursor = db.retrieve();
-
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String selected_date = cursor.getString(1);
-            String lottery_number = cursor.getString(2);
-            String lottery_result = cursor.getString(3);
-
-            HistoryModel model = new HistoryModel();
-            model.setId(id);
-            model.setSelected_date(selected_date);
-            model.setLottery_number(lottery_number);
-            model.setLottery_result(lottery_result);
-
-            listHistory.add(model);
-
-        }
-        db.closeDB();
-
-        if(listHistory.size() > 0){
-            recyclerViewCheckedLottery.setAdapter(adapter);
-        }
-    }
+//    private void getLotteries(){
+//        listHistory.clear();
+//
+//        DBHistoryAdapter db = new DBHistoryAdapter(this);
+//        db.openDB();
+//        Cursor cursor = db.retrieve();
+//
+//        while (cursor.moveToNext()){
+//            int id = cursor.getInt(0);
+//            String selected_date = cursor.getString(1);
+//            String lottery_number = cursor.getString(2);
+//            String lottery_result = cursor.getString(3);
+//
+//            HistoryModel model = new HistoryModel();
+//            model.setId(id);
+//            model.setSelected_date(selected_date);
+//            model.setLottery_number(lottery_number);
+//            model.setLottery_result(lottery_result);
+//
+//            listHistory.add(model);
+//
+//        }
+//        db.closeDB();
+//
+//        if(listHistory.size() > 0){
+//            recyclerViewCheckedLottery.setAdapter(adapter);
+//        }
+//    }
 
     // Dialog Display when not connect Internet
     public boolean isConnected(Context context) {

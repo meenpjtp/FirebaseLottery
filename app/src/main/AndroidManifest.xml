@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.CheckLotteryActivity"
+            android:name=".Activities.DontUse.CheckLotteryActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Activities.DisplayLotteriesActivity"
+            android:name=".Activities.DontUse.DisplayLotteriesActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Activities.ModeSimulation.ModeSimulationActivity"
@@ -43,8 +43,7 @@
         <activity
             android:name=".Activities.ModeSimulation.SimStatActivity"
             android:parentActivityName=".Activities.ModeSimulation.ModeSimulationActivity" />
-
-        <activity android:name=".Activities.DisplayImageLotteryActivity"></activity>
+        <activity android:name=".Activities.DontUse.DisplayImageLotteryActivity" />
     </application>
 
 </manifest>

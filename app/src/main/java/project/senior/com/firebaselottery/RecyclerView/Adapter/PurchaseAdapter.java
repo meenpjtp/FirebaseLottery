@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import project.senior.com.firebaselottery.DBHelper.DBHelperPurchase.DBPurchaseAdapter;
 import project.senior.com.firebaselottery.Models.PurchaseModel;
 import project.senior.com.firebaselottery.R;
 
@@ -70,21 +68,21 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.Purcha
         }
     }
 
-    public void deletePurchase(int position){
-        PurchaseModel model = listPurchase.get(position);
-        int id = model.getId();
-
-        DBPurchaseAdapter db = new DBPurchaseAdapter(context);
-        db.openDB();
-        if(db.deleteLottery(id)){
-            listPurchase.remove(position);
-            Toast.makeText(context,R.string.message_delete_complete,Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(context,"Unable To Delete",Toast.LENGTH_SHORT).show();
-        }
-        db.closeDB();
-
-        this.notifyItemRemoved(position);
-    }
+//    public void deletePurchase(int position){
+//        PurchaseModel model = listPurchase.get(position);
+//        int id = model.getId();
+//
+//        DBPurchaseAdapter db = new DBPurchaseAdapter(context);
+//        db.openDB();
+//        if(db.deleteLottery(id)){
+//            listPurchase.remove(position);
+//            Toast.makeText(context,R.string.message_delete_complete,Toast.LENGTH_SHORT).show();
+//
+//        } else {
+//            Toast.makeText(context,"Unable To Delete",Toast.LENGTH_SHORT).show();
+//        }
+//        db.closeDB();
+//
+//        this.notifyItemRemoved(position);
+//    }
 }
