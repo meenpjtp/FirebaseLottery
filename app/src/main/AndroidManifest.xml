@@ -41,7 +41,7 @@
             android:parentActivityName=".Activities.ModePurchase.ModePurchaseActivity" />
         <activity android:name=".Activities.ModePurchase.SummaryPurchaseActivity" />
         <activity
-            android:name=".Activities.ModeSimulation.SimStatActivity"
+            android:name=".Activities.ModeSimulation.SummarySimulationActivity"
             android:parentActivityName=".Activities.ModeSimulation.ModeSimulationActivity" />
         <activity android:name=".Activities.DontUse.DisplayImageLotteryActivity" />
     </application>

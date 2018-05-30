@@ -2,7 +2,7 @@ package project.senior.com.firebaselottery.Models;
 
 public class SimulationModel {
 
-    private int id;
+    private String id;
     private String lottery_date;
     private String lottery_number;
     private String lottery_amount;
@@ -13,6 +13,16 @@ public class SimulationModel {
     public SimulationModel() {
     }
 
+    public SimulationModel(String id, String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status, String lottery_value) {
+        this.id = id;
+        this.lottery_date = lottery_date;
+        this.lottery_number = lottery_number;
+        this.lottery_amount = lottery_amount;
+        this.lottery_paid = lottery_paid;
+        this.lottery_status = lottery_status;
+        this.lottery_value = lottery_value;
+    }
+
     public String getLottery_value() {
         return lottery_value;
     }
@@ -21,11 +31,11 @@ public class SimulationModel {
         this.lottery_value = lottery_value;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

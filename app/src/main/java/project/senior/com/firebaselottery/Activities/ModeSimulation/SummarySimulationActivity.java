@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import project.senior.com.firebaselottery.R;
 
-public class SimStatActivity extends AppCompatActivity {
+public class SummarySimulationActivity extends AppCompatActivity {
 
     private PieChart sim_pieChart;
     private Date date;
@@ -20,7 +20,7 @@ public class SimStatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stat_simulation);
+        setContentView(R.layout.activity_summary_simulation);
 
 //        mPresenter = new SimStatTypeActivityPresenter(this, this.getApplicationContext());
 

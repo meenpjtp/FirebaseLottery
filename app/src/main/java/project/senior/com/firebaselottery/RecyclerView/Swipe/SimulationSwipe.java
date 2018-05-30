@@ -62,7 +62,7 @@ public class SimulationSwipe extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        adapter.deleteSimulation(viewHolder.getAdapterPosition());
+//        adapter.deleteSimulation(viewHolder.getAdapterPosition());
     }
 
     public interface SimulationSwipeListener{
