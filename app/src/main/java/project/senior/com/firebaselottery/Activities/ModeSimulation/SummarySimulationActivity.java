@@ -2,8 +2,8 @@ package project.senior.com.firebaselottery.Activities.ModeSimulation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,24 +24,31 @@ import project.senior.com.firebaselottery.R;
 
 public class SummarySimulationActivity extends AppCompatActivity {
 
-    private TextView sim_amountLotteryTextView, sim_winTextView, sim_didNotWinTextView, sim_totalAmountTextView;
+    private TextView sim_amountLotteryTextView, sim_winTextView, sim_didNotWinTextView, sim_totalPaidTextView;
     private DatabaseReference refLottery, refModeSimulation;
+    private Toolbar sim_toolbar;
     int win = 0;
     int didNotWin = 0;
-
+    int totalLottery = 0;
+    int totalPaid = 0;
+    private final int PRICE = 80;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary_simulation);
 
-        setupPieChart();
-
         //Initial View
         sim_amountLotteryTextView = (TextView) findViewById(R.id.sim_amountLotteryTextView);
         sim_winTextView = (TextView) findViewById(R.id.sim_winTextView);
         sim_didNotWinTextView = (TextView) findViewById(R.id.sim_didNotWinTextView);
-        sim_totalAmountTextView = (TextView) findViewById(R.id.sim_totalAmountTextView);
+        sim_totalPaidTextView = (TextView) findViewById(R.id.sim_totalPaidTextView);
+        sim_toolbar = (Toolbar) findViewById(R.id.sim_toolbar);
+
+        // Display Button Back To ModeSimulationActivity
+        setSupportActionBar(sim_toolbar);
+        getSupportActionBar().setTitle("สรุปผลโหมดจำลอง");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Firebase
         refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
@@ -65,46 +73,88 @@ public class SummarySimulationActivity extends AppCompatActivity {
                         //Did not win
                         boolean did_notWin = data.child("lottery_status").getValue().toString().equals("ไม่ถูกรางวัล");
 
+//                        int win = 0;
+//                        int didNotWin = 0;
+
                         if(first_prize == true){
                             win+=1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if(second_prize == true){
                             win+=1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if(third_prize == true){
                             win+= 1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if(fourth_prize == true){
                             win+=1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if(fifth_prize == true){
                             win+=1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if(last_2 == true){
                             win+=1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if(first_3 == true){
                             win+=1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if (last_3 == true){
                             win+=1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if(near_1 == true){
                             win+=1;
+                            totalLottery+=1;
                             sim_winTextView.setText(String.valueOf(win));
 
                         } if(did_notWin == true){
                             didNotWin += 1;
+                            totalLottery+=1;
                             sim_didNotWinTextView.setText(String.valueOf(didNotWin));
                         }
+
+                        sim_amountLotteryTextView.setText(String.valueOf(totalLottery));
+
+                        // Display Amount You Paid
+                        DecimalFormat comma = new DecimalFormat("###,###,###");
+                        int paid = Integer.parseInt(data.child("lottery_amount").getValue().toString());
+                        totalPaid += paid;
+                        sim_totalPaidTextView.setText(String.valueOf(comma.format(totalPaid*PRICE)));
+
+                        // Display Pie Chart
+                        int[] type = {win, didNotWin};
+                        String[] str = {"ถูกรางวัล", "ไม่ถูกรางวัล"};
+
+//                        Log.i("gggg", String.valueOf(type));
+
+                        List<PieEntry> pieEntries = new ArrayList<>();
+                        for(int i = 0; i < type.length; i++){
+                            pieEntries.add(new PieEntry(type[i], str[i]));
+                        }
+
+
+                        PieDataSet dataSet = new PieDataSet(pieEntries, "เปอร์เซ็นต์");
+                        PieData data1 = new PieData(dataSet);
+                        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
+                        PieChart sim_pieChart = (PieChart) findViewById(R.id.sim_pieChart);
+                        sim_pieChart.setData(data1);
+                        sim_pieChart.animateY(1000);
+                        sim_pieChart.invalidate();
 
                     }
                 }
@@ -116,28 +166,44 @@ public class SummarySimulationActivity extends AppCompatActivity {
             }
         });
 
+//        sim_pieChart = (PieChart) findViewById(R.id.sim_pieChart);
+//        data = new ArrayList<>();
+//        data.add(new ChartData("win", win));
+//        data.add(new ChartData("did not win", 2));
+//
+//        data1 = new ArrayList<>();
+//        data1.add(new ChartData("win", 10, Color.BLACK));
+//        data1.add(new ChartData("did not win", 2, Color.BLACK));
+//        data1.add(new ChartData("did not win", 10, Color.BLACK));
+//        data1.add(new ChartData("win", 2, Color.BLACK));
+//        data1.add(new ChartData("did not win", 10, Color.BLACK));
+//
+//
+//        sim_pieChart.setChartData(data1);
+
     }
 
-    private void setupPieChart(){
-        int[] type = {win, didNotWin};
-        String[] str = {"Win", "Did not win"};
-
-        Log.i("gggg", String.valueOf(type));
-
-        List<PieEntry> pieEntries = new ArrayList<>();
-        for(int i = 0; i < type.length; i++){
-            pieEntries.add(new PieEntry(type[i], str[i]));
-        }
-
-
-        PieDataSet dataSet = new PieDataSet(pieEntries, "Percentage");
-        PieData data = new PieData(dataSet);
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-
-        PieChart sim_pieChart = (PieChart) findViewById(R.id.sim_pieChart);
-        sim_pieChart.setData(data);
-        sim_pieChart.animateY(1000);
-        sim_pieChart.invalidate();
-    }
+//    private void setupPieChart(){
+//
+//        int[] type = {win, didNotWin};
+//        String[] str = {"Win", "Did not win"};
+//
+//        Log.i("gggg", String.valueOf(type));
+//
+//        List<PieEntry> pieEntries = new ArrayList<>();
+//        for(int i = 0; i < type.length; i++){
+//            pieEntries.add(new PieEntry(type[i], str[i]));
+//        }
+//
+//
+//        PieDataSet dataSet = new PieDataSet(pieEntries, "Percentage");
+//        PieData data = new PieData(dataSet);
+//        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+//
+//        PieChart sim_pieChart = (PieChart) findViewById(R.id.sim_pieChart);
+//        sim_pieChart.setData(data);
+//        sim_pieChart.animateY(1000);
+//        sim_pieChart.invalidate();
+//    }
 
 }

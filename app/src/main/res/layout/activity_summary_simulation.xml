@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginStart="15dp"
-    android:layout_marginTop="15dp"
-    android:layout_marginEnd="15dp"
-    android:layout_marginBottom="15dp"
     tools:context="project.senior.com.firebaselottery.Activities.ModeSimulation.SummarySimulationActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/sim_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_stat_mode_sim"
-            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +87,7 @@
                 android:text="@string/text_amount_paid_lottery"
                 android:layout_marginEnd="10dp"/>
             <TextView
-                android:id="@+id/sim_totalAmountTextView"
+                android:id="@+id/sim_totalPaidTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -95,8 +98,10 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/sim_pieChart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
 
     </com.github.mikephil.charting.charts.PieChart>
 

@@ -18,7 +18,7 @@
     <string name="text_paid">จำนวนเงิน :</string>
     <string name="text_status">สถานะ</string>
     <string name="text_static_lottery">สถิติการตรวจล็อตเตอรี่</string>
-    <string name="text_amount_lottery">จำนวนสลากที่ตรวจ</string>
+    <string name="text_amount_lottery">จำนวนเลขที่ตรวจ</string>
     <string name="text_win_lottery">ถูกรางวัล</string>
     <string name="text_did_not_win_lottery">ไม่ถูกรางวัล</string>
     <string name="text_amount_paid_lottery">จำนวนเงินค่าสลากทั้งหมด</string>
@@ -31,7 +31,7 @@
     <string name="text_baht">บาท</string>
     <string name="text_summary">สรุปผล</string>
     <string name="text_add">เพิ่มล็อตเตอรี่</string>
-    <string name="text_stat_mode_sim">สถิติโหมดจำลอง</string>
+    <string name="text_summary_mode_sim">สรุปผลโหมดจำลอง</string>
 
 
     <string name="error_message_length">กรุณากรอกตัวเลขให้ครบ 6 หลัก</string>
