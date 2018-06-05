@@ -3,6 +3,7 @@ package project.senior.com.firebaselottery.Activities.ModePurchase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -136,8 +137,12 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
                         totalPaid += paid;
                         pur_totalPaidTextView.setText(String.valueOf(comma.format(totalPaid*PRICE)));
 
+                        int percentage_win = (win * 100) / (win + didNotWin);
+                        int percentage_didNotWin = (didNotWin * 100)/ (win + didNotWin);
+                        Log.i("gggg", String.valueOf(percentage_win));
+
                         // Display Pie Chart
-                        int[] type = {win, didNotWin};
+                        int[] type = {percentage_win , percentage_didNotWin};
                         String[] str = {"ถูกรางวัล", "ไม่ถูกรางวัล"};
 
 //                        Log.i("gggg", String.valueOf(type));
@@ -148,7 +153,7 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
                         }
 
 
-                        PieDataSet dataSet = new PieDataSet(pieEntries, "เปอร์เซ็นต์");
+                        PieDataSet dataSet = new PieDataSet(pieEntries, "หน่วย : เปอร์เซ็นต์");
                         PieData data1 = new PieData(dataSet);
                         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 

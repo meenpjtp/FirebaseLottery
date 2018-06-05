@@ -270,7 +270,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                 // change 5 -> 173
                                 if(countFalse ==152){
                                     model = new SimulationModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , "ไม่ถูกรางวัล", "-");
+                                            , "ไม่ถูกรางวัล", "0");
                                     refModeSimulation.child(id).setValue(model);
 
                                     Log.i("testCountFalse", String.valueOf(countFalse));

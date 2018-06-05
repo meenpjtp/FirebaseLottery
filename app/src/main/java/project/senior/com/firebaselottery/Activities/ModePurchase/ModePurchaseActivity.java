@@ -18,6 +18,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import project.senior.com.firebaselottery.FirebaseHelper.FBAdapter.ModePurchaseAdapter;
 import project.senior.com.firebaselottery.FirebaseHelper.FBHelper.ModePurchaseHelper;
@@ -112,7 +113,7 @@ public class ModePurchaseActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.menu_toolbar,menu);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.m_search));
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
         searchView.setQueryHint(getString(R.string.text_search_date));
@@ -126,6 +127,7 @@ public class ModePurchaseActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String s) {
 //                searchItem(s);
+
                 return false;
             }
         });
@@ -142,6 +144,11 @@ public class ModePurchaseActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void firebaseSearch (String searchText){
+        Query fbSearch = refModePurchase.orderByChild("lottery_date").startAt(searchText).endAt(searchText + "\uf8ff");
+
     }
 }
 

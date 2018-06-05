@@ -143,6 +143,18 @@ public class ModeSimulationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+//    private void firebaseSearch (String searchText){
+//        Query fbSearch = refModeSimulation.orderByChild("lottery_date").startAt(searchText).endAt(searchText + "\uf8ff");
+//        ModeSimulationAdapter<SimulationModel, ModeSimulationHolder> a = new ModeSimulationAdapter<SimulationModel, ModeSimulationHolder>(
+//                SimulationModel.class,
+//                R.layout.item_simulation_list,
+//                fbSearch
+//        ){
+//
+//        }
+//
+//    }
+
 }
 
 // SQLite

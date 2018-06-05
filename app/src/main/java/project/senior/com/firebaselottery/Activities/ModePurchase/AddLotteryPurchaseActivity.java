@@ -273,7 +273,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
                                 if(countFalse ==152){
 
                                     model = new PurchaseModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , "ไม่ถูกรางวัล", "-");
+                                            , "ไม่ถูกรางวัล", "0");
                                     refModePurchase.child(id).setValue(model);
 //                                    clear();
                                     Log.i("testCountFalse", String.valueOf(countFalse));

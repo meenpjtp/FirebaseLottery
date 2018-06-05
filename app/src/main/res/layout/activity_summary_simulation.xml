@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_amount_lottery"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="60dp"/>
             <TextView
                 android:id="@+id/sim_amountLotteryTextView"
                 android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_win_lottery"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="110dp"/>
             <TextView
                 android:id="@+id/sim_winTextView"
                 android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_did_not_win_lottery"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="90dp"/>
             <TextView
                 android:id="@+id/sim_didNotWinTextView"
                 android:layout_width="wrap_content"
@@ -89,9 +89,31 @@
             <TextView
                 android:id="@+id/sim_totalPaidTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="บาท"/>
 
         </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="จำนวนเงินรางวัลที่ถูก"-->
+                <!--android:layout_marginEnd="90dp"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/sim_valueTextView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+
+        <!--</LinearLayout>-->
 
 
     </LinearLayout>

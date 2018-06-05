@@ -2,8 +2,9 @@ package project.senior.com.firebaselottery.Activities.ModeSimulation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -24,13 +25,14 @@ import project.senior.com.firebaselottery.R;
 
 public class SummarySimulationActivity extends AppCompatActivity {
 
-    private TextView sim_amountLotteryTextView, sim_winTextView, sim_didNotWinTextView, sim_totalPaidTextView;
+    private TextView sim_amountLotteryTextView, sim_winTextView, sim_didNotWinTextView, sim_totalPaidTextView, sim_valueTextView;
     private DatabaseReference refLottery, refModeSimulation;
     private Toolbar sim_toolbar;
     int win = 0;
     int didNotWin = 0;
     int totalLottery = 0;
     int totalPaid = 0;
+    int totalValue =0 ;
     private final int PRICE = 80;
 
     @Override
@@ -43,6 +45,7 @@ public class SummarySimulationActivity extends AppCompatActivity {
         sim_winTextView = (TextView) findViewById(R.id.sim_winTextView);
         sim_didNotWinTextView = (TextView) findViewById(R.id.sim_didNotWinTextView);
         sim_totalPaidTextView = (TextView) findViewById(R.id.sim_totalPaidTextView);
+//        sim_valueTextView = (TextView) findViewById(R.id.sim_valueTextView);
         sim_toolbar = (Toolbar) findViewById(R.id.sim_toolbar);
 
         // Display Button Back To ModeSimulationActivity
@@ -135,11 +138,21 @@ public class SummarySimulationActivity extends AppCompatActivity {
                         totalPaid += paid;
                         sim_totalPaidTextView.setText(String.valueOf(comma.format(totalPaid*PRICE)));
 
+                        float percentage_win = (win * 100) / (win + didNotWin);
+                        float percentage_didNotWin = (didNotWin * 100)/ (win + didNotWin);
+                        Log.i("gggg", String.valueOf(percentage_win));
+
+
                         // Display Pie Chart
-                        int[] type = {win, didNotWin};
+                        float[] type = {percentage_win, percentage_didNotWin};
                         String[] str = {"ถูกรางวัล", "ไม่ถูกรางวัล"};
 
-//                        Log.i("gggg", String.valueOf(type));
+                        //Display lottery_value
+//                        String v = String.valueOf(data.child("lottery_value").getValue().toString().split(",")).toString();
+//                        int value = Integer.parseInt(v);
+//                        totalValue += value;
+//                        Log.i("gggg", v);
+//                        sim_valueTextView.setText(String.valueOf(comma.format(totalValue)));
 
                         List<PieEntry> pieEntries = new ArrayList<>();
                         for(int i = 0; i < type.length; i++){
@@ -147,7 +160,7 @@ public class SummarySimulationActivity extends AppCompatActivity {
                         }
 
 
-                        PieDataSet dataSet = new PieDataSet(pieEntries, "เปอร์เซ็นต์");
+                        PieDataSet dataSet = new PieDataSet(pieEntries, "หน่วย : เปอร์เซ็นต์");
                         PieData data1 = new PieData(dataSet);
                         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
