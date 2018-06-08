@@ -26,7 +26,7 @@ import project.senior.com.firebaselottery.R;
 public class SummaryPurchaseActivity extends AppCompatActivity {
 
     private TextView pur_amountLotteryTextView, pur_winTextView, pur_didNotWinTextView,
-            pur_totalPaidTextView, pur_totalValueTextView, sim_profitTextView, sim_lossTextView;
+            pur_totalPaidTextView, pur_totalValueTextView, pur_profitTextView, pur_lossTextView;
     private Toolbar pur_toolbar;
     private final int PRICE = 80;
     private DatabaseReference refLottery, refModePurchase;
@@ -35,6 +35,7 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
     int didNotWin = 0;
     int totalLottery = 0;
     int totalPaid = 0;
+    int totalValue =0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
         pur_totalPaidTextView = (TextView) findViewById(R.id.pur_totalPaidTextView);
         pur_toolbar = (Toolbar) findViewById(R.id.pur_toolbar);
         pur_totalValueTextView = (TextView) findViewById(R.id.pur_totalValueTextView);
+        pur_profitTextView = (TextView) findViewById(R.id.pur_profitTextView);
+        pur_lossTextView = (TextView) findViewById(R.id.pur_lossTextView);
 
         // Display Button Back To ModeSimulationActivity
         setSupportActionBar(pur_toolbar);
@@ -77,8 +80,10 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
                         //Did not win
                         boolean did_notWin = data.child("lottery_status").getValue().toString().equals("ไม่ถูกรางวัล");
 
-//                        int win = 0;
-//                        int didNotWin = 0;
+                        if(win == 0 || didNotWin == 0){
+                            pur_winTextView.setText("-");
+                            pur_didNotWinTextView.setText("-");
+                        }
 
                         if(first_prize == true){
                             win+=1;
@@ -144,8 +149,20 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
                         Log.i("gggg", String.valueOf(percentage_win));
 
                         //Display Profit and Loss
-                        int total_value = Integer.parseInt(data.child("lottery_value").getValue().toString());
-                        pur_totalValueTextView.setText(String.valueOf(total_value));
+                        int total_value = Integer.parseInt(data.child("value").getValue().toString());
+                        totalValue += total_value;
+                        int total_paid = totalPaid * PRICE;
+                        pur_totalValueTextView.setText(String.valueOf(comma.format(total_paid)));
+
+                        int profit_loss = totalValue - total_paid;
+                        if(totalValue - total_paid >= 0){
+                            pur_profitTextView.setText(String.valueOf(comma.format(profit_loss)));
+                            pur_lossTextView.setText("-");
+                        } else {
+                            pur_lossTextView.setText(String.valueOf(comma.format(profit_loss)));
+                            pur_profitTextView.setText("-");
+
+                        }
 
                         // Display Pie Chart
                         int[] type = {percentage_win , percentage_didNotWin};
@@ -154,8 +171,6 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
                         for(int i = 0; i < type.length; i++){
                             pieEntries.add(new PieEntry(type[i], str[i]));
                         }
-
-
                         PieDataSet dataSet = new PieDataSet(pieEntries, "หน่วย : เปอร์เซ็นต์");
                         PieData data1 = new PieData(dataSet);
                         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);

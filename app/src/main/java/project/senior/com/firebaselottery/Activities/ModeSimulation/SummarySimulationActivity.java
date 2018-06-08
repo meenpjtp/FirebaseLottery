@@ -79,8 +79,10 @@ public class SummarySimulationActivity extends AppCompatActivity {
                         //Did not win
                         boolean did_notWin = data.child("lottery_status").getValue().toString().equals("ไม่ถูกรางวัล");
 
-//                        int win = 0;
-//                        int didNotWin = 0;
+                        if(win == 0 || didNotWin == 0){
+                            sim_winTextView.setText("-");
+                            sim_didNotWinTextView.setText("-");
+                        }
 
                         if(first_prize == true){
                             win+=1;

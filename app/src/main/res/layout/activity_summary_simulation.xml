@@ -31,10 +31,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_amount_lottery"
-                android:layout_marginEnd="60dp"/>
+                android:layout_marginEnd="10dp"/>
             <TextView
                 android:id="@+id/sim_amountLotteryTextView"
                 android:layout_width="wrap_content"
@@ -48,10 +48,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_win_lottery"
-                android:layout_marginEnd="110dp"/>
+                android:layout_marginEnd="10dp"/>
             <TextView
                 android:id="@+id/sim_winTextView"
                 android:layout_width="wrap_content"
@@ -65,10 +65,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_did_not_win_lottery"
-                android:layout_marginEnd="90dp"/>
+                android:layout_marginEnd="10dp"/>
             <TextView
                 android:id="@+id/sim_didNotWinTextView"
                 android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_amount_paid_lottery"
                 android:layout_marginEnd="10dp"/>
@@ -104,7 +104,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_total_value"
                 android:layout_marginEnd="10dp"/>
@@ -126,19 +126,22 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_profit"
+                android:textColor="@color/colorProfit"
                 android:layout_marginEnd="10dp"/>
             <TextView
                 android:id="@+id/sim_profitTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp" />
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/colorProfit" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="บาท"/>
+                android:text="บาท"
+                android:textColor="@color/colorProfit" />
 
         </LinearLayout>
 
@@ -148,19 +151,22 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_loss"
+                android:textColor="@color/colorLoss"
                 android:layout_marginEnd="10dp"/>
             <TextView
                 android:id="@+id/sim_lossTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp" />
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/colorLoss" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="บาท"/>
+                android:text="บาท"
+                android:textColor="@color/colorLoss" />
 
         </LinearLayout>
 
