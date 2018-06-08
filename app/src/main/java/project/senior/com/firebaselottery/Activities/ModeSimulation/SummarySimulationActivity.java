@@ -25,7 +25,8 @@ import project.senior.com.firebaselottery.R;
 
 public class SummarySimulationActivity extends AppCompatActivity {
 
-    private TextView sim_amountLotteryTextView, sim_winTextView, sim_didNotWinTextView, sim_totalPaidTextView, sim_valueTextView;
+    private TextView sim_amountLotteryTextView, sim_winTextView, sim_didNotWinTextView, sim_totalPaidTextView,
+            sim_totalValueTextView, sim_profitTextView, sim_lossTextView;
     private DatabaseReference refLottery, refModeSimulation;
     private Toolbar sim_toolbar;
     int win = 0;
@@ -45,8 +46,10 @@ public class SummarySimulationActivity extends AppCompatActivity {
         sim_winTextView = (TextView) findViewById(R.id.sim_winTextView);
         sim_didNotWinTextView = (TextView) findViewById(R.id.sim_didNotWinTextView);
         sim_totalPaidTextView = (TextView) findViewById(R.id.sim_totalPaidTextView);
-//        sim_valueTextView = (TextView) findViewById(R.id.sim_valueTextView);
+        sim_totalValueTextView = (TextView) findViewById(R.id.sim_totalValueTextView);
         sim_toolbar = (Toolbar) findViewById(R.id.sim_toolbar);
+        sim_profitTextView = (TextView) findViewById(R.id.sim_profitTextView);
+        sim_lossTextView = (TextView) findViewById(R.id.sim_lossTextView);
 
         // Display Button Back To ModeSimulationActivity
         setSupportActionBar(sim_toolbar);
@@ -136,23 +139,33 @@ public class SummarySimulationActivity extends AppCompatActivity {
                         DecimalFormat comma = new DecimalFormat("###,###,###");
                         int paid = Integer.parseInt(data.child("lottery_amount").getValue().toString());
                         totalPaid += paid;
-                        sim_totalPaidTextView.setText(String.valueOf(comma.format(totalPaid*PRICE)));
+                        int total_paid = totalPaid * PRICE;
+                        sim_totalPaidTextView.setText(String.valueOf(comma.format(total_paid)));
 
                         float percentage_win = (win * 100) / (win + didNotWin);
                         float percentage_didNotWin = (didNotWin * 100)/ (win + didNotWin);
                         Log.i("gggg", String.valueOf(percentage_win));
 
+                        //Display Profit and Loss
+                        int total_value = Integer.parseInt(data.child("value").getValue().toString());
+                        totalValue += total_value;
+                        sim_totalValueTextView.setText(String.valueOf(comma.format(totalValue)));
+
+                        int profit_loss = totalValue - total_paid;
+                        if(totalValue - total_paid >= 0){
+                            sim_profitTextView.setText(String.valueOf(comma.format(profit_loss)));
+                            sim_lossTextView.setText("-");
+                        } else {
+                            sim_lossTextView.setText(String.valueOf(comma.format(profit_loss)));
+                            sim_profitTextView.setText("-");
+
+                        }
+
+
 
                         // Display Pie Chart
                         float[] type = {percentage_win, percentage_didNotWin};
                         String[] str = {"ถูกรางวัล", "ไม่ถูกรางวัล"};
-
-                        //Display lottery_value
-//                        String v = String.valueOf(data.child("lottery_value").getValue().toString().split(",")).toString();
-//                        int value = Integer.parseInt(v);
-//                        totalValue += value;
-//                        Log.i("gggg", v);
-//                        sim_valueTextView.setText(String.valueOf(comma.format(totalValue)));
 
                         List<PieEntry> pieEntries = new ArrayList<>();
                         for(int i = 0; i < type.length; i++){

@@ -222,7 +222,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
                                     // Save check lottery to database
                                     model = new SimulationModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value);
+                                            , lottery_status, lottery_value, totalValue);
                                     refModeSimulation.child(id).setValue(model);
                                     break;
                                 }
@@ -232,7 +232,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
                                     // Save check lottery to database
                                     model = new SimulationModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value);
+                                            , lottery_status, lottery_value, totalValue);
                                     refModeSimulation.child(id).setValue(model);
 
                                     break;
@@ -244,7 +244,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
                                     // Save check lottery to database
                                     model = new SimulationModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value);
+                                            , lottery_status, lottery_value, totalValue);
                                     refModeSimulation.child(id).setValue(model);
 
                                     break;
@@ -255,7 +255,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
                                     // Save check lottery to database
                                     model = new SimulationModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value);
+                                            , lottery_status, lottery_value, totalValue);
                                     refModeSimulation.child(id).setValue(model);
                                     break;
 
@@ -272,7 +272,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                 // change 5 -> 173
                                 if(countFalse ==152){
                                     model = new SimulationModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , "ไม่ถูกรางวัล", "0");
+                                            , "ไม่ถูกรางวัล", "0", 0);
                                     refModeSimulation.child(id).setValue(model);
 
                                     Log.i("testCountFalse", String.valueOf(countFalse));
@@ -285,7 +285,7 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 //                                    Snackbar.make(checkLotteryFragment, "กำลังรอผล", Snackbar.LENGTH_SHORT).show();
 
                                     model = new SimulationModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value);
+                                            , lottery_status, lottery_value, Integer.parseInt(lottery_value));
                                     refModeSimulation.child(id).setValue(model);
                                     refModeSimulation.keepSynced(true);
                                     clear();

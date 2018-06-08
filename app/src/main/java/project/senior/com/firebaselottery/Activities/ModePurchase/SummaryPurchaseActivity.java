@@ -25,7 +25,8 @@ import project.senior.com.firebaselottery.R;
 
 public class SummaryPurchaseActivity extends AppCompatActivity {
 
-    private TextView pur_amountLotteryTextView, pur_winTextView, pur_didNotWinTextView, pur_totalPaidTextView;
+    private TextView pur_amountLotteryTextView, pur_winTextView, pur_didNotWinTextView,
+            pur_totalPaidTextView, pur_totalValueTextView, sim_profitTextView, sim_lossTextView;
     private Toolbar pur_toolbar;
     private final int PRICE = 80;
     private DatabaseReference refLottery, refModePurchase;
@@ -46,6 +47,7 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
         pur_didNotWinTextView = (TextView) findViewById(R.id.pur_didNotWinTextView);
         pur_totalPaidTextView = (TextView) findViewById(R.id.pur_totalPaidTextView);
         pur_toolbar = (Toolbar) findViewById(R.id.pur_toolbar);
+        pur_totalValueTextView = (TextView) findViewById(R.id.pur_totalValueTextView);
 
         // Display Button Back To ModeSimulationActivity
         setSupportActionBar(pur_toolbar);
@@ -141,12 +143,13 @@ public class SummaryPurchaseActivity extends AppCompatActivity {
                         int percentage_didNotWin = (didNotWin * 100)/ (win + didNotWin);
                         Log.i("gggg", String.valueOf(percentage_win));
 
+                        //Display Profit and Loss
+                        int total_value = Integer.parseInt(data.child("lottery_value").getValue().toString());
+                        pur_totalValueTextView.setText(String.valueOf(total_value));
+
                         // Display Pie Chart
                         int[] type = {percentage_win , percentage_didNotWin};
                         String[] str = {"ถูกรางวัล", "ไม่ถูกรางวัล"};
-
-//                        Log.i("gggg", String.valueOf(type));
-
                         List<PieEntry> pieEntries = new ArrayList<>();
                         for(int i = 0; i < type.length; i++){
                             pieEntries.add(new PieEntry(type[i], str[i]));
