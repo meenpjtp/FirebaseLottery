@@ -185,10 +185,12 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                  *  Counting True < 5 you win!
                                  */
                                 boolean match1 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString());
-                                boolean match2 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(4,6));
-                                boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(3,6));
-                                boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(0,3));
-
+                                boolean match2 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(4,6))
+                                        && data.child("lottery_prize").getValue().toString().equals("เลขท้าย 2 ตัว");
+                                boolean match3 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(3,6))
+                                        && data.child("lottery_prize").getValue().toString().equals("เลขท้าย 3 ตัว");
+                                boolean match4 = data.child("lottery_number").getValue().toString().equals(editTextAddLottery.getText().toString().substring(0,3))
+                                        && data.child("lottery_prize").getValue().toString().equals("เลขหน้า 3 ตัว");
                                 /**
                                  * id
                                  * lottery_date
