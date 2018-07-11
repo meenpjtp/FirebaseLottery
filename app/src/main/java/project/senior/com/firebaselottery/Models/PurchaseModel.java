@@ -10,8 +10,9 @@ public class PurchaseModel {
     private String lottery_status;
     private String lottery_value;
     private int value;
+    private String timeStamp;
 
-    public PurchaseModel(String id, String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status, String lottery_value, int value) {
+    public PurchaseModel(String id, String lottery_date, String lottery_number, String lottery_amount, String lottery_paid, String lottery_status, String lottery_value, int value, String timeStamp) {
         this.id = id;
         this.lottery_date = lottery_date;
         this.lottery_number = lottery_number;
@@ -20,9 +21,18 @@ public class PurchaseModel {
         this.lottery_status = lottery_status;
         this.lottery_value = lottery_value;
         this.value = value;
+        this.timeStamp = timeStamp;
     }
 
     public PurchaseModel() {
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public int getValue() {

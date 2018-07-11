@@ -26,7 +26,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import project.senior.com.firebaselottery.FirebaseHelper.FBHelper.ModePurchaseHelper;
@@ -219,12 +221,14 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
                                 String lottery_status = data.child("lottery_prize").getValue().toString();
                                 String lottery_value = comma.format(totalValue);
 
+                                String timeStamp = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+
                                 // 1st prize | 2nd prize | 3rd prize | 4th prize | 5th prize
                                 if(match1 == true){
 
                                     // Save check lottery to database
                                     model = new PurchaseModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value, totalValue);
+                                            , lottery_status, lottery_value, totalValue, timeStamp);
                                     refModePurchase.child(id).setValue(model);
                                     break;
                                 }
@@ -234,7 +238,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
                                     // Save check lottery to database
                                     model = new PurchaseModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value, totalValue);
+                                            , lottery_status, lottery_value, totalValue, timeStamp);
                                     refModePurchase.child(id).setValue(model);
 
                                     break;
@@ -246,7 +250,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
                                     // Save check lottery to database
                                     model = new PurchaseModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value, totalValue);
+                                            , lottery_status, lottery_value, totalValue, timeStamp);
                                     refModePurchase.child(id).setValue(model);
                                     break;
                                 }
@@ -256,7 +260,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
                                     // Save check lottery to database
                                     model = new PurchaseModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value, totalValue);
+                                            , lottery_status, lottery_value, totalValue, timeStamp);
                                     refModePurchase.child(id).setValue(model);
 
                                     break;
@@ -275,7 +279,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
                                 if(countFalse ==152){
 
                                     model = new PurchaseModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , "ไม่ถูกรางวัล", "0", 0);
+                                            , "ไม่ถูกรางวัล", "0", 0, timeStamp);
                                     refModePurchase.child(id).setValue(model);
 //                                    clear();
                                     Log.i("testCountFalse", String.valueOf(countFalse));
@@ -288,7 +292,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 //                                    Snackbar.make(checkLotteryFragment, "กำลังรอผล", Snackbar.LENGTH_SHORT).show();
 
                                     model = new PurchaseModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
-                                            , lottery_status, lottery_value, Integer.parseInt(lottery_value));
+                                            , lottery_status, lottery_value, Integer.parseInt(lottery_value), timeStamp);
                                     refModePurchase.child(id).setValue(model);
                                     clear();
                                     break;

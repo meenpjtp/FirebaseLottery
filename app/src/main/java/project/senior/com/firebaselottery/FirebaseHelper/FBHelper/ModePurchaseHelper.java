@@ -23,6 +23,7 @@ public class ModePurchaseHelper {
         refModePurchase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 fetchData(dataSnapshot);
             }
 

@@ -1,9 +1,7 @@
 package project.senior.com.firebaselottery.Activities.ModePurchase;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,13 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import project.senior.com.firebaselottery.FirebaseHelper.FBAdapter.ModePurchaseAdapter;
 import project.senior.com.firebaselottery.FirebaseHelper.FBHelper.ModePurchaseHelper;
@@ -38,7 +34,7 @@ public class ModePurchaseActivity extends AppCompatActivity {
     //Firebase
     ModePurchaseHelper helper;
     ModePurchaseAdapter adapter;
-    DatabaseReference refLottery, refModePurchase;
+    DatabaseReference refLottery, refModePurchase1, refModePurchase2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +45,8 @@ public class ModePurchaseActivity extends AppCompatActivity {
 
         //Firebase
         refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-        refModePurchase = refLottery.child("ModePurchase");
-        helper = new ModePurchaseHelper(refModePurchase);
+        refModePurchase1 = refLottery.child("ModePurchase");
+        helper = new ModePurchaseHelper(refModePurchase1);
         adapter = new ModePurchaseAdapter(this, helper.retrieveData());
         helper.retrieveData();
 
@@ -107,30 +103,32 @@ public class ModePurchaseActivity extends AppCompatActivity {
 //        helper.attachToRecyclerView(recyclerviewPurchase);
     }
 
+
+
     //Menu SearchView
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_toolbar,menu);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.m_search));
-        final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setQueryHint(getString(R.string.text_search_date));
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-//                searchItem(s);
-
-                return false;
-            }
-        });
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.m_search));
+//        final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//        searchView.setSubmitButtonEnabled(true);
+//        searchView.setQueryHint(getString(R.string.text_search_date));
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+////                searchItem(s);
+//
+//                return false;
+//            }
+//        });
         return true;
 
     }
@@ -139,6 +137,8 @@ public class ModePurchaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.m_refresh:
+
+                refModePurchase1.orderByChild("timeStamp");
                 recyclerviewPurchase.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
@@ -146,10 +146,8 @@ public class ModePurchaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void firebaseSearch (String searchText){
-        Query fbSearch = refModePurchase.orderByChild("lottery_date").startAt(searchText).endAt(searchText + "\uf8ff");
 
-    }
+
 }
 
 // Update list history to recyclerview

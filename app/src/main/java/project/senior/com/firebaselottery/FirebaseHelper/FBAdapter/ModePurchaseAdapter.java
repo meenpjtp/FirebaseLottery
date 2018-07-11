@@ -22,6 +22,7 @@ public class ModePurchaseAdapter extends RecyclerView.Adapter<ModePurchaseHolder
         this.purchaseModels = purchaseModels;
     }
 
+
     @Override
     public ModePurchaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(c).inflate(R.layout.item_purchase_list, parent, false);
