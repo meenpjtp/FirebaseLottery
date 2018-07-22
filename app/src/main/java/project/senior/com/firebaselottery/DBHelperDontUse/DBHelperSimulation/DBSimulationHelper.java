@@ -1,21 +1,20 @@
-package project.senior.com.firebaselottery.DBHelper.DBHelperHistory;
-
+package project.senior.com.firebaselottery.DBHelperDontUse.DBHelperSimulation;
 
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHistoryHelper extends SQLiteOpenHelper {
+public class DBSimulationHelper extends SQLiteOpenHelper {
 
-    public DBHistoryHelper(Context context){
-        super(context, ConstantsHistory.DB_NAME, null, ConstantsHistory.DB_VERSION);
+    public DBSimulationHelper(Context context){
+        super(context, ConstantsSimulation.DB_NAME, null, ConstantsSimulation.DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
-            sqLiteDatabase.execSQL(ConstantsHistory.CREATE_TB);
+            sqLiteDatabase.execSQL(ConstantsSimulation.CREATE_TB);
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -24,7 +23,7 @@ public class DBHistoryHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL(ConstantsHistory.DROP_TB);
+        sqLiteDatabase.execSQL(ConstantsSimulation.DROP_TB);
         onCreate(sqLiteDatabase);
     }
 }

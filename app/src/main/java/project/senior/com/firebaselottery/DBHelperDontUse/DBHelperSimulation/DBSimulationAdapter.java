@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.DBHelper.DBHelperSimulation;
+package project.senior.com.firebaselottery.DBHelperDontUse.DBHelperSimulation;
 
 import android.content.ContentValues;
 import android.content.Context;

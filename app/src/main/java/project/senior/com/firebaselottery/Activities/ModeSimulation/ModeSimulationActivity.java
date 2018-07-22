@@ -65,20 +65,12 @@ public class ModeSimulationActivity extends AppCompatActivity {
 
     private void initObjects(){
 
-//        listModel = new ArrayList<>();
-//        adapter = new SimulationAdapter(this,listModel);
-
         // RecyclerView
         recyclerviewSimulation = (RecyclerView) findViewById(R.id.recyclerviewSimulation);
         recyclerviewSimulation.setLayoutManager(new LinearLayoutManager(this));
         recyclerviewSimulation.setItemAnimator(new DefaultItemAnimator());
         recyclerviewSimulation.setHasFixedSize(true);
         recyclerviewSimulation.setAdapter(adapter);
-
-        // RecyclerView Swipe To Delete
-//        ItemTouchHelper.Callback callback = new SimulationSwipe(adapter);
-//        ItemTouchHelper helper = new ItemTouchHelper(callback);
-//        helper.attachToRecyclerView(recyclerviewSimulation);
 
         //Floating Action Button
         sim_fabStat = (FloatingActionButton) findViewById(R.id.sim_fabStat);
@@ -107,24 +99,6 @@ public class ModeSimulationActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_toolbar,menu);
-//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.m_search));
-//        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//        searchView.setSubmitButtonEnabled(true);
-//        searchView.setQueryHint(getString(R.string.text_search_date));
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-////                searchItem(s);
-//                return false;
-//            }
-//        });
         return true;
 
     }
@@ -140,17 +114,6 @@ public class ModeSimulationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void firebaseSearch (String searchText){
-//        Query fbSearch = refModeSimulation.orderByChild("lottery_date").startAt(searchText).endAt(searchText + "\uf8ff");
-//        ModeSimulationAdapter<SimulationModel, ModeSimulationHolder> a = new ModeSimulationAdapter<SimulationModel, ModeSimulationHolder>(
-//                SimulationModel.class,
-//                R.layout.item_simulation_list,
-//                fbSearch
-//        ){
-//
-//        }
-//
-//    }
 
 }
 

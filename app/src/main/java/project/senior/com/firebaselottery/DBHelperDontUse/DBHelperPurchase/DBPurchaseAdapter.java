@@ -1,11 +1,9 @@
-package project.senior.com.firebaselottery.DBHelper.DBHelperPurchase;
+package project.senior.com.firebaselottery.DBHelperDontUse.DBHelperPurchase;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import project.senior.com.firebaselottery.DBHelper.DBHelperSimulation.ConstantsSimulation;
 
 public class DBPurchaseAdapter {
 

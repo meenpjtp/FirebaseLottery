@@ -53,16 +53,11 @@ public class CheckLotteryFragment extends Fragment {
     private Button buttonSelect;
     private RecyclerView recyclerViewCheckLottery;
 
-    // SQLite Don't use
-//    private ArrayList<HistoryModel> listHistory;
-//    HistoryAdapter adapter;
-
     // Firebase
     private HistoryModel historyModel;
     DatabaseReference refLottery, refCheck, refDate, refResult;
     private CheckLotteryHelper helper;
     private CheckLotteryAdapter lotteryAdapter;
-
 
     int countFalse = 0;
 
@@ -104,15 +99,11 @@ public class CheckLotteryFragment extends Fragment {
 
         getViewComponents();
         setRecyclerView();
-//        setFirebase();
-
     }
 
     private void setRecyclerView() {
 
         recyclerViewCheckLottery = (RecyclerView) getView().findViewById(R.id.recyclerViewCheckLottery);
-//        listHistory = new ArrayList<>();
-//        adapter = new HistoryAdapter(getContext(), listHistory);
 
         recyclerViewCheckLottery.setHasFixedSize(true);
         RecyclerView.LayoutManager LM = new LinearLayoutManager(getContext());
@@ -120,25 +111,7 @@ public class CheckLotteryFragment extends Fragment {
         recyclerViewCheckLottery.setItemAnimator(new DefaultItemAnimator());
         recyclerViewCheckLottery.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
-        // RecyclerView Swipe To Delete
-//        ItemTouchHelper.Callback callback = new HistorySwipe(adapter);
-//        ItemTouchHelper helper = new ItemTouchHelper(callback);
-//        helper.attachToRecyclerView(recyclerViewCheckLottery);
-
     }
-
-//    private void setFirebase(){
-//        historyModel = new HistoryModel();
-//        helper = new CheckLotteryHelper(refCheck); // Insert data to Firebase
-//        lotteryAdapter = new CheckLotteryAdapter(getContext(), helper.retrieveData());
-//        helper.retrieveData();
-
-//        refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-//        refResult = refLottery.child("RESULT");
-//        refCheck = refLottery.child("CHECK");
-//        refDate = refLottery.child("DATE");
-
-//    }
 
     private void getViewComponents() {
 
@@ -199,13 +172,7 @@ public class CheckLotteryFragment extends Fragment {
                     return;
                 }
 
-//                DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-//                final DatabaseReference refResult = refLottery.child("RESULT");
                 final DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
-//                final DatabaseReference refCheck = refLottery.child("CHECK");
-
-
-//                refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
                 refResult.child(spinnerSelectDate.getSelectedItem().toString()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -296,12 +263,10 @@ public class CheckLotteryFragment extends Fragment {
 
                                         }
 
-
                                         // Did not win lottery (count boolean False == 5)
                                         if(match1 == false && match2 == false && match3 == false && match4 == false) {
                                             countFalse++;
                                             Log.i("countFalse", String.valueOf(countFalse));
-
 
                                         }
                                         // countFalse == 5 --> Did not win lottery!
@@ -327,7 +292,6 @@ public class CheckLotteryFragment extends Fragment {
                                             clear();
                                             break;
 
-
                                         }
 
                                     }
@@ -344,25 +308,6 @@ public class CheckLotteryFragment extends Fragment {
                                 }
                             });
                         }
-
-                        // Waiting Result...
-//                        else{
-//
-//                            Log.i("testExists", "data not exists");
-//
-//                            // Display Snackbar
-//                            Snackbar.make(checkLotteryFragment, R.string.message_result, Snackbar.LENGTH_SHORT).show();
-//
-//                            // Save check lottery to database
-//                            save(spinnerSelectDate.getSelectedItem().toString(),
-//                                    editTextLotteryNumber.getText().toString(),
-//                                    "รอผลรางวัล");
-//
-//                            getLotteries();
-//                            clear();
-//
-//
-//                        }
 
                     }
 

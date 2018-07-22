@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.DBHelper.DBHelperSimulation;
+package project.senior.com.firebaselottery.DBHelperDontUse.DBHelperSimulation;
 
 public class ConstantsSimulation {
 

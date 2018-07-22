@@ -1,4 +1,4 @@
-package project.senior.com.firebaselottery.DBHelper.DBHelperPurchase;
+package project.senior.com.firebaselottery.DBHelperDontUse.DBHelperPurchase;
 
 import android.content.Context;
 import android.database.SQLException;

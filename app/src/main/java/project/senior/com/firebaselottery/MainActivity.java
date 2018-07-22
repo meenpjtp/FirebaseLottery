@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
-//        setUpTabIcons();
 
         // Press button start intent ModeSimulation, ModePurchase
         btn_sim.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent a = new Intent(MainActivity.this, ModeSimulationActivity.class);
                 startActivity(a);
-//                Intent a = new Intent(MainActivity.this, DisplayImageLotteryActivity.class);
-//                startActivity(a);
             }
         });
 
@@ -130,17 +127,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
 
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.m_search:
-//                Intent intent = new Intent(this, ModeSimulationActivity.class);
-//                startActivity(intent);
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
 }
 

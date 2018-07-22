@@ -27,10 +27,6 @@ public class ModePurchaseActivity extends AppCompatActivity {
     private FloatingActionButton pur_fabAdd,pur_fabStat;
     private Toolbar m_purToolbar;
 
-    // SQLite
-//    private ArrayList<PurchaseModel> listModel;
-//    ModePurchaseAdapter adapter;
-
     //Firebase
     ModePurchaseHelper helper;
     ModePurchaseAdapter adapter;
@@ -63,8 +59,6 @@ public class ModePurchaseActivity extends AppCompatActivity {
         recyclerviewPurchase = (RecyclerView) findViewById(R.id.recyclerviewPurchase);
         pur_fabMenu = (FloatingActionMenu) findViewById(R.id.pur_fabMenu);
 
-
-
         // Floating Action Button Start AddLotteryPpurchaseActivity Intent
         pur_fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,20 +81,12 @@ public class ModePurchaseActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("โหมดซื้อจริง");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //RecyclerView
-//        listModel = new ArrayList<>();
-//        adapter = new ModePurchaseAdapter(this,listModel);
-
         // RecyclerView
         recyclerviewPurchase.setLayoutManager(new LinearLayoutManager(this));
         recyclerviewPurchase.setItemAnimator(new DefaultItemAnimator());
         recyclerviewPurchase.setHasFixedSize(true);
         recyclerviewPurchase.setAdapter(adapter);
 
-        // RecyclerView Swipe To Delete
-//        ItemTouchHelper.Callback callback = new PurchaseSwipe(adapter);
-//        ItemTouchHelper helper = new ItemTouchHelper(callback);
-//        helper.attachToRecyclerView(recyclerviewPurchase);
     }
 
 
@@ -110,25 +96,6 @@ public class ModePurchaseActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_toolbar,menu);
-//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.m_search));
-//        final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//        searchView.setSubmitButtonEnabled(true);
-//        searchView.setQueryHint(getString(R.string.text_search_date));
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-////                searchItem(s);
-//
-//                return false;
-//            }
-//        });
         return true;
 
     }
@@ -145,8 +112,6 @@ public class ModePurchaseActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 }
 

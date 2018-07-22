@@ -163,8 +163,6 @@ public class SummarySimulationActivity extends AppCompatActivity {
 
                         }
 
-
-
                         // Display Pie Chart
                         float[] type = {percentage_win, percentage_didNotWin};
                         String[] str = {"ถูกรางวัล", "ไม่ถูกรางวัล"};

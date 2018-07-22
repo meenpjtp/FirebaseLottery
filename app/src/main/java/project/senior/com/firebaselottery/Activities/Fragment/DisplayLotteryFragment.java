@@ -46,9 +46,6 @@ public class DisplayLotteryFragment extends Fragment {
     private RecyclerView recyclerViewLotteries;
     private RelativeLayout displayLotteryFragment;
 
-//    private LotteriesAdapter adapter; //RecyclerView
-//    private List<DisplayLotteryModel> listDisplay;
-
     private DisplayImageLotteryAdapter adapter;
     private List<ImageModel> listDisplay;
 

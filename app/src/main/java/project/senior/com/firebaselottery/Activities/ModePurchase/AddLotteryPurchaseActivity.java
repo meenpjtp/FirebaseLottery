@@ -53,9 +53,6 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
     private InputValidation inputValidation;
 
-    //SQLite
-//    private ArrayList<PurchaseModel> listModel;
-
     // Firebase
     private DatabaseReference refLottery, refDate, refResult, refModePurchase;
     private ModePurchaseHelper helper;
@@ -115,13 +112,9 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
     private void initObjects(){
 
         setSupportActionBar(pur_toolbar);
-//        getToolbar().setTitle(getString(R.string.app_name));
 
         // Error when field is empty
         inputValidation = new InputValidation(this);
-
-        // Save To SQLite
-//        listModel = new ArrayList<>();
 
         // Spinner
         DatabaseReference lottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
@@ -164,8 +157,6 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
         }
 
         // Call Firebase
-//        DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-//        final DatabaseReference refResult = refLottery.child("RESULT");
         final DatabaseReference refDate = refResult.child(pur_spinnerSelectDate.getSelectedItem().toString());
 
         refResult.child(pur_spinnerSelectDate.getSelectedItem().toString()).addValueEventListener(new ValueEventListener() {
@@ -289,14 +280,12 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
                                 // Waiting for result
                                 if(data.child("lottery_number").getValue().toString().equals("กำลังรอผล")){
-//                                    Snackbar.make(checkLotteryFragment, "กำลังรอผล", Snackbar.LENGTH_SHORT).show();
 
                                     model = new PurchaseModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
                                             , lottery_status, lottery_value, Integer.parseInt(lottery_value), timeStamp);
                                     refModePurchase.child(id).setValue(model);
                                     clear();
                                     break;
-
 
                                 }
 
@@ -306,34 +295,13 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
                             clear();
                         }
 
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
                     });
                 }
-
-                // Waiting Result...
-//                else{
-//
-//                    Log.i("testExists", "data not exists");
-//
-//                    // Save check lottery to database
-//                    save(pur_spinnerSelectDate.getSelectedItem().toString(),
-//                            pur_editTextAddLottery.getText().toString(),
-//                            pur_editTextAddAmount.getText().toString(),
-//                            String.valueOf(save_paid),
-//                            "รอผลรางวัล",
-//                            "รอผลรางวัล");
-//                    clear();
-//
-//
-//                }
-
-//                getLotteries();
                 Snackbar.make(addLotteryPurchase, "บันทึกเรียบร้อย", Snackbar.LENGTH_SHORT).show();
-
             }
 
             @Override

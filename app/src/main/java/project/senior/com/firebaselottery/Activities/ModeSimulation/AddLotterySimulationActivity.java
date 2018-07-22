@@ -51,9 +51,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
     private InputValidation inputValidation;
 
-    //SQLite
-//    private ArrayList<SimulationModel> listModel;
-
     // Firebase
     private DatabaseReference refLottery, refDate, refResult, refModeSimulation;
     private ModeSimulationHelper helper;
@@ -129,7 +126,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-
             }
         });
 
@@ -137,9 +133,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
         if(!isConnected(AddLotterySimulationActivity.this)) buildDialog(AddLotterySimulationActivity.this).show();
         else {
         }
-
-        // Save To SQLite
-//        listModel = new ArrayList<>();
 
     }
 
@@ -155,9 +148,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
             return;
         }
 
-        // Call Firebase
-//        DatabaseReference refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
-//        final DatabaseReference refResult = refLottery.child("RESULT");
         final DatabaseReference refDate = refResult.child(spinnerSelectDate.getSelectedItem().toString());
 
         refModeSimulation.keepSynced(true);
@@ -282,7 +272,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
 
                                 // Waiting for result
                                 if(data.child("lottery_number").getValue().toString().equals("กำลังรอผล")){
-//                                    Snackbar.make(checkLotteryFragment, "กำลังรอผล", Snackbar.LENGTH_SHORT).show();
 
                                     model = new SimulationModel(id, lottery_date, lottery_number, lottery_amount, lottery_paid
                                             , lottery_status, lottery_value, Integer.parseInt(lottery_value));
@@ -290,7 +279,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                                     refModeSimulation.keepSynced(true);
                                     clear();
                                     break;
-
 
                                 }
                             }
@@ -307,7 +295,6 @@ public class AddLotterySimulationActivity extends AppCompatActivity {
                     });
                 }
 
-//                getLotteries();
                 Snackbar.make(addLotterySimulation, "บันทึกเรียบร้อย", Snackbar.LENGTH_SHORT).show();
 
             }
