@@ -18,17 +18,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import project.senior.com.firebaselottery.FirebaseHelper.FBHelper.ModeSimulationHelper;
 import project.senior.com.firebaselottery.Models.SimulationModel;
 import project.senior.com.firebaselottery.R;

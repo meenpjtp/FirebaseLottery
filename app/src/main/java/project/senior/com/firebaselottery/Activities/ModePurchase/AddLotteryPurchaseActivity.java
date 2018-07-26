@@ -18,19 +18,16 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import project.senior.com.firebaselottery.FirebaseHelper.FBHelper.ModePurchaseHelper;
 import project.senior.com.firebaselottery.Models.PurchaseModel;
 import project.senior.com.firebaselottery.R;
@@ -72,9 +69,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
 
         // Display Dialog when is not connect internet
         if(!isConnected(AddLotteryPurchaseActivity.this)) buildDialog(AddLotteryPurchaseActivity.this).show();
-        else {
-
-        }
+        else { }
 
         //Firebase
         refLottery = FirebaseDatabase.getInstance().getReference("LOTTERY");
@@ -290,7 +285,6 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
                                 }
 
                             }
-
                             countFalse = 0; // reset countFalse
                             clear();
                         }
@@ -298,8 +292,7 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                        }});
                 }
                 Snackbar.make(addLotteryPurchase, "บันทึกเรียบร้อย", Snackbar.LENGTH_SHORT).show();
             }
@@ -311,7 +304,6 @@ public class AddLotteryPurchaseActivity extends AppCompatActivity {
         });
 
     }
-
     private void clear(){
         pur_editTextAddAmount.setText("");
         pur_editTextAddLottery.setText("");

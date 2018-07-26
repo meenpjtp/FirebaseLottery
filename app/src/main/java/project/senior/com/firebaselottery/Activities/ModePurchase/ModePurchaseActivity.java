@@ -10,12 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import project.senior.com.firebaselottery.FirebaseHelper.FBAdapter.ModePurchaseAdapter;
 import project.senior.com.firebaselottery.FirebaseHelper.FBHelper.ModePurchaseHelper;
 import project.senior.com.firebaselottery.R;
@@ -89,9 +87,6 @@ public class ModePurchaseActivity extends AppCompatActivity {
 
     }
 
-
-
-    //Menu SearchView
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

@@ -5,9 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
-
 import project.senior.com.firebaselottery.FirebaseHelper.FBHolder.CheckLotteryHolder;
 import project.senior.com.firebaselottery.Models.HistoryModel;
 import project.senior.com.firebaselottery.R;

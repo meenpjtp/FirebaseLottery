@@ -3,7 +3,6 @@ package project.senior.com.firebaselottery.FirebaseHelper.FBHolder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import project.senior.com.firebaselottery.R;
 
 public class CheckLotteryHolder extends RecyclerView.ViewHolder {

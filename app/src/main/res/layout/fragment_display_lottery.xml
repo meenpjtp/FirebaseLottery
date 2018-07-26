@@ -61,7 +61,6 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewLotteries"
                 android:layout_width="match_parent"
@@ -69,7 +68,6 @@
             </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
-
 
     </LinearLayout>
 

@@ -69,6 +69,7 @@
 
                     <TextView
                         android:id="@+id/sim_dateTextView"
+                        android:text="1 สิงหาคม 2561"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
@@ -94,13 +95,13 @@
 
                     <TextView
                         android:id="@+id/sim_statusTextView"
+                        android:text="กำลังรอผล"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="13sp" />
 
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -112,12 +113,11 @@
                 android:baselineAligned="false"
                 android:background="@drawable/recyclerview_shape2">
 
-
                 <TextView
                     android:id="@+id/sim_lotteryNumberTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="123456"
+                    android:text="273517"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -145,7 +145,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="textView"
+                            android:text="3"
                             android:textSize="15sp" />
 
                         <TextView
@@ -176,7 +176,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="textView"
+                            android:text="240"
                             android:textSize="15sp" />
 
                         <TextView
@@ -187,7 +187,6 @@
                             android:textSize="15sp" />
 
                     </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -216,7 +215,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="textView"
+                        android:text="-"
                         android:textSize="15sp"/>
 
                     <TextView
@@ -226,7 +225,6 @@
                         android:text="@string/text_baht"/>
 
                 </LinearLayout>
-
 
             </LinearLayout>
 

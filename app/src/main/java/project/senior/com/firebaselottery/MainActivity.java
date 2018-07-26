@@ -13,10 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import project.senior.com.firebaselottery.Activities.Fragment.CheckLotteryFragment;
 import project.senior.com.firebaselottery.Activities.Fragment.DisplayLotteryFragment;
 import project.senior.com.firebaselottery.Activities.Fragment.ViewPager.CustomViewPager;

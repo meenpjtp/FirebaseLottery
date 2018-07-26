@@ -11,12 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import project.senior.com.firebaselottery.FirebaseHelper.FBAdapter.ModeSimulationAdapter;
 import project.senior.com.firebaselottery.FirebaseHelper.FBHelper.ModeSimulationHelper;
 import project.senior.com.firebaselottery.R;
@@ -94,7 +92,6 @@ public class ModeSimulationActivity extends AppCompatActivity {
 
     }
 
-    //Menu SearchView
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

@@ -170,7 +170,6 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
 
     <com.github.mikephil.charting.charts.PieChart
@@ -181,6 +180,5 @@
         android:layout_marginTop="10dp">
 
     </com.github.mikephil.charting.charts.PieChart>
-
 
 </LinearLayout>

@@ -21,16 +21,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import project.senior.com.firebaselottery.MainActivity;
 import project.senior.com.firebaselottery.Models.ImageModel;
 import project.senior.com.firebaselottery.R;
@@ -124,7 +121,8 @@ public class DisplayLotteryFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         if(dataSnapshot.getValue() == null){
-                            Snackbar.make(displayLotteryFragment, "ไม่มีผลรางวัลดังกล่าว", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(displayLotteryFragment,
+                                    "ไม่มีผลรางวัลดังกล่าว", Snackbar.LENGTH_SHORT).show();
                         } else {
                             listDisplay.clear();
                             ImageModel model = dataSnapshot.getValue(ImageModel.class);
@@ -157,22 +155,27 @@ public class DisplayLotteryFragment extends Fragment {
         RecyclerView.LayoutManager LM = new LinearLayoutManager(getContext());
         recyclerViewLotteries.setLayoutManager(LM);
         recyclerViewLotteries.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewLotteries.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerViewLotteries.addItemDecoration(new DividerItemDecoration(getContext(),
+                LinearLayoutManager.VERTICAL));
 
     }
 
     // Internet is not connect
     public boolean isConnected(Context context) {
 
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netinfo = cm.getActiveNetworkInfo();
 
         if (netinfo != null && netinfo.isConnectedOrConnecting()) {
             android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting())) return true;
-            else return false;
+            if((mobile != null && mobile.isConnectedOrConnecting()) ||
+                    (wifi != null && wifi.isConnectedOrConnecting()))
+                return true;
+            else
+                return false;
         } else
             return false;
     }
